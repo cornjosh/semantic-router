@@ -1,0 +1,16 @@
+.git
+.worktrees
+.superpowers
+.venv
+__pycache__
+*.py[cod]
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.env
+.env.*
+*.key
+*.db
+*.db-*
+*.safetensors
+deploy/adaptive/generated

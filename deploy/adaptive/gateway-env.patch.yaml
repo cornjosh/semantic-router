@@ -1,0 +1,14 @@
+# Apply to the Higress gateway Deployment in higress-system after creating this Secret.
+# This is a strategic merge PATCH, not a standalone Kubernetes object.
+spec:
+  template:
+    spec:
+      containers:
+        - name: higress-gateway
+          env:
+            - name: ADAPTIVE_ROUTE_TOKEN
+              valueFrom:
+                secretKeyRef: {name: adaptive-gateway-credentials, key: GATEWAY_TOKEN}
+            - name: ADAPTIVE_OBSERVE_TOKEN
+              valueFrom:
+                secretKeyRef: {name: adaptive-gateway-credentials, key: GATEWAY_TOKEN}

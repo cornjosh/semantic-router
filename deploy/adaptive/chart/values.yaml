@@ -1,0 +1,36 @@
+# Build and provide your own image; no registry publication is performed by this chart.
+image: ""
+replicas: 1
+credentialsSecret: adaptive-credentials
+# Override with --set-file serviceConfig=your-service.yaml, otherwise files/service.yaml.
+serviceConfig: ""
+storage:
+  backend: sqlite
+  size: 1Gi
+  storageClassName: null
+  # For an existing etcd cluster, leave etcd.enabled=false and supply these.
+  endpoints: []
+  clientTLSSecret: adaptive-etcd-client
+  prefix: /semantic-router/
+etcd:
+  enabled: false
+  image: gcr.io/etcd-development/etcd:v3.7.2
+  size: 2Gi
+  serverTLSSecret: adaptive-etcd-server
+resources:
+  requests: {cpu: 100m, memory: 256Mi}
+  limits: {cpu: "2", memory: 1Gi}
+gateway:
+  tenantId: demo
+  namespace: higress-system
+  host: llm.example.com
+  ingressClassName: higress
+  wasmUrl: ""
+  # Both env vars can reference the same route+observe credential in a gateway Secret.
+  routeTokenEnv: ADAPTIVE_ROUTE_TOKEN
+  observeTokenEnv: ADAPTIVE_OBSERVE_TOKEN
+  tlsSecretName: ""
+  upstreams:
+    basic-east: {service: model-basic-east, port: 8080}
+    basic-west: {service: model-basic-west, port: 8080}
+    reasoning-east: {service: model-reasoning-east, port: 8080}

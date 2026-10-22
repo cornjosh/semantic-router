@@ -116,11 +116,11 @@ The earlier PostgreSQL feature was tested and pushed, but is superseded by the u
 
 **Files:** `deploy/adaptive/`, local/e2e scripts, pinned runtime manifest, deployment docs, CI workflow.
 
-- [ ] Add Python image, plugin OCI packaging, v2.2.5 WasmPlugin and ingress/service mappings, replicas/PDB/spread/probes/secrets/config and standalone SQLite and optional three-member etcd profiles.
-- [ ] Render/validate manifests against exact CRDs; exercise local Kubernetes API or disposable cluster if feasible. Document deployment evidence and platform limits exactly.
-- [ ] Run proxy→two service replicas→etcd→HTTP providers/upstreams with failures, SSE and feedback; verify counts/choices after one replica exits.
-- [ ] Add CI jobs for changed Python/Go/integration artifacts with paid APIs excluded.
-- [ ] Commit `feat(deploy): package adaptive routing for Higress on Kubernetes`; push and verify.
+- [x] Add Python image, plugin OCI packaging, v2.2.5 WasmPlugin and ingress/service mappings, replicas/PDB/spread/probes/secrets/config and standalone SQLite and optional three-member etcd profiles.
+- [x] Render/validate manifests against exact CRDs; exercise local Kubernetes API or disposable cluster if feasible. Document deployment evidence and platform limits exactly.
+- [x] Run proxy→two service replicas→etcd→HTTP providers/upstreams with failures, SSE and feedback; verify counts/choices after one replica exits.
+- [x] Add CI jobs for changed Python/Go/integration artifacts with paid APIs excluded.
+- [x] Commit `feat(deploy): package adaptive routing for Higress on Kubernetes`; push and verify.
 
 **Completion contract:** Deployment artifacts consumed by real validators; complete local chain tested; no production deploy or registry publish unless separately authorized.
 

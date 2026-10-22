@@ -66,7 +66,6 @@ def install_gateway(destination, image_cache):
             [
                 "skopeo",
                 "copy",
-                "--preserve-digests",
                 "--override-os",
                 "linux",
                 "--override-arch",

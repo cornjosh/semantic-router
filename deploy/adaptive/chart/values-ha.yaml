@@ -1,0 +1,6 @@
+# Requires three worker nodes and server/client TLS Secrets. See deployment README.
+replicas: 2
+storage:
+  backend: etcd
+etcd:
+  enabled: true

@@ -1,0 +1,84 @@
+{{- $cfg := include "adaptive.config" . | fromYaml -}}
+{{- $targets := dict -}}
+{{- if not (hasKey $cfg.tenants .Values.gateway.tenantId) -}}{{ fail "gateway.tenantId must exist in serviceConfig tenants" }}{{- end -}}
+{{- range $cluster := $cfg.clusters -}}
+{{- $_ := required (printf "missing gateway.upstreams.%s" $cluster.route_id) (index $.Values.gateway.upstreams $cluster.route_id) -}}
+{{- $_ := set $targets $cluster.route_id (dict "model_id" $cluster.model_id "cluster_id" $cluster.cluster_id "upstream_model" $cluster.upstream_model) -}}
+{{- end -}}
+apiVersion: extensions.higress.io/v1alpha1
+kind: WasmPlugin
+metadata:
+  name: {{ include "adaptive.name" . }}
+  namespace: {{ .Values.gateway.namespace }}
+spec:
+  url: {{ required "provide gateway.wasmUrl for the built plugin" .Values.gateway.wasmUrl | quote }}
+  phase: UNSPECIFIED_PHASE
+  priority: 100
+  failStrategy: FAIL_CLOSE
+  vmConfig:
+    env:
+      - {name: {{ .Values.gateway.routeTokenEnv }}, valueFrom: HOST}
+      - {name: {{ .Values.gateway.observeTokenEnv }}, valueFrom: HOST}
+  defaultConfig:
+    tenant_id: {{ .Values.gateway.tenantId | quote }}
+    hosts: [{{ .Values.gateway.host | quote }}]
+    classifier_cluster: outbound|8080||{{ include "adaptive.name" . }}.{{ .Release.Namespace }}.svc.cluster.local
+    classifier_authority: {{ include "adaptive.name" . }}.{{ .Release.Namespace }}.svc.cluster.local
+    route_token_env: {{ .Values.gateway.routeTokenEnv }}
+    observe_token_env: {{ .Values.gateway.observeTokenEnv }}
+    timeout_ms: {{ min 30000 (add 1000 ($cfg.request_timeout_ms | default 5000)) }}
+    max_body_bytes: 262144
+    targets: {{ $targets | toJson }}
+---
+# A non-existent backend with no endpoints rejects requests without an internal target.
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "adaptive.name" . }}-reject
+  namespace: {{ .Release.Namespace }}
+spec:
+  ports: [{name: http, port: 8080}]
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "adaptive.name" . }}-default
+  namespace: {{ .Release.Namespace }}
+  annotations: {higress.io/proxy-read-timeout: "300"}
+spec:
+  ingressClassName: {{ .Values.gateway.ingressClassName }}
+  {{- if .Values.gateway.tlsSecretName }}
+  tls: [{hosts: [{{ .Values.gateway.host | quote }}], secretName: {{ .Values.gateway.tlsSecretName }}}]
+  {{- end }}
+  rules:
+    - host: {{ .Values.gateway.host }}
+      http:
+        paths:
+          - path: /v1/chat/completions
+            pathType: Exact
+            backend:
+              service: {name: {{ include "adaptive.name" . }}-reject, port: {number: 8080}}
+{{ range $cluster := $cfg.clusters }}
+{{ $upstream := index $.Values.gateway.upstreams $cluster.route_id }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "adaptive.name" $ }}-{{ $cluster.route_id }}
+  namespace: {{ $.Release.Namespace }}
+  annotations:
+    higress.io/canary: "true"
+    higress.io/canary-by-header: x-semantic-route
+    higress.io/canary-by-header-value: {{ $cluster.route_id | quote }}
+    higress.io/proxy-read-timeout: "300"
+spec:
+  ingressClassName: {{ $.Values.gateway.ingressClassName }}
+  rules:
+    - host: {{ $.Values.gateway.host }}
+      http:
+        paths:
+          - path: /v1/chat/completions
+            pathType: Exact
+            backend:
+              service: {name: {{ $upstream.service }}, port: {number: {{ $upstream.port }}}}
+{{ end }}

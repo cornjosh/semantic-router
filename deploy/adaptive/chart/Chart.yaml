@@ -1,0 +1,7 @@
+apiVersion: v2
+name: adaptive-router
+description: External semantic decision service and Higress 2.2.5 routing plugin
+type: application
+version: 0.1.0
+appVersion: "1.1.1"
+kubeVersion: ">=1.26.0-0"

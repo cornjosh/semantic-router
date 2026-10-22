@@ -1,0 +1,4 @@
+# Merge into the Higress 2.2.5 installation's existing values.
+# Wasm HTTP callouts need the classifier cluster even though it has no public Ingress.
+global:
+  onlyPushRouteCluster: false

@@ -1,0 +1,68 @@
+name: Adaptive routing
+on:
+  pull_request:
+    paths: ["semantic_router/adaptive/**", "plugins/higress-adaptive/**", "deploy/adaptive/**", "scripts/adaptive/**", "tests/**/adaptive/**", ".github/workflows/adaptive.yml", "pyproject.toml", "uv.lock"]
+  push:
+    branches: [main, feat/higress-adaptive-routing]
+    paths: ["semantic_router/adaptive/**", "plugins/higress-adaptive/**", "deploy/adaptive/**", "scripts/adaptive/**", "tests/**/adaptive/**", ".github/workflows/adaptive.yml", "pyproject.toml", "uv.lock"]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: adaptive-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      UV_PYTHON: "3.12"
+      TMPDIR: /tmp
+      ETCD_BIN: /tmp/adaptive-tools/etcd
+      HIGRESS_ENVOY: /tmp/adaptive-tools/envoy
+      ADAPTIVE_WASM: /tmp/adaptive-routing.wasm
+      HELM_BIN: /tmp/adaptive-kubernetes/helm
+      KUBE_APISERVER: /tmp/adaptive-kubernetes/kube-apiserver
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.13.5"
+          python-version: "3.12"
+          enable-cache: true
+      - run: uv sync --locked
+      - run: sudo apt-get update && sudo apt-get install -y skopeo openssl
+      - name: Acquire pinned runtimes
+        run: |
+          uv run python scripts/adaptive/bootstrap_higress.py --destination /tmp/adaptive-tools --go --gateway
+          uv run python scripts/adaptive/bootstrap_etcd.py --destination /tmp/adaptive-tools
+          uv run python scripts/adaptive/bootstrap_kubernetes.py --destination /tmp/adaptive-kubernetes
+          echo /tmp/adaptive-tools/go/bin >> "$GITHUB_PATH"
+      - name: Go host tests and real Wasm build
+        run: uv run make -C plugins/higress-adaptive test build OUT=/tmp/adaptive-routing.wasm
+      - name: Python contracts, real stores, complete proxy chain and Kubernetes API
+        run: |
+          uv run ruff check semantic_router/adaptive tests/unit/adaptive tests/integration/adaptive scripts/adaptive
+          uv run pytest tests/unit/adaptive tests/integration/adaptive -q
+      - name: OCI packaging
+        run: |
+          uv run python scripts/adaptive/package_wasm.py --wasm /tmp/adaptive-routing.wasm --output /tmp/adaptive-plugin-oci
+          skopeo inspect oci:/tmp/adaptive-plugin-oci:v0.1.0
+      - name: Build Docker images and smoke standalone SQLite
+        run: |
+          docker build -f deploy/adaptive/Dockerfile -t adaptive-classifier:test .
+          docker build -f "$GITHUB_WORKSPACE/deploy/adaptive/plugin.Dockerfile" -t adaptive-plugin:test plugins/higress-adaptive
+          docker run --detach --name adaptive-smoke --read-only --tmpfs /tmp --cap-drop ALL \
+            -p 127.0.0.1:18080:8080 \
+            -e GATEWAY_TOKEN=ci-gateway-token-123456 -e FEEDBACK_TOKEN=ci-feedback-token-123456 -e METRICS_TOKEN=ci-metrics-token-123456 \
+            -v "$GITHUB_WORKSPACE/examples/adaptive/service.yaml:/etc/semantic-router/service.yaml:ro" adaptive-classifier:test
+          trap 'docker logs adaptive-smoke; docker rm -fv adaptive-smoke' EXIT
+          for _ in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:18080/readyz; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: adaptive-routing-wasm
+          path: /tmp/adaptive-routing.wasm
