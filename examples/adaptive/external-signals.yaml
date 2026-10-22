@@ -1,0 +1,84 @@
+# All URLs/model IDs are illustrative. No provider is enabled by default.
+providers:
+  jev:
+    protocol: systemone
+    endpoint: http://127.0.0.1:18081/v1/systemone
+    model: replace-with-served-jev-id
+    api_key_env: ADAPTIVE_JEV_KEY
+    timeout_ms: 600
+    concurrency: 16
+    max_request_bytes: 65536
+    max_response_bytes: 65536
+  embeddings:
+    protocol: embedding
+    endpoint: http://127.0.0.1:18082/v1/embeddings
+    model: replace-with-served-embedding-id
+    api_key_env: ADAPTIVE_EMBEDDING_KEY
+    timeout_ms: 600
+    concurrency: 8
+  classifier:
+    protocol: llm
+    endpoint: http://127.0.0.1:18083/v1/chat/completions
+    model: replace-with-served-classifier-id
+    api_key_env: ADAPTIVE_CLASSIFIER_KEY
+    timeout_ms: 1200
+    concurrency: 4
+pipeline:
+  timeout_ms: 2000
+  signals:
+    - name: semantic
+      kind: systemone
+      enabled: false
+      stage: 1
+      timeout_ms: 650
+      parameters:
+        provider: jev
+        text: {mode: latest_user, max_chars: 8192}
+        questions: &classification_questions
+          category:
+            instructions: What kind of task is the user asking to perform?
+            options:
+              coding: Programming, debugging or code explanation
+              other: Any other task
+          difficulty:
+            instructions: How much reasoning does the task require?
+            options:
+              easy: Routine task with a straightforward answer
+              hard: Complex reasoning, planning or difficult analysis
+    - name: similarity
+      kind: embedding
+      enabled: false
+      stage: 1
+      timeout_ms: 650
+      parameters:
+        provider: embeddings
+        text: {mode: latest_user, max_chars: 8192}
+        examples:
+          coding: [Explain binary search, Debug this Python function]
+          other: [Write a short greeting, Give me a recipe]
+    - name: llm
+      kind: llm
+      enabled: false
+      stage: 2
+      timeout_ms: 1250
+      parameters:
+        provider: classifier
+        text: {mode: conversation, max_chars: 8192}
+        max_completion_tokens: 512
+        questions: *classification_questions
+  policy:
+    rules:
+      - name: tool-continuation
+        when: [{signal: request, path: is_tool_continuation, op: eq, value: true}]
+        models: [tool-model]
+        shortcut: true
+      - name: semantic-coding
+        when:
+          - {signal: semantic, path: category, op: eq, value: coding}
+          - {signal: semantic, path: answers.category.probabilities.coding, op: gte, value: 0.85}
+        models: [coding-model]
+        shortcut: true
+      - name: expensive-classification
+        when: [{signal: llm, path: difficulty, op: eq, value: hard}]
+        models: [reasoning-model]
+    fallback_models: [general]

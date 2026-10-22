@@ -53,10 +53,10 @@
 
 **Interfaces:** Consumes Task 1 extractors; produces category/difficulty/embedding facts with explicit score type and availability. Provider endpoint/model/env-key references live outside rules.
 
-- [ ] Start real loopback provider fixtures; write RED tests for System One multi-question wire request, custom endpoint, embedding outputs and structured LLM output.
-- [ ] Implement pooled HTTP transport, response size bounds, total budgets and provider concurrency; reuse existing semantic-router interfaces without changing public defaults.
-- [ ] Test malformed/NaN/partial probabilities, errors, oversized response, deadline, cancellation, no secrets in errors, disabled provider with absent credential, and multi-turn/tool text selection.
-- [ ] Run focused HTTP + Task 1 tests and lint/type checks; commit `feat(adaptive): add external semantic signal providers`; push and verify.
+- [x] Start real loopback provider fixtures; write RED tests for System One multi-question wire request, custom endpoint, embedding outputs and structured LLM output.
+- [x] Implement pooled HTTP transport, response size bounds, total budgets and provider concurrency; reuse existing semantic-router interfaces without changing public defaults.
+- [x] Test malformed/NaN/partial probabilities, errors, oversized response, deadline, cancellation, no secrets in errors, disabled provider with absent credential, and multi-turn/tool text selection.
+- [x] Run focused HTTP + Task 1 tests and lint/type checks; commit `feat(adaptive): add external semantic signal providers`; push and verify.
 
 **Completion contract:** Three protocols exercised over HTTP with no real paid calls or invented provider accuracy.
 

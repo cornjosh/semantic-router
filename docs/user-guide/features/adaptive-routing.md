@@ -83,3 +83,39 @@ pipeline = SignalPipeline(
 响应保留固定错误码，不包含供应商异常正文、API key 或用户 prompt。类别置信度、余弦相似度和模型任务成功率属于不同信号，不能混用。
 
 `text_characters` 是完整消息历史中文本部分的字符数，包含 system 消息；它不是 token 数，也未把工具 schema 或图像换算成 token。目标模型的容量判断需要独立、明确的计数来源。
+
+## 外部分类接口
+
+`examples/adaptive/external-signals.yaml` 将 `providers` 与 `pipeline` 分开。前者配置完整 endpoint、服务端模型 ID、密钥环境变量和连接限制；后者配置要抽取的问题、文本来源、执行阶段和策略。示例中的模型名和 loopback 地址都需要替换，三个外部信号默认关闭：
+
+```bash
+# 无网络调用，验证默认结构信号和 fallback。
+uv run python examples/adaptive/external_signals.py "解释二分查找"
+# 配置实际 endpoint/model 并设置相应环境变量后，显式打开信号。
+uv run python examples/adaptive/external_signals.py --config /path/to/signals.yaml --enable semantic
+```
+
+| kind | 协议与事实 | 分数含义 |
+| --- | --- | --- |
+| `systemone` | 一次请求发送 `state`、`model`、多个 choice 问题；返回各问题的标签和 `answers.<问题>.probabilities` / `confidence` | `provider_probability`，保留供应商分布，未在本项目数据上校准 |
+| `embedding` | OpenAI-compatible embeddings；返回向量，或与 `examples` 的最大相似度及最近类别 | `embedding_vector` 或 `cosine_similarity`，相似度范围 −1…1，不是成功概率 |
+| `llm` | OpenAI-compatible Chat Completions，要求支持 `response_format: json_schema`；每个问题返回枚举标签，加 `confidence` | `self_reported_confidence`，仅是分类模型自报估计 |
+
+Jev 适配器复用本项目的 `choice()` 问题格式，支持自定义完整 endpoint，不自动拼接路径。首版将 category/difficulty 都表达为 choice 问题；没有伪装成兼容所有 System One 问题类型。响应必须包含全部问题、全部选项、有限的 0…1 数值，分布总和允许 0.01 的舍入误差；不会自动补零或重新归一化。choice 必须是最高概率选项，confidence 保留为独立统计量。协议依据 [TypeSafe System One 官方文档](https://docs.typesafe.ai/api/system-one) 和 [OpenAPI schema](https://api.typesafe.ai/openapi.json)，核对日期为 2026-10-22。
+
+Embedding 按返回的 `index` 重排，检查维数、重复索引、非零范数和有限数字。配置 examples 后，首次实际执行才编码示例并缓存；之后只编码当前查询，使用本项目的 `similarity_matrix` 计算各类别最高余弦相似度。缓存是配置示例的派生数据，不存储用户查询。供应商返回的模型版本或维数改变时拒绝混算；更新 embedding 模型或示例后应重新创建流水线。对于相同 ID 下的隐式模型升级，客户端无法检测，应使用固定版本 ID。接口字段依据 [OpenAI embeddings reference](https://developers.openai.com/api/reference/resources/embeddings/methods/create)。
+
+LLM 分类会验证实际返回内容，而非只信任供应商支持 schema。非法标签、额外字段、重复 JSON key、截断和 refusal 都返回 unavailable。它只输出分类事实，不生成用户的最终回复。所需 `json_schema` 协议见 [OpenAI Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs?api-mode=chat)；接入其他供应商前应确认其兼容范围。
+
+每个信号的 `parameters.text.mode` 可选 `latest_user`（默认）或 `conversation`。前者只取最后一条 user 消息的文本；后者将完整角色序列、文本和工具调用作为待分类数据序列化。图像/音频数据不发送给这些文本分类器；消息中没有可用文本或超过 `max_chars` 时不可用，不静默截断。外部信号自己的 `text_characters` 表示实际送去分类的字符数，与 `request.text_characters` 的全历史结构统计不同，两者都不是容量计数器。
+
+`ProviderRegistry.validate(signals=...)` 检查启用的配置和协议引用，不读取凭证或发请求。第一次真正调用时读取 `api_key_env`；配置了变量名却没有值时拒绝匿名调用。不需要认证的内部服务可省略该字段。多信号引用同一 provider 时共用连接池与并发额度。服务退出时先等待进行中的请求结束，再关闭 pipeline 和 registry：
+
+```python
+await pipeline.aclose()
+await providers.aclose()
+```
+
+provider `timeout_ms` 包含排队、连接、响应头和完整响应体；还受 signal 与 pipeline 剩余预算约束。不自动重试或跟随重定向。请求和响应分别有字节上限，chunked 响应也受限制；只接受未压缩 JSON，避免压缩体突破内存边界。不继承环境代理配置。HTTP 使用默认 TLS 校验，endpoint 不能携带用户名、密码、query 或 fragment，密钥仅通过环境变量设置 Bearer header。
+
+本机 HTTP 测试验证的是上述请求/响应合同与资源边界。测试回复均为人工构造数据，不代表真实供应商准确率或延迟。真实供应商尚需用实际 endpoint、固定模型版本和代表性数据验证。

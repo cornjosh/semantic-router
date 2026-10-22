@@ -7,8 +7,12 @@ from pydantic import JsonValue
 from semantic_router.adaptive.models import RoutingRequest
 
 
+class InvalidSignalResult(ValueError):
+    """An extractor received malformed facts; no provider payload in the message."""
+
+
 class Signal(Protocol):
-    async def extract(self, request: RoutingRequest) -> dict[str, JsonValue]: ...
+    async def extract(self, *, request: RoutingRequest) -> dict[str, JsonValue]: ...
 
 
 class ClosableSignal(Signal, Protocol):

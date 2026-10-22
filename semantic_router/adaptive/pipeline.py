@@ -16,7 +16,7 @@ from semantic_router.adaptive.models import (
     SignalResult,
 )
 from semantic_router.adaptive.policy import Policy
-from semantic_router.adaptive.signals.base import Signal
+from semantic_router.adaptive.signals.base import InvalidSignalResult, Signal
 from semantic_router.adaptive.signals.structural import StructuralSignal
 
 
@@ -72,7 +72,7 @@ class SignalPipeline:
             )
         except asyncio.TimeoutError:
             error = "timeout"
-        except ValidationError:
+        except (ValidationError, InvalidSignalResult):
             error = "invalid_result"
         except Exception:
             # Cancellation (BaseException) propagates. Never expose provider error
