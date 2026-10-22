@@ -1,0 +1,27 @@
+# Run from the repository root after setting three distinct credentials.
+services:
+  classifier:
+    build:
+      context: ../..
+      dockerfile: deploy/adaptive/Dockerfile
+    ports: ["127.0.0.1:8080:8080"]
+    environment:
+      GATEWAY_TOKEN: ${GATEWAY_TOKEN:?set GATEWAY_TOKEN}
+      FEEDBACK_TOKEN: ${FEEDBACK_TOKEN:?set FEEDBACK_TOKEN}
+      METRICS_TOKEN: ${METRICS_TOKEN:?set METRICS_TOKEN}
+    volumes:
+      - classifier-data:/data
+      - ../../examples/adaptive/service.yaml:/etc/semantic-router/service.yaml:ro
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    stop_grace_period: 15s
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/readyz', timeout=3)"]
+      interval: 10s
+      timeout: 4s
+      retries: 3
+    restart: unless-stopped
+volumes:
+  classifier-data:

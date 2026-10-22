@@ -6,7 +6,7 @@
 
 **Architecture:** Higress retains all generation traffic. A staged signal pipeline supplies facts to declarative policy; constrained model and cluster selection use embedded SQLite or optional shared etcd state. Gateway timing observations and authenticated quality feedback update distinct operational and learning models.
 
-**Tech Stack:** Python 3.10–3.13, Pydantic, aiohttp, FastAPI/uvicorn, stdlib SQLite / optional etcd v3 JSON API; Go Wasm SDK; Higress v2.2.5; Kubernetes.
+**Tech Stack:** Python 3.10–3.13, Pydantic, aiohttp (including HTTP server), stdlib SQLite / optional etcd v3 JSON API; Go Wasm SDK; Higress v2.2.5; Kubernetes.
 
 **Spec:** `docs/superpowers/specs/2026-10-22-adaptive-higress-routing.md`
 
@@ -86,15 +86,15 @@ The earlier PostgreSQL feature was tested and pushed, but is superseded by the u
 
 ### Task 4: Decision HTTP service with hard constraints and HA behavior
 
-**Files:** `adaptive/{service,app,__main__}.py`, server extra, API schemas/config, integration HTTP tests and service image.
+**Files:** `adaptive/{service,app,__main__}.py`, existing aiohttp runtime, API schemas/config, integration HTTP tests and service image.
 
 **Interfaces:** `POST /v1/route`, `/v1/observations`, `/v1/feedback`, health/readiness/metrics. Route decision supplies a logical target from trusted configuration, never an arbitrary URL. Strict auth roles and tenant binding.
 
-- [ ] Write RED end-to-end HTTP tests using two server processes plus etcd (and SQLite standalone coverage): identical concurrent requests return the same persisted decision, kill/restart a worker, learning visible from the survivor.
-- [ ] Implement composition, capability/model/context filters, request fingerprint/idempotency, authentication, bounded concurrency and deadlines, graceful shutdown.
-- [ ] Test fixed models, tool shortcuts, unsupported modality/schema/context, missing exact count policy, invalid auth/tenant, DB outage, overload, input bounds and secret redaction.
-- [ ] Add usable YAML examples, including one model in two clusters. Verify commands and API docs against running service.
-- [ ] Run focused HA/HTTP suites and regressions; commit `feat(adaptive): serve durable routing decisions over HTTP`; push and verify.
+- [x] Write RED end-to-end HTTP tests using two server processes plus etcd (and SQLite standalone coverage): identical concurrent requests return the same persisted decision, kill/restart a worker, learning visible from the survivor.
+- [x] Implement composition, capability/model/context filters, request fingerprint/idempotency, authentication, bounded concurrency and deadlines, graceful shutdown.
+- [x] Test fixed models, tool shortcuts, unsupported modality/schema/context, missing exact count policy, invalid auth/tenant, DB outage, overload, input bounds and secret redaction.
+- [x] Add usable YAML examples, including one model in two clusters. Verify commands and API docs against running service.
+- [x] Run focused HA/HTTP suites and regressions; commit `feat(adaptive): serve durable routing decisions over HTTP`; push and verify.
 
 **Completion contract:** Multi-process failover is observed; only facts enter policy; downstream generation never traverses this service.
 

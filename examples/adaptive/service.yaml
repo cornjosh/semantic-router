@@ -1,0 +1,91 @@
+# Standalone profile: one process + a local persistent /data volume.
+policy_version: example-v1
+feature_version: example-v1
+state:
+  backend: sqlite
+  path: /data/adaptive.db
+pipeline:
+  timeout_ms: 1000
+  signals:
+    - name: semantic
+      kind: llm
+      enabled: false
+      stage: 1
+      parameters:
+        provider: classifier
+        questions:
+          category:
+            instructions: Classify the user's request by task category.
+            options:
+              code: Programming and software development
+              general: General questions and conversation
+  policy:
+    rules:
+      - name: tool-continuation
+        when: [{signal: request, path: is_tool_continuation, op: eq, value: true}]
+        models: [reasoning]
+        shortcut: true
+      - name: tool-capability
+        when: [{signal: request, path: requires_tools, op: eq, value: true}]
+        models: [reasoning]
+        shortcut: true
+    fallback_models: [basic, reasoning]
+providers:
+  classifier:
+    protocol: llm
+    endpoint: http://classifier.example.invalid/v1/chat/completions
+    model: example-classifier
+    api_key_env: CLASSIFIER_TOKEN
+# The disabled signal needs neither a provider connection nor CLASSIFIER_TOKEN.
+context_fields:
+  category: {signal: semantic, path: category}
+models:
+  - model_id: basic
+    version: example-v1
+    max_context_tokens: 16384
+    max_output_tokens: 2048
+    tools: false
+    modalities: [text]
+    response_formats: [text]
+    accounting:
+      # An operator-declared bound, not an exact universal chat tokenizer.
+      mode: utf8_upper_bound
+      framing_tokens: 64
+      tokens_per_message: 32
+  - model_id: reasoning
+    version: example-v1
+    max_context_tokens: 32768
+    max_output_tokens: 4096
+    tools: true
+    modalities: [text]
+    response_formats: [text, json_object, json_schema]
+    accounting: {mode: utf8_upper_bound, framing_tokens: 64, tokens_per_message: 32}
+clusters:
+  - cluster_id: basic-east
+    model_id: basic
+    route_id: basic-east
+    upstream_model: example-basic
+    soft_capacity: 8
+  - cluster_id: basic-west
+    model_id: basic
+    route_id: basic-west
+    upstream_model: example-basic
+    soft_capacity: 8
+  - cluster_id: reasoning-east
+    model_id: reasoning
+    route_id: reasoning-east
+    upstream_model: example-reasoning
+    soft_capacity: 4
+tenants:
+  demo: [basic, reasoning]
+principals:
+  - {token_env: GATEWAY_TOKEN, tenant_id: demo, roles: [route, observe]}
+  - {token_env: FEEDBACK_TOKEN, tenant_id: demo, roles: [feedback]}
+  - {token_env: METRICS_TOKEN, tenant_id: demo, roles: [metrics]}
+learning: {epsilon: 0}
+load: {stale_after_s: 60, failure_threshold: 3, cooldown_s: 10}
+telemetry: []
+request_timeout_ms: 5000
+max_request_bytes: 262144
+concurrency: 64
+decision_ttl_s: 300

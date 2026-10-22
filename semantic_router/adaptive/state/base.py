@@ -8,9 +8,9 @@ from datetime import datetime
 from typing import Any, Literal
 from uuid import UUID, uuid4
 
-from pydantic import AwareDatetime, Field, model_validator
+from pydantic import AwareDatetime, Field, JsonValue, field_validator, model_validator
 
-from semantic_router.adaptive.models import Contract, Identifier
+from semantic_router.adaptive.models import Contract, Identifier, finite_json
 
 
 class StateConflict(ValueError):
@@ -72,6 +72,15 @@ class Decision(Contract):
     expires_at: AwareDatetime
     reason: str = Field(default="policy", max_length=256)
     signal_status: dict[str, str] = Field(default_factory=dict)
+    route_id: Identifier | None = None
+    upstream_model: Identifier | None = None
+    accounting: dict[str, JsonValue] = Field(default_factory=dict)
+
+    @field_validator("accounting")
+    @classmethod
+    def finite_accounting(cls, value: dict[str, JsonValue]) -> dict[str, JsonValue]:
+        finite_json(value)
+        return value
 
     @model_validator(mode="after")
     def consistent(self) -> Decision:

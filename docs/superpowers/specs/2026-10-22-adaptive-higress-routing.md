@@ -13,7 +13,7 @@ The signal layer only extracts information. The policy layer alone selects candi
 ## Versions and repository boundaries
 
 - Python remains compatible with the package's `>=3.10,<3.14` constraint. Existing `BaseRouter`, `IndexedRouter`, `DecisionRouter`, `Chain`, `Merge` APIs stay compatible.
-- New Python code lives in `semantic_router/adaptive/`, with server dependencies in an optional `server` extra.
+- New Python code lives in `semantic_router/adaptive/`, using the existing aiohttp runtime (no new server dependency).
 - Higress target is **v2.2.5**, the latest stable GitHub release checked on 2026-10-22 (published 2026-10-04). Pin release references and build dependencies; do not float `main` or container `latest`.
 - Deployment supports standalone Docker with SQLite, and Kubernetes HA with an application etcd cluster. No production cluster credentials or inference endpoints have been provided. Ship complete deployment artifacts and test locally, retaining the distinction between real proxy execution and live Kubernetes/provider validation.
 - Work branch: `feat/higress-adaptive-routing`. After each tested feature, commit and push this branch to `origin`; do not push to upstream or merge main automatically.
