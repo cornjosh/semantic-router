@@ -119,3 +119,5 @@ await providers.aclose()
 provider `timeout_ms` 包含排队、连接、响应头和完整响应体；还受 signal 与 pipeline 剩余预算约束。不自动重试或跟随重定向。请求和响应分别有字节上限，chunked 响应也受限制；只接受未压缩 JSON，避免压缩体突破内存边界。不继承环境代理配置。HTTP 使用默认 TLS 校验，endpoint 不能携带用户名、密码、query 或 fragment，密钥仅通过环境变量设置 Bearer header。
 
 本机 HTTP 测试验证的是上述请求/响应合同与资源边界。测试回复均为人工构造数据，不代表真实供应商准确率或延迟。真实供应商尚需用实际 endpoint、固定模型版本和代表性数据验证。
+
+另外提供 [公开数据集评测](../../../benchmarks/adaptive/README.md)：从 ModelScope 下载固定版本 BGE/Qwen 权重，通过实际 HTTP 适配器测试 MASSIVE、CLINC150 和 BANKING77。分类准确率、未知意图拒识、去重审计及局限见 [结果报告](../../../benchmarks/adaptive/REPORT.md)。Jev 未提供真实 endpoint/key，其准确率没有据此推测。

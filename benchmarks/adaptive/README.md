@@ -75,3 +75,12 @@ uv run python -m benchmarks.adaptive.workload --samples 200 --warmup 20 \
 通过真实本机 HTTP 和 `/tmp` 上的 SQLite 分别运行静态、负载感知、质量反馈学习、外部信号、工具 shortcut 五种场景。每种预热 20 次、测量 200 次，并发 1；回报 HTTP 只发生在路由计时之后。外部 embedding fixture 固定等待 20ms；后端 TTFT、延迟和成功标签是脚本给定，报告明确使用 `synthetic` 标记。学习和负载场景保留预热决策轨迹，以便核对变化原因。这里的 p50/p95/p99 是分类服务响应时间，不是完整生成 TTFT 或系统吞吐上限。
 
 完整代理及故障切换证据在 [部署说明](../../deploy/adaptive/README.md)；不需要为数据集评测部署 etcd 或 Kubernetes。
+
+代理开销另外通过真实 Higress v2.2.5 和编译后的插件测量：
+
+```bash
+HIGRESS_ENVOY=/PATH/TO/envoy ADAPTIVE_WASM=/PATH/TO/adaptive.wasm \
+  uv run python -m benchmarks.adaptive.gateway --samples 200 --output /tmp/gateway.json
+```
+
+该脚本复用开发环境的真实代理测试启动器，测量直接访问 SSE fixture 和经过 Higress/Wasm/SQLite 分类服务两条路径，分别使用并发 1、8。fixture 固定 20ms 后输出内容、再过 2ms 输出 DONE；客户端测量 TTFT、完整响应延迟及请求/秒，并逐条核对 SSE 字节。两路径分位数之差是环境内的开销估计，不是跨机器 SLA。报告包含请求数、预热数、错误数、Wasm/Envoy SHA256。
