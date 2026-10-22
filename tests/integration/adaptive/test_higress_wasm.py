@@ -41,7 +41,14 @@ async def serve(app):
         await runner.cleanup()
 
 
-def bootstrap(wasm, gateway_port, classifier_port, upstream_ports):
+def bootstrap(
+    wasm,
+    gateway_port,
+    classifier_port,
+    upstream_ports,
+    plugin_config=None,
+    vm_environment=None,
+):
     """Header routes deliberately precede a rejecting default to prove rerouting."""
     targets = {
         f"route-{key}": {
@@ -60,6 +67,12 @@ def bootstrap(wasm, gateway_port, classifier_port, upstream_ports):
         "timeout_ms": 500,
         "targets": targets,
     }
+    plugin.update(plugin_config or {})
+    if vm_environment:
+        for role in ("route", "observe"):
+            plugin.pop(role + "_token", None)
+            plugin[role + "_token_env"] = "ADAPTIVE_" + role.upper() + "_TOKEN"
+    targets = plugin["targets"]
     routes = [
         {
             "match": {
@@ -74,6 +87,7 @@ def bootstrap(wasm, gateway_port, classifier_port, upstream_ports):
     ] + [{"match": {"prefix": "/"}, "direct_response": {"status": 503}}]
     clusters = []
     for name, port in {"classifier": classifier_port, **upstream_ports}.items():
+        ports = port if isinstance(port, list) else [port]
         clusters.append(
             {
                 "name": name,
@@ -89,17 +103,29 @@ def bootstrap(wasm, gateway_port, classifier_port, upstream_ports):
                                         "address": {
                                             "socket_address": {
                                                 "address": "127.0.0.1",
-                                                "port_value": port,
+                                                "port_value": endpoint_port,
                                             }
                                         }
                                     }
                                 }
+                                for endpoint_port in ports
                             ]
                         }
                     ],
                 },
             }
         )
+        if name == "classifier" and len(ports) > 1:
+            clusters[-1]["health_checks"] = [
+                {
+                    "timeout": "0.2s",
+                    "interval": "0.1s",
+                    "no_traffic_interval": "0.1s",
+                    "unhealthy_threshold": 1,
+                    "healthy_threshold": 1,
+                    "http_health_check": {"path": "/readyz"},
+                }
+            ]
     hcm = {
         "@type": "type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager",
         "stat_prefix": "adaptive_test",
@@ -123,6 +149,9 @@ def bootstrap(wasm, gateway_port, classifier_port, upstream_ports):
                         "vm_config": {
                             "vm_id": "adaptive-routing",
                             "runtime": "envoy.wasm.runtime.v8",
+                            "environment_variables": {
+                                "key_values": vm_environment or {}
+                            },
                             "code": {"local": {"filename": str(wasm)}},
                         },
                     },
@@ -165,7 +194,9 @@ def bootstrap(wasm, gateway_port, classifier_port, upstream_ports):
 
 
 @asynccontextmanager
-async def gateway(tmp_path, classifier_port, upstream_ports):
+async def gateway(
+    tmp_path, classifier_port, upstream_ports, plugin_config=None, vm_environment=None
+):
     binary = os.environ.get("HIGRESS_ENVOY")
     wasm = os.environ.get("ADAPTIVE_WASM")
     if not binary or not wasm:
@@ -173,7 +204,16 @@ async def gateway(tmp_path, classifier_port, upstream_ports):
     port = free_port()
     config_path = tmp_path / "envoy.yaml"
     config_path.write_text(
-        yaml.safe_dump(bootstrap(wasm, port, classifier_port, upstream_ports))
+        yaml.safe_dump(
+            bootstrap(
+                wasm,
+                port,
+                classifier_port,
+                upstream_ports,
+                plugin_config,
+                vm_environment,
+            )
+        )
     )
     with (tmp_path / "envoy.log").open("w+") as log:
         process = subprocess.Popen(
@@ -210,7 +250,10 @@ async def gateway(tmp_path, classifier_port, upstream_ports):
 
 
 @pytest.mark.asyncio
-async def test_real_wasm_routes_sse_and_root_observations(tmp_path):
+@pytest.mark.parametrize("credentials_in_environment", [False, True])
+async def test_real_wasm_routes_sse_and_root_observations(
+    tmp_path, credentials_in_environment
+):
     received, observations = [], []
 
     async def classify(request):
@@ -267,7 +310,17 @@ async def test_real_wasm_routes_sse_and_root_observations(tmp_path):
         serve(upstream("a")) as a,
         serve(upstream("b")) as b,
     ):
-        async with gateway(tmp_path, cport, {"a": a, "b": b}) as (url, _):
+        vm_environment = (
+            {
+                "ADAPTIVE_ROUTE_TOKEN": ROUTE_TOKEN,
+                "ADAPTIVE_OBSERVE_TOKEN": OBSERVE_TOKEN,
+            }
+            if credentials_in_environment
+            else None
+        )
+        async with gateway(
+            tmp_path, cport, {"a": a, "b": b}, vm_environment=vm_environment
+        ) as (url, _):
             async with aiohttp.ClientSession() as client:
                 for cluster in ("a", "b"):
                     async with client.post(

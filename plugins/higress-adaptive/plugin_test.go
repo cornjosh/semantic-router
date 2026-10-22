@@ -272,3 +272,23 @@ func TestHostRateLimitIsOperationalFailureAndRetriesAreBounded(t *testing.T) {
 		t.Fatal("unbounded retries")
 	}
 }
+
+func TestHostScopeDoesNotClassifyOtherVirtualHosts(t *testing.T) {
+	h := newHarness(t)
+	h.root.config.Hosts = []string{"llm.example.com"}
+	for _, test := range []struct {
+		host   string
+		action types.Action
+	}{{"other.example.com", types.HeaderContinue}, {"LLM.EXAMPLE.COM:8080", types.HeaderStopIteration}} {
+		id := h.host.InitializeHttpContext()
+		action := h.host.CallOnRequestHeaders(id, [][2]string{{":method", "POST"}, {":path", "/v1/chat/completions"}, {":authority", test.host}, {"content-type", "application/json"}, {routeHeader, "evil"}}, false)
+		if action != test.action {
+			t.Fatalf("host %s: action %d", test.host, action)
+		}
+		for _, header := range h.host.GetCurrentRequestHeaders(id) {
+			if header[0] == routeHeader {
+				t.Fatal("untrusted route header retained on host bypass")
+			}
+		}
+	}
+}

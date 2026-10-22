@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io"
+	"os"
 	"regexp"
 	"strings"
 )
@@ -16,6 +17,8 @@ const maxDecisionBytes = 65536
 var identifier = regexp.MustCompile(`^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$`)
 var routeName = regexp.MustCompile(`^[A-Za-z][A-Za-z0-9_-]{0,63}$`)
 var uuidPattern = regexp.MustCompile(`^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$`)
+var environmentName = regexp.MustCompile(`^[A-Za-z_][A-Za-z0-9_]{0,127}$`)
+var hostname = regexp.MustCompile(`^[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?$`)
 
 type target struct {
 	ModelID       string `json:"model_id"`
@@ -29,7 +32,10 @@ type config struct {
 	ClassifierAuthority string            `json:"classifier_authority"`
 	RouteToken          string            `json:"route_token"`
 	ObserveToken        string            `json:"observe_token"`
+	RouteTokenEnv       string            `json:"route_token_env,omitempty"`
+	ObserveTokenEnv     string            `json:"observe_token_env,omitempty"`
 	Path                string            `json:"path"`
+	Hosts               []string          `json:"hosts,omitempty"`
 	TimeoutMS           uint32            `json:"timeout_ms"`
 	MaxBodyBytes        int               `json:"max_body_bytes"`
 	Targets             map[string]target `json:"targets"`
@@ -44,6 +50,25 @@ func parseConfig(data []byte) (config, error) {
 	d.DisallowUnknownFields()
 	if err := d.Decode(&c); err != nil {
 		return c, errors.New("invalid configuration")
+	}
+	for _, pair := range []struct {
+		value *string
+		env   string
+	}{{&c.RouteToken, c.RouteTokenEnv}, {&c.ObserveToken, c.ObserveTokenEnv}} {
+		if pair.env != "" {
+			if *pair.value != "" || !environmentName.MatchString(pair.env) {
+				return c, errors.New("ambiguous credential configuration")
+			}
+			*pair.value = os.Getenv(pair.env)
+		}
+	}
+	if len(c.Hosts) > 128 {
+		return c, errors.New("invalid hosts")
+	}
+	for _, host := range c.Hosts {
+		if len(host) > 253 || !hostname.MatchString(host) {
+			return c, errors.New("invalid hosts")
+		}
 	}
 	if !identifier.MatchString(c.TenantID) || c.ClassifierCluster == "" || len(c.ClassifierCluster) > 256 || c.ClassifierAuthority == "" || len(c.ClassifierAuthority) > 256 || strings.ContainsAny(c.ClassifierAuthority, " /\t\r\n") || !strings.HasPrefix(c.Path, "/") || strings.ContainsAny(c.Path, "?\r\n") || c.TimeoutMS < 1 || c.TimeoutMS > 30000 || c.MaxBodyBytes < 1024 || c.MaxBodyBytes > 1048576 || len(c.Targets) == 0 || len(c.Targets) > 128 {
 		return c, errors.New("invalid configuration")

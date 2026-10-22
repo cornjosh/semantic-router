@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"mime"
+	"net"
 	"strconv"
 	"strings"
 	"time"
@@ -43,7 +44,8 @@ func (h *httpContext) OnHttpRequestHeaders(_ int, end bool) types.Action {
 		}
 	}
 	path, _ := proxywasm.GetHttpRequestHeader(":path")
-	if strings.SplitN(path, "?", 2)[0] != h.config.Path {
+	authority, _ := proxywasm.GetHttpRequestHeader(":authority")
+	if strings.SplitN(path, "?", 2)[0] != h.config.Path || !h.config.matchesHost(authority) {
 		return types.HeaderContinue
 	}
 	h.active = true
@@ -86,6 +88,23 @@ func (h *httpContext) OnHttpRequestHeaders(_ int, end bool) types.Action {
 		h.fail(500)
 	}
 	return types.HeaderStopIteration
+}
+
+func (c config) matchesHost(authority string) bool {
+	if len(c.Hosts) == 0 {
+		return true
+	}
+	host := authority
+	if value, _, err := net.SplitHostPort(authority); err == nil {
+		host = value
+	}
+	host = strings.ToLower(strings.TrimSuffix(host, "."))
+	for _, allowed := range c.Hosts {
+		if host == allowed {
+			return true
+		}
+	}
+	return false
 }
 func (h *httpContext) OnHttpRequestBody(size int, end bool) types.Action {
 	if !h.active {

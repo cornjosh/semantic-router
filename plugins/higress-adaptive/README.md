@@ -37,11 +37,14 @@ HIGRESS_ENVOY=/tmp/adaptive-tools/envoy ADAPTIVE_WASM=/tmp/adaptive-routing.wasm
 
 见 [config.example.json](config.example.json)，目标映射与仓库的 `examples/adaptive/service.yaml` 一致。每个配置绑定一个可信租户，不能从客户端请求头指定租户。`route_token`、`observe_token` 是分类服务凭证；示例服务的 `GATEWAY_TOKEN` 同时拥有两种权限，因此这两个值可以相同。不要把实际凭证提交到 Git 或客户端配置。
 
+Kubernetes 可使用 `route_token_env`、`observe_token_env` 指定 Wasm 环境变量名，由 `WasmPlugin.spec.vmConfig.env` 的 `valueFrom: HOST` 从 Higress 网关注入。网关 Deployment 使用 Secret 的 `valueFrom.secretKeyRef`；插件配置中只保存变量名。同一凭证不能同时配置明文和环境变量。缺少变量时插件启动失败；Secret 更新后需要滚动重启网关使 VM 重新读取。
+
 | 字段 | 含义 |
 | --- | --- |
 | `classifier_cluster` | 已由 Higress 配置好的 Envoy 集群名；不是任意 URL |
 | `classifier_authority` | 分类请求的 Host；TLS 由该集群的 transport socket 配置 |
 | `path` | 精确匹配的请求路径，默认 `/v1/chat/completions`，忽略 query 部分 |
+| `hosts` | 可选的精确域名列表（小写，不含端口）；为空时覆盖全部域名。Kubernetes 模板显式设置，其他域名不进行分类 |
 | `timeout_ms` | 单次分类/观测调用期限，1–30000 ms，默认 5000 |
 | `max_body_bytes` | 原始生成请求上限，1024–1048576，默认 262144；同时设置 Higress 解码缓冲上限 |
 | `targets` | `route_id → model_id / cluster_id / upstream_model`，每项必须与服务返回完全一致 |
@@ -49,6 +52,8 @@ HIGRESS_ENVOY=/tmp/adaptive-tools/envoy ADAPTIVE_WASM=/tmp/adaptive-routing.wasm
 Higress 路由按 `x-semantic-route` 匹配到预先配置的 Service/集群。插件首先删除客户端同名头与伪造的决策 ID，只写入校验后的值。Higress 默认在请求头修改后清除路由缓存；**不要设置 `clear_route_cache=off`**。未匹配内部目标的默认路由应拒绝请求。
 
 此插件应覆盖该主机上的全部候选路由；它们必须共享同一套前置认证、租户绑定和授权规则。不能在部分目标路由上关闭插件或放松认证，否则路由重算可能穿过不同的授权配置。分类服务还会检查租户、固定模型、工具/模态/schema 和上下文限制。
+
+配置使用全局 `defaultConfig` 加插件自身的 `hosts` 范围。不使用 Higress 的 `matchRules`：其按路由的配置会随重路由改变，且直接 SDK 插件没有 wrapper 的规则解析器。
 
 插件拥有 `auto` 模型选择和最终别名改写。相同路径不再启用另一个 `model-router`，避免二次选择。默认直接转发 OpenAI 兼容上游；若另加 `ai-proxy` 做厂商协议转换，需在部署中单独验证其插件顺序、别名映射和流格式。当前运行证据是直接转发链路，不宣称验证了所有厂商转换插件。
 
