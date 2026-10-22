@@ -66,11 +66,11 @@
 
 **Interfaces:** Atomic decision lookup/record by tenant+request ID+fingerprint; observation/feedback insertion with unique event identity; versioned Beta posterior; cluster EWMA/inflight/cooldown/freshness snapshot; optional polling leases. API service consumes transactions, never reconstructs authoritative state in memory.
 
-- [ ] Write RED tests against a uniquely named real PostgreSQL schema: two store instances update same events concurrently; feedback changes later model choice; operational failure leaves quality counts unchanged; request-ID conflicts; restart persistence.
-- [ ] Implement migrations, transactions and atomic update methods; contextual Beta means and epsilon-greedy propensity; explicit priors; separate model and cluster selection.
-- [ ] Test same-model/two-cluster latency shift, TTFT unknown, stale/out-of-order observations, duplicate terminal events, cooldown/recovery, missing outcomes, cross-tenant and wrong-model/version feedback.
-- [ ] Implement disabled-by-default bounded active telemetry polling/ownership with a real local telemetry endpoint test.
-- [ ] Run real multi-process shared-state tests, unit suites and checks; commit `feat(adaptive): share load and online learning across replicas`; push and verify.
+- [x] Write RED tests against a uniquely named real PostgreSQL schema: two store instances update same events concurrently; feedback changes later model choice; operational failure leaves quality counts unchanged; request-ID conflicts; restart persistence.
+- [x] Implement migrations, transactions and atomic update methods; contextual Beta means and epsilon-greedy propensity; explicit priors; separate model and cluster selection.
+- [x] Test same-model/two-cluster latency shift, TTFT unknown, stale/out-of-order observations, duplicate terminal events, cooldown/recovery, missing outcomes, cross-tenant and wrong-model/version feedback.
+- [x] Implement disabled-by-default bounded active telemetry polling/ownership with a real local telemetry endpoint test.
+- [x] Run real multi-process shared-state tests, unit suites and checks; commit `feat(adaptive): share load and online learning across replicas`; push and verify.
 
 **Completion contract:** Actual concurrent processes share durable updates; no simulated database-only proof; production requirements for HA PostgreSQL documented.
 
