@@ -35,15 +35,15 @@
 
 ### Task 1: Isolated signal pipeline and declarative policy
 
-**Files:** new `semantic_router/adaptive/{__init__,models,config,policy,pipeline}.py`, `signals/{__init__,base,structural}.py`; `tests/unit/adaptive/test_pipeline.py`, `test_config.py`; configuration example and user documentation.
+**Files:** new `semantic_router/adaptive/{__init__,models,config,policy,pipeline}.py`, `signals/{__init__,base,structural}.py`; `tests/unit/adaptive/test_pipeline.py`, `test_adaptive_config.py`; configuration example and user documentation.
 
 **Interfaces:** Produces `RoutingRequest`, `SignalResult`, `SignalSpec`, `PolicyRule`, `PolicyMatch`, `PipelineResult` and `SignalPipeline.run(request)`. Extractors implement async `extract(request) -> dict`; registry factories are invoked only for enabled signals. Built-in `request` facts are available before optional stages. Consumers in Tasks 2/4 use these exact contracts.
 
-- [ ] Write behavioral tests: tool-result shortcut skips a later extractor that would fail if called; disabled missing provider never constructs; different policy maps identical facts differently; provisional rule waits for later evidence; unavailable/missing value does not match; stage timeout and total deadline bound execution; cancellation propagates; extraction result cannot mutate previous signals.
-- [ ] Run `uv run pytest tests/unit/adaptive/test_pipeline.py tests/unit/adaptive/test_config.py -q`; expected RED for missing behavior, then implement smallest independent contracts/pipeline/rules.
-- [ ] Validate duplicate names, invalid rule references, negative limits, unknown models, disabled-signal rule semantics and finite numeric values. Add runnable structural-only example.
-- [ ] Run focused tests, existing unit/functional suite and ruff/mypy for changed files; record unavailable optional integrations separately.
-- [ ] Commit `feat(adaptive): separate configurable signals from shortcut policies`; push origin feature branch and verify remote SHA.
+- [x] Write behavioral tests: tool-result shortcut skips a later extractor that would fail if called; disabled missing provider never constructs; different policy maps identical facts differently; provisional rule waits for later evidence; unavailable/missing value does not match; stage timeout and total deadline bound execution; cancellation propagates; extraction result cannot mutate previous signals.
+- [x] Run `uv run pytest tests/unit/adaptive/test_pipeline.py tests/unit/adaptive/test_adaptive_config.py -q`; expected RED for missing behavior, then implement smallest independent contracts/pipeline/rules.
+- [x] Validate duplicate names, invalid rule references, negative limits, unknown models, disabled-signal rule semantics and finite numeric values. Add runnable structural-only example.
+- [x] Run focused tests, existing unit/functional suite and ruff/mypy for changed files; record unavailable optional integrations separately.
+- [x] Commit `feat(adaptive): separate configurable signals from shortcut policies`; push origin feature branch and verify remote SHA.
 
 **Completion contract:** Real extraction and policy behavior tested; no route table/provider credential coupling; default package import stays compatible.
 

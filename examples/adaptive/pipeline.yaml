@@ -1,0 +1,27 @@
+# Runnable without credentials. Model IDs are illustrative candidates, not URLs.
+timeout_ms: 1000
+signals:
+  - name: semantic
+    kind: systemone
+    enabled: false
+    stage: 1
+    timeout_ms: 500
+policy:
+  rules:
+    - name: tool-continuation
+      when:
+        - signal: request
+          path: is_tool_continuation
+          op: eq
+          value: true
+      models: [tool-model]
+      shortcut: true
+    - name: tool-capability
+      when:
+        - signal: request
+          path: requires_tools
+          op: eq
+          value: true
+      models: [tool-model]
+      shortcut: true
+  fallback_models: [general]
