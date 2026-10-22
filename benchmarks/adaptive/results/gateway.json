@@ -1,0 +1,82 @@
+{
+  "source_commit": "2f6719d6d6631260129e80248d2683c8612240eb",
+  "script_sha256": "cb72aa61460d051fe3f5037722fecd66bcd9c15367f26683dd7b7ac07e62e6df",
+  "wasm_sha256": "fdb89dce19efa8bbf962b51d95ee62025cdaaf1f66d6814112ed74585e5ba727",
+  "envoy_sha256": "b3a229ad3b785c5ebc6a52e49fd942fc5cb5da2eff5d37f6c949afd2939a7ecd",
+  "fixture": "20ms to first content,2ms to DONE; no model inference",
+  "warmup_per_mode": 20,
+  "modes": {
+    "direct_c1": {
+      "samples": 200,
+      "concurrency": 1,
+      "errors": 0,
+      "elapsed_s": 4.5424548499286175,
+      "requests_per_second": 44.02905622785506,
+      "client_ttft": {
+        "p50_ms": 20.487680099904537,
+        "p95_ms": 20.665932167321444,
+        "p99_ms": 20.771004147827625
+      },
+      "client_total": {
+        "p50_ms": 22.65798021107912,
+        "p95_ms": 22.90679132565856,
+        "p99_ms": 23.05595325306058
+      },
+      "byte_identical_streams": 200
+    },
+    "higress_wasm_classifier_c1": {
+      "samples": 200,
+      "concurrency": 1,
+      "errors": 0,
+      "elapsed_s": 5.687579581514001,
+      "requests_per_second": 35.164343132894004,
+      "client_ttft": {
+        "p50_ms": 24.986227974295616,
+        "p95_ms": 34.99525571241975,
+        "p99_ms": 40.97514197230339
+      },
+      "client_total": {
+        "p50_ms": 27.421879582107067,
+        "p95_ms": 37.2769215144217,
+        "p99_ms": 43.28431103378534
+      },
+      "byte_identical_streams": 200
+    },
+    "direct_c8": {
+      "samples": 200,
+      "concurrency": 8,
+      "errors": 0,
+      "elapsed_s": 0.6145743168890476,
+      "requests_per_second": 325.4285031180486,
+      "client_ttft": {
+        "p50_ms": 21.576848812401295,
+        "p95_ms": 22.160075418651104,
+        "p99_ms": 22.551416717469692
+      },
+      "client_total": {
+        "p50_ms": 24.07736051827669,
+        "p95_ms": 24.630972370505333,
+        "p99_ms": 25.002258457243443
+      },
+      "byte_identical_streams": 200
+    },
+    "higress_wasm_classifier_c8": {
+      "samples": 200,
+      "concurrency": 8,
+      "errors": 0,
+      "elapsed_s": 2.122580198571086,
+      "requests_per_second": 94.22494383705235,
+      "client_ttft": {
+        "p50_ms": 53.71096823364496,
+        "p95_ms": 201.50526938959953,
+        "p99_ms": 486.52297850698216
+      },
+      "client_total": {
+        "p50_ms": 56.235252879559994,
+        "p95_ms": 204.24245288595557,
+        "p99_ms": 489.1734262183307
+      },
+      "byte_identical_streams": 200
+    }
+  }
+}

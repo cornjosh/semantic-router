@@ -1,0 +1,1200 @@
+{
+  "dataset": "massive-zh",
+  "model": "bge-small-zh-v1.5",
+  "protocol": "embedding",
+  "source_commit": "2f6719d6d6631260129e80248d2683c8612240eb",
+  "evaluator_sha256": "5c787e16b08bb5b94ef28464223e8bbfa4bd58669f63a60850c2be2396033d89",
+  "python": "3.12.13",
+  "seed": 42,
+  "max_examples_per_class": 5,
+  "prototype_counts": {
+    "alarm_query": 5,
+    "alarm_remove": 5,
+    "alarm_set": 5,
+    "audio_volume_down": 5,
+    "audio_volume_mute": 5,
+    "audio_volume_other": 5,
+    "audio_volume_up": 5,
+    "calendar_query": 5,
+    "calendar_remove": 5,
+    "calendar_set": 5,
+    "cooking_query": 4,
+    "cooking_recipe": 5,
+    "datetime_convert": 5,
+    "datetime_query": 5,
+    "email_addcontact": 5,
+    "email_query": 5,
+    "email_querycontact": 5,
+    "email_sendemail": 5,
+    "general_greet": 5,
+    "general_joke": 5,
+    "general_quirky": 5,
+    "iot_cleaning": 5,
+    "iot_coffee": 5,
+    "iot_hue_lightchange": 5,
+    "iot_hue_lightdim": 5,
+    "iot_hue_lightoff": 5,
+    "iot_hue_lighton": 5,
+    "iot_hue_lightup": 5,
+    "iot_wemo_off": 5,
+    "iot_wemo_on": 5,
+    "lists_createoradd": 5,
+    "lists_query": 5,
+    "lists_remove": 5,
+    "music_dislikeness": 5,
+    "music_likeness": 5,
+    "music_query": 5,
+    "music_settings": 5,
+    "news_query": 5,
+    "play_audiobook": 5,
+    "play_game": 5,
+    "play_music": 5,
+    "play_podcasts": 5,
+    "play_radio": 5,
+    "qa_currency": 5,
+    "qa_definition": 5,
+    "qa_factoid": 5,
+    "qa_maths": 5,
+    "qa_stock": 5,
+    "recommendation_events": 5,
+    "recommendation_locations": 5,
+    "recommendation_movies": 5,
+    "social_post": 5,
+    "social_query": 5,
+    "takeaway_order": 5,
+    "takeaway_query": 5,
+    "transport_query": 5,
+    "transport_taxi": 5,
+    "transport_ticket": 5,
+    "transport_traffic": 5,
+    "weather_query": 5
+  },
+  "per_class_subset": 0,
+  "classes": 60,
+  "label_aliases": {},
+  "concurrency": 1,
+  "method": "max cosine of train examples",
+  "score_is_calibrated_probability": false,
+  "warmup_ms": [
+    393.2930938899517,
+    6.145786494016647,
+    5.081679672002792,
+    4.7172121703624725,
+    4.847154021263123,
+    4.736587405204773,
+    6.243579089641571,
+    6.539039313793182,
+    5.339512601494789,
+    6.785599514842033
+  ],
+  "audit": {
+    "normalization": "NFKC + casefold + collapse whitespace",
+    "precedence": [
+      "train",
+      "dev",
+      "test"
+    ],
+    "removed": {
+      "train": 492,
+      "dev": 147,
+      "test": 263
+    },
+    "original_counts": {
+      "train": 11514,
+      "dev": 2033,
+      "test": 2974
+    },
+    "clean_counts": {
+      "train": 11022,
+      "dev": 1886,
+      "test": 2711
+    }
+  },
+  "metrics": {
+    "dev": {
+      "n": 1886,
+      "correct": 957,
+      "accuracy": 0.5074231177094379,
+      "macro_f1": 0.503405585045778,
+      "invalid": 0,
+      "per_label": {
+        "alarm_query": {
+          "f1": 0.5833333333333334,
+          "support": 18
+        },
+        "alarm_remove": {
+          "f1": 0.7272727272727273,
+          "support": 13
+        },
+        "alarm_set": {
+          "f1": 0.2037037037037037,
+          "support": 29
+        },
+        "audio_volume_down": {
+          "f1": 0.6153846153846154,
+          "support": 6
+        },
+        "audio_volume_mute": {
+          "f1": 0.7407407407407407,
+          "support": 13
+        },
+        "audio_volume_other": {
+          "f1": 0.0,
+          "support": 0
+        },
+        "audio_volume_up": {
+          "f1": 0.21052631578947367,
+          "support": 6
+        },
+        "calendar_query": {
+          "f1": 0.2857142857142857,
+          "support": 99
+        },
+        "calendar_remove": {
+          "f1": 0.48120300751879697,
+          "support": 47
+        },
+        "calendar_set": {
+          "f1": 0.31413612565445026,
+          "support": 129
+        },
+        "cooking_query": {
+          "f1": 0.25,
+          "support": 2
+        },
+        "cooking_recipe": {
+          "f1": 0.6557377049180327,
+          "support": 39
+        },
+        "datetime_convert": {
+          "f1": 0.42424242424242425,
+          "support": 9
+        },
+        "datetime_query": {
+          "f1": 0.41304347826086957,
+          "support": 52
+        },
+        "email_addcontact": {
+          "f1": 0.32,
+          "support": 5
+        },
+        "email_query": {
+          "f1": 0.592,
+          "support": 71
+        },
+        "email_querycontact": {
+          "f1": 0.5,
+          "support": 16
+        },
+        "email_sendemail": {
+          "f1": 0.5571428571428572,
+          "support": 61
+        },
+        "general_greet": {
+          "f1": 0.0,
+          "support": 1
+        },
+        "general_joke": {
+          "f1": 0.5714285714285714,
+          "support": 12
+        },
+        "general_quirky": {
+          "f1": 0.12598425196850394,
+          "support": 102
+        },
+        "iot_cleaning": {
+          "f1": 0.9166666666666666,
+          "support": 11
+        },
+        "iot_coffee": {
+          "f1": 0.8,
+          "support": 10
+        },
+        "iot_hue_lightchange": {
+          "f1": 0.717948717948718,
+          "support": 20
+        },
+        "iot_hue_lightdim": {
+          "f1": 0.7096774193548387,
+          "support": 14
+        },
+        "iot_hue_lightoff": {
+          "f1": 0.8181818181818182,
+          "support": 10
+        },
+        "iot_hue_lighton": {
+          "f1": 0.36363636363636365,
+          "support": 3
+        },
+        "iot_hue_lightup": {
+          "f1": 0.45454545454545453,
+          "support": 11
+        },
+        "iot_wemo_off": {
+          "f1": 0.21052631578947367,
+          "support": 4
+        },
+        "iot_wemo_on": {
+          "f1": 0.5714285714285714,
+          "support": 3
+        },
+        "lists_createoradd": {
+          "f1": 0.27906976744186046,
+          "support": 22
+        },
+        "lists_query": {
+          "f1": 0.6386554621848739,
+          "support": 48
+        },
+        "lists_remove": {
+          "f1": 0.704225352112676,
+          "support": 35
+        },
+        "music_dislikeness": {
+          "f1": 0.11764705882352941,
+          "support": 2
+        },
+        "music_likeness": {
+          "f1": 0.2222222222222222,
+          "support": 16
+        },
+        "music_query": {
+          "f1": 0.6333333333333333,
+          "support": 27
+        },
+        "music_settings": {
+          "f1": 0.18867924528301888,
+          "support": 7
+        },
+        "news_query": {
+          "f1": 0.6086956521739131,
+          "support": 81
+        },
+        "play_audiobook": {
+          "f1": 0.7297297297297297,
+          "support": 35
+        },
+        "play_game": {
+          "f1": 0.75,
+          "support": 21
+        },
+        "play_music": {
+          "f1": 0.4049079754601227,
+          "support": 112
+        },
+        "play_podcasts": {
+          "f1": 0.5517241379310345,
+          "support": 29
+        },
+        "play_radio": {
+          "f1": 0.5194805194805194,
+          "support": 40
+        },
+        "qa_currency": {
+          "f1": 0.8985507246376812,
+          "support": 31
+        },
+        "qa_definition": {
+          "f1": 0.5121951219512195,
+          "support": 54
+        },
+        "qa_factoid": {
+          "f1": 0.1568627450980392,
+          "support": 87
+        },
+        "qa_maths": {
+          "f1": 0.5517241379310345,
+          "support": 11
+        },
+        "qa_stock": {
+          "f1": 0.8837209302325582,
+          "support": 23
+        },
+        "recommendation_events": {
+          "f1": 0.37037037037037035,
+          "support": 25
+        },
+        "recommendation_locations": {
+          "f1": 0.6129032258064516,
+          "support": 31
+        },
+        "recommendation_movies": {
+          "f1": 0.5555555555555556,
+          "support": 12
+        },
+        "social_post": {
+          "f1": 0.7346938775510204,
+          "support": 49
+        },
+        "social_query": {
+          "f1": 0.23809523809523808,
+          "support": 17
+        },
+        "takeaway_order": {
+          "f1": 0.37037037037037035,
+          "support": 17
+        },
+        "takeaway_query": {
+          "f1": 0.52,
+          "support": 21
+        },
+        "transport_query": {
+          "f1": 0.16326530612244897,
+          "support": 34
+        },
+        "transport_taxi": {
+          "f1": 0.9090909090909091,
+          "support": 26
+        },
+        "transport_ticket": {
+          "f1": 0.6027397260273972,
+          "support": 24
+        },
+        "transport_traffic": {
+          "f1": 0.8260869565217391,
+          "support": 21
+        },
+        "weather_query": {
+          "f1": 0.8155339805825242,
+          "support": 112
+        }
+      },
+      "top_confusions": [
+        {
+          "truth": "calendar_set",
+          "prediction": "alarm_set",
+          "n": 40
+        },
+        {
+          "truth": "play_music",
+          "prediction": "music_settings",
+          "n": 28
+        },
+        {
+          "truth": "email_query",
+          "prediction": "email_sendemail",
+          "n": 24
+        },
+        {
+          "truth": "transport_query",
+          "prediction": "transport_ticket",
+          "n": 20
+        },
+        {
+          "truth": "calendar_query",
+          "prediction": "calendar_remove",
+          "n": 19
+        },
+        {
+          "truth": "calendar_set",
+          "prediction": "calendar_remove",
+          "n": 18
+        },
+        {
+          "truth": "play_music",
+          "prediction": "music_likeness",
+          "n": 16
+        },
+        {
+          "truth": "calendar_set",
+          "prediction": "calendar_query",
+          "n": 15
+        },
+        {
+          "truth": "general_quirky",
+          "prediction": "general_greet",
+          "n": 14
+        },
+        {
+          "truth": "alarm_set",
+          "prediction": "alarm_query",
+          "n": 14
+        },
+        {
+          "truth": "calendar_query",
+          "prediction": "calendar_set",
+          "n": 14
+        },
+        {
+          "truth": "calendar_query",
+          "prediction": "lists_query",
+          "n": 13
+        },
+        {
+          "truth": "calendar_query",
+          "prediction": "alarm_set",
+          "n": 10
+        },
+        {
+          "truth": "play_music",
+          "prediction": "play_radio",
+          "n": 9
+        },
+        {
+          "truth": "calendar_query",
+          "prediction": "datetime_query",
+          "n": 9
+        }
+      ],
+      "http_signal_latency": {
+        "n": 1886,
+        "p50_ms": 4.769480787217617,
+        "p95_ms": 5.748385563492775,
+        "p99_ms": 7.1105296723544615
+      }
+    },
+    "test": {
+      "n": 2711,
+      "correct": 1301,
+      "accuracy": 0.4798967170785688,
+      "macro_f1": 0.4806338919368907,
+      "invalid": 0,
+      "per_label": {
+        "alarm_query": {
+          "f1": 0.611764705882353,
+          "support": 31
+        },
+        "alarm_remove": {
+          "f1": 0.6122448979591837,
+          "support": 17
+        },
+        "alarm_set": {
+          "f1": 0.15384615384615385,
+          "support": 40
+        },
+        "audio_volume_down": {
+          "f1": 0.4444444444444444,
+          "support": 8
+        },
+        "audio_volume_mute": {
+          "f1": 0.5,
+          "support": 23
+        },
+        "audio_volume_other": {
+          "f1": 0.23529411764705882,
+          "support": 5
+        },
+        "audio_volume_up": {
+          "f1": 0.2857142857142857,
+          "support": 12
+        },
+        "calendar_query": {
+          "f1": 0.2513089005235602,
+          "support": 120
+        },
+        "calendar_remove": {
+          "f1": 0.4046242774566474,
+          "support": 64
+        },
+        "calendar_set": {
+          "f1": 0.31438127090301005,
+          "support": 204
+        },
+        "cooking_query": {
+          "f1": 0.0,
+          "support": 0
+        },
+        "cooking_recipe": {
+          "f1": 0.5714285714285714,
+          "support": 70
+        },
+        "datetime_convert": {
+          "f1": 0.34782608695652173,
+          "support": 15
+        },
+        "datetime_query": {
+          "f1": 0.48,
+          "support": 70
+        },
+        "email_addcontact": {
+          "f1": 0.2857142857142857,
+          "support": 12
+        },
+        "email_query": {
+          "f1": 0.5463917525773195,
+          "support": 109
+        },
+        "email_querycontact": {
+          "f1": 0.38095238095238093,
+          "support": 26
+        },
+        "email_sendemail": {
+          "f1": 0.4628099173553719,
+          "support": 107
+        },
+        "general_greet": {
+          "f1": 0.0,
+          "support": 1
+        },
+        "general_joke": {
+          "f1": 0.47761194029850745,
+          "support": 17
+        },
+        "general_quirky": {
+          "f1": 0.08791208791208792,
+          "support": 163
+        },
+        "iot_cleaning": {
+          "f1": 0.6666666666666666,
+          "support": 10
+        },
+        "iot_coffee": {
+          "f1": 0.8055555555555556,
+          "support": 31
+        },
+        "iot_hue_lightchange": {
+          "f1": 0.7692307692307693,
+          "support": 34
+        },
+        "iot_hue_lightdim": {
+          "f1": 0.5853658536585366,
+          "support": 14
+        },
+        "iot_hue_lightoff": {
+          "f1": 0.6909090909090909,
+          "support": 28
+        },
+        "iot_hue_lighton": {
+          "f1": 0.08,
+          "support": 3
+        },
+        "iot_hue_lightup": {
+          "f1": 0.5,
+          "support": 22
+        },
+        "iot_wemo_off": {
+          "f1": 0.5833333333333334,
+          "support": 9
+        },
+        "iot_wemo_on": {
+          "f1": 0.625,
+          "support": 8
+        },
+        "lists_createoradd": {
+          "f1": 0.2535211267605634,
+          "support": 34
+        },
+        "lists_query": {
+          "f1": 0.544,
+          "support": 47
+        },
+        "lists_remove": {
+          "f1": 0.6292134831460674,
+          "support": 43
+        },
+        "music_dislikeness": {
+          "f1": 0.18181818181818182,
+          "support": 4
+        },
+        "music_likeness": {
+          "f1": 0.40476190476190477,
+          "support": 31
+        },
+        "music_query": {
+          "f1": 0.575,
+          "support": 35
+        },
+        "music_settings": {
+          "f1": 0.05333333333333334,
+          "support": 6
+        },
+        "news_query": {
+          "f1": 0.73,
+          "support": 115
+        },
+        "play_audiobook": {
+          "f1": 0.6904761904761905,
+          "support": 38
+        },
+        "play_game": {
+          "f1": 0.6376811594202898,
+          "support": 29
+        },
+        "play_music": {
+          "f1": 0.415929203539823,
+          "support": 161
+        },
+        "play_podcasts": {
+          "f1": 0.5904761904761905,
+          "support": 57
+        },
+        "play_radio": {
+          "f1": 0.5178571428571429,
+          "support": 63
+        },
+        "qa_currency": {
+          "f1": 0.9459459459459459,
+          "support": 35
+        },
+        "qa_definition": {
+          "f1": 0.5476190476190477,
+          "support": 57
+        },
+        "qa_factoid": {
+          "f1": 0.25149700598802394,
+          "support": 139
+        },
+        "qa_maths": {
+          "f1": 0.6779661016949152,
+          "support": 22
+        },
+        "qa_stock": {
+          "f1": 0.7368421052631579,
+          "support": 25
+        },
+        "recommendation_events": {
+          "f1": 0.43037974683544306,
+          "support": 43
+        },
+        "recommendation_locations": {
+          "f1": 0.6285714285714286,
+          "support": 31
+        },
+        "recommendation_movies": {
+          "f1": 0.48484848484848486,
+          "support": 20
+        },
+        "social_post": {
+          "f1": 0.7777777777777778,
+          "support": 78
+        },
+        "social_query": {
+          "f1": 0.33962264150943394,
+          "support": 23
+        },
+        "takeaway_order": {
+          "f1": 0.38235294117647056,
+          "support": 21
+        },
+        "takeaway_query": {
+          "f1": 0.5671641791044776,
+          "support": 31
+        },
+        "transport_query": {
+          "f1": 0.25,
+          "support": 50
+        },
+        "transport_taxi": {
+          "f1": 0.8837209302325582,
+          "support": 21
+        },
+        "transport_ticket": {
+          "f1": 0.6813186813186813,
+          "support": 32
+        },
+        "transport_traffic": {
+          "f1": 0.5128205128205128,
+          "support": 13
+        },
+        "weather_query": {
+          "f1": 0.7551867219917012,
+          "support": 134
+        }
+      },
+      "top_confusions": [
+        {
+          "truth": "calendar_set",
+          "prediction": "alarm_set",
+          "n": 71
+        },
+        {
+          "truth": "play_music",
+          "prediction": "music_settings",
+          "n": 43
+        },
+        {
+          "truth": "email_query",
+          "prediction": "email_sendemail",
+          "n": 43
+        },
+        {
+          "truth": "alarm_set",
+          "prediction": "alarm_query",
+          "n": 23
+        },
+        {
+          "truth": "calendar_set",
+          "prediction": "calendar_remove",
+          "n": 21
+        },
+        {
+          "truth": "transport_query",
+          "prediction": "transport_ticket",
+          "n": 20
+        },
+        {
+          "truth": "general_quirky",
+          "prediction": "general_greet",
+          "n": 19
+        },
+        {
+          "truth": "calendar_query",
+          "prediction": "calendar_remove",
+          "n": 19
+        },
+        {
+          "truth": "play_music",
+          "prediction": "music_likeness",
+          "n": 18
+        },
+        {
+          "truth": "calendar_query",
+          "prediction": "calendar_set",
+          "n": 18
+        },
+        {
+          "truth": "general_quirky",
+          "prediction": "general_joke",
+          "n": 17
+        },
+        {
+          "truth": "calendar_query",
+          "prediction": "alarm_set",
+          "n": 17
+        },
+        {
+          "truth": "email_sendemail",
+          "prediction": "email_query",
+          "n": 17
+        },
+        {
+          "truth": "email_sendemail",
+          "prediction": "email_addcontact",
+          "n": 17
+        },
+        {
+          "truth": "calendar_set",
+          "prediction": "calendar_query",
+          "n": 16
+        }
+      ],
+      "http_signal_latency": {
+        "n": 2711,
+        "p50_ms": 4.722295328974724,
+        "p95_ms": 5.557729862630367,
+        "p99_ms": 6.30921833217144
+      }
+    }
+  },
+  "prototype_text_hashes": {
+    "alarm_query": [
+      "c84f59a56e1fcef99e44d0e869d71433cf910ee4a1e54aba7740f82b2f622795",
+      "393f7ddc5712d11958cb8816b01e6025f3db839d3adb773fb6707a8a4981e6a4",
+      "6c62ac992f4f2077d39889f090f08cb946cf35530cf7ab86b754719a35f256ad",
+      "4383932025862e21dc8abca4b60c309ed3ae04dcdc219ce05b8562a814429cd7",
+      "0b73ae6373398d31869b19d5180ca1ae758930fac59be6632587d41cf11230b0"
+    ],
+    "alarm_remove": [
+      "29ec7c2825ca321ff4f7b5dd68101ec0b6840c8d31bbbaa3c28a7dc2b93a03b4",
+      "24411e779a0c1fc6b4f9487ea6780a4b9ca39263a2f66b044a806df32b464253",
+      "c8151a449ab6f22d46886e797d3764e5c1f89281f5f411817e044b24cc86d956",
+      "89f40477f3b5244fd41dacdb77161dc1c74303c62049087ae30ce6a3e974a21f",
+      "19b0ae97abf80cee7b115b550dc3c0ed9b04157dc93f7c41fa8cb06ee1037572"
+    ],
+    "alarm_set": [
+      "93118a28c88fd503f1ad7625985c58cfa5c1c1956cf41fd33f40c2bfad0fca51",
+      "f10b88f3034352dd3d2383432cfe293a3a4061786a7b7bbf477cf5ad84858b6f",
+      "e317c6a5b629fafd5dec0c8cd245b18ef0547e1f6e7fdbdfaa93156e51f128e0",
+      "6418dda4b2b2ea51d57c5e35acb373c1667e95913f32095a869d2219a07c9b12",
+      "df5fa6f615daee00ccf2576e235d7bbecc2b95ba12e7d09b8f8ef91d5d88e20b"
+    ],
+    "audio_volume_down": [
+      "3eb10a640f645f4d3823e0fa0eff0a61e3fcc72aeb0456efcff70a60060ce09f",
+      "9524788a4fd7aa62351635338f82fb57c0328a7914ba691b9ad9819a61654eac",
+      "f8534967e4ea63ddbfe84d9b0a37501747c8c9678368b52aec30ac7a0e4aa692",
+      "e33d8d344d8f314fd0cf1c9eeeebb4df34b8d2e8a42ff29dce8b655bda3b6e19",
+      "292ec3ce255d40f1c03c9ccccf991572d738b4e9a465fed86663b134564cdd51"
+    ],
+    "audio_volume_mute": [
+      "791c84ec469f38a1c7a40859df6a47034a05f1abc3e7316f5cbc64dab0794e50",
+      "61e84402e4f1de3aff9fafca97f9f2c2f0f7388b188a255a2b039e4cf78a265a",
+      "02a72b71f0b826160e357f1a949fcde4388b1eae48f1dcd68270e4ce650e89cb",
+      "289a344f69a50c248f42d8de8471e0769a5c555004882c19de5290f9d1295a42",
+      "fa67eaa09aa051cd5206ebef2d02f8f8a40bbdf0ace1adcd6a3f3970d2cc641e"
+    ],
+    "audio_volume_other": [
+      "9d0ed1d5c5d61ec99354b67a6a4c72fcc6fb9eeefc81fa9167aab9f9df312ea9",
+      "66383e4b5d76ba10c8ed67b88cb9315e3d94efa7450351dca107b1acc8bb0db6",
+      "15e5fdae1afb10105bfe107f2f0c8a3f978bb885d4af904dbb3c781a75d183cf",
+      "a4b0feb0ba88cade7c1def149bef9ef7ac912268d81d87a6c3af048b65c0b79c",
+      "3cd3b5f64c5a28eb1dd4c20f383fb52f09bd6b7232b17f212005bbc6a23c1e4a"
+    ],
+    "audio_volume_up": [
+      "08aeb5cbb9da5f239279f185347d7e22096f79c5cbfff21e763b29b464ea0082",
+      "4d97f20f6aef1f1781fe9932330c372174da1bb89bc7da6f8e76f7897067719d",
+      "9f67135593087d41f6bb3048b3be2b073c8455ef6997b9bd2157174b87f520d6",
+      "36de33f4aaf647a0bc72a80f8e4c134fcf94e87b25c8a975bab1d9d2791d84ec",
+      "d2aeacdd90a33a12512ab4c91d2e8f4a0dc73cd1f9bdf30427a3886466873f32"
+    ],
+    "calendar_query": [
+      "7c206addc9733e1e87ebf6a953d59fdb95fa705f4dca36419cdbf8fd4128a353",
+      "14fe1c3867f1e350d7c8841ba75fefeab4ab0a2492fec2f57bcc5a20b439222c",
+      "6f9521ee8d7bf00cdcf0eb3d8f77f63c52f34ae9cdc5d98311def6c3b1d5dea2",
+      "750c578d478f9e784f1eb82d2ddd51e578aef74117b6f20d404df3338f489b4e",
+      "1457c46ea7c25a0d2312157971fde15e31d594d035ca8ecfe6dcd51067afee8f"
+    ],
+    "calendar_remove": [
+      "9de843e932092095b9d8e905b45d7ecf7c4847bb47dd5d686f0523d497f6a8b0",
+      "b60ee8b366f130af8c37ac64f9bf9348031260fb8b0435e1f93d85f6c4a90440",
+      "d8eba3797f217741ebb8d4df9d1da3719b4b9325ad42c702382638e4260f652d",
+      "1d42136dd8f32b86c0c250d7f4bafb3cf2fbb6265b11f328898e34071c014f8e",
+      "11b0c33b159fe70b773522979c6f70d31179b9165f872d632e50d5e5cd51f119"
+    ],
+    "calendar_set": [
+      "8ed889f0637da00dd81ded6bbe147258acbd8617a0bc6b2d6734f268e7a344a4",
+      "083cf56e4ad91b701036ab690a2f4f6fa4a4e0c500adfee1b7dbc82e7ee5450d",
+      "ef4bab8f43f6f127ac4bf49e3d90779abd0e03402c0294b7e919e9f37c3e48ef",
+      "bbeacf851f28eda32df4d5fa842d7aac0328e2ea8d03aeda56253eec81118760",
+      "8da3d8db9ca734e66820b4e93f514176b4e5ec6c7d81bca0ffa35a2502c289ee"
+    ],
+    "cooking_query": [
+      "0fcf785b2dea7f9ccc97eb9c2c1c3b5a7eb6fbe97293c3c4dfa13e57809d1b1c",
+      "a5f1b0e9ad95521bd0e66598c2710f7e22a4f9382a6154b597cb05da9e30aeac",
+      "133f25ca77f5064380d1f3d2819b4ae4184c62c9a986475b62d4108ec025fdf7",
+      "1d9b4242356878092af8b474fd5986a321026dfbe66d6c8a0ac6c343f33500d6"
+    ],
+    "cooking_recipe": [
+      "93a0c98414a02e093944505c1358aed185fa7ad56b9f8fdf57e661d46d3a1ceb",
+      "2384656694ab0bfa5452c0472d70c93c3f0fd81d884553e7783e9cb927c7f80f",
+      "d408216d38c858385bbc12ef45b4157d34b8ba5f54ed5bf5d895a2cfed1891fb",
+      "9f68dd003c22573a98448edd24768c0c013042892ecf3b958a61c191a094cfc9",
+      "40959078c3563768372e1d7aab7f95f0dabfe765d764753a3b727eb7d886d78e"
+    ],
+    "datetime_convert": [
+      "c92d0d3d4a1581b67f1a06013e8cb59f1707911afb40ed2074b312488ad109be",
+      "d4edf0590d4daab61ae287e13ebde7d6f1ac22260626f84b107cd71b29f78d8a",
+      "cad255b794d9a6f9b144cd2391d3598d43e2f110f1093e16c8bc81fe7e9b00bf",
+      "b9e3c58e8be900968a01dd630cf25fcbdd57ab62359f82529244b3d8423102fc",
+      "81272cb2231bbb27224dba5f9dbabb3cc2c204bfd1de1b035f5cf4bc9b6fc117"
+    ],
+    "datetime_query": [
+      "b03659df3263fa36eda1cc7b9cf21f6515a082848c4695017254347344780f05",
+      "053b07cc04bf5d2a10cae8fed851641db28ada4f5251fd3917a2872e640977e5",
+      "a228ffcef73ce1278dfde6e407cc19ee265cf4faf38cb70091a48bb697777f34",
+      "520dadf626ada659257948b273e281f45541b86bb6e273beaf0a59df20539557",
+      "97fd63578bd418cade5b21b763b66261eed0c30a1cd3785560e87cb2ba473611"
+    ],
+    "email_addcontact": [
+      "20181fb24f558507f92404de088c8aa11c0e8effc659d1fb8a2e22e01e206108",
+      "7f6734b49a593a2b12a3a1626960ad999f5da165533c131f9d31e1dc07bc2590",
+      "a44423d20103250a5b73525621b779f8d95e286944d42c124fd3cd563c921059",
+      "962e82ff191acd8960de216c230ae4e475f67a181738989487167b15e601a348",
+      "e97a95ad82380bc881b7decb278a8a2f7253e5fdc075ecae3c9691e8dd2138a0"
+    ],
+    "email_query": [
+      "6eff77d11ce8a308aa54e390a6db0c33f1fc95de01f9240cd583949ccc666ce9",
+      "d7ccf27e8b8bd8ce54a77949a780f8d1cfb3ff9fd2460921a0c48ceb1bdd4be2",
+      "fa068548337892bfd13740dad01d0cf062a5cc3ad9baf7e65ef3ad037802af17",
+      "76bcef20307f4f837b44e3f4958a24584786e46005f5a1b9905336e3f8c45a51",
+      "44e950acc6220bb811b9411cf16c4eb9bb78f7c52c45c3cd353810979a95136e"
+    ],
+    "email_querycontact": [
+      "1ffe740c5ef73dabe1ff5e01d98f86077842cf499b4a84393113a65d3e05aec2",
+      "1e1724bccbcaa286134a2fdd065bb66557f83b3eff515ca891d9852c3b2c0cd1",
+      "3303b56982a00fd1b3a4483062463e73a5e0023aad1b3dbb202258890c19e998",
+      "35f48be381b4ecc7f2683a4223495bb8d879dd70d3e8770a0969c648d7813fed",
+      "d797d0af127263968a0518097296e1e83634633822387158346c1b9fa76a7d2a"
+    ],
+    "email_sendemail": [
+      "4ff47576326bc5985152cc0e75d744b1721cba22a03d42ccc28df620ad9f469f",
+      "8ab761b294f04684c333acfa133b993e1989785c57b056da14e90536e5fe97a9",
+      "0985858b9a0379a3ed258fcafdc2d0b4dc137b2984089c29f85e2c0feab909ef",
+      "6addf8bcaa312621cb8f45c3bcdf8c57a2cf88cfc02b3c30d2d537c879354805",
+      "b99f81395f9c61df5550af925ae2c1290f2d40d875287ddfc2c14efe1b01521a"
+    ],
+    "general_greet": [
+      "3cc2e31eb28e33773214184e9f0edee2403745e6ffe40762d771c6ed8194c8a5",
+      "c52483a4c4614b360e367005c636be07979f529fb551e60099deec26bcb9d350",
+      "2ec229dbf928b1ca6130445ed3cdf50e479896cfd2cce1eb806408185bdd4904",
+      "d8e9a7fa2086ea8e2b1f2c2524fddc0f8f525ac7e9bb74091d05e2e5c349c625",
+      "552594ef8057e087e8fa0a687f1251d0ade677b7a877d3e8a8d4ca4a80926242"
+    ],
+    "general_joke": [
+      "c9a320e9e4f8b3baac15bc08c96462533cff6f3f77e03209da1b71ea34de818e",
+      "fc939bf2e3daa2da07cf5b6e816c01cc2c100aad5da1a2aa59dd6e2704b1b731",
+      "937db318a74d0c115927f505e4e4b40ff7e958f1519581988e08fdedd87be928",
+      "fde79d3978ed6652522b4ce8a569b7d3893d044ffc4204fd31691993273778b7",
+      "7f89542cf7a742d84f74f5a0af9fb2a3e14a087a253888532400ff354ae830ee"
+    ],
+    "general_quirky": [
+      "e8277ac4f6abeb560aabd21fb5b9a34e895af867a6bf8042641646b5177e6f5f",
+      "3b177821c5a58ff5c6ae64e8c0506bb7da68a37c4eaa8bee169bf35efae62fc7",
+      "fd77c0a4ed0d212adf54edbe3eb7358d58ea7670d559d89d5ce72c221c9ab8f1",
+      "425dbc33fb6f0dc7cba5c1e6bfe8bdb959c0245191ab7f0695d3298bfbb1fa22",
+      "b95d5942ecda2627653715847893205dcaf0d92caf6202e7ee1bb921d452d5b1"
+    ],
+    "iot_cleaning": [
+      "6c01687217fa432a5f7517b16843bdb35cf0b0bd7fba4ddadbfe863c33af6c6a",
+      "3bd88fb0873fae623e40cad55579cd63ade43b19abbb642064b16fb55076ceaf",
+      "853f9fe8e1afee9fc7fa36026da176f401d2ff7e21dc1eae7a33ad49ccd4de81",
+      "ac2cfa4e49e9e520ed61418f4b7c364c6e4426311d430dc6e0033557e34f2f62",
+      "ed237f9591c684f237d46fbeb12759421c32b2ae8aa5abfaa9d2490156f3a83c"
+    ],
+    "iot_coffee": [
+      "560a9df2b4d662429212b08609f09292bc519f06540fae0f04c452e45c133415",
+      "b92fc88edf5de0e8e8df454f4f181be8db27e6b3956cc2828c18e7f75c3965de",
+      "91c88efbfcfb75ab4c84353c694ab9c54c32d36ece2ad303e89ad71fca9cdeff",
+      "d717b959ffec9d8eb8e4c1d919609e0d68520ea60f7c72aee8c1604b7f4bb010",
+      "e239e20eb735a9db8f9b2572e46f88eccb0284790114541ef51e76565d76bead"
+    ],
+    "iot_hue_lightchange": [
+      "b7d4ddb6e5af7e34294a6f426a9ca78cf63bd25eb4657dae4afdd744c11f9553",
+      "3b32c97fa3f98300c05ccecfc05a8332a11d630664ed6af52cee3d44379cf4df",
+      "d1c0b6cd2e748ef3a7bc3e64bbc2a7ef70ff744f80b6714a95ef7fc826ccbca7",
+      "00497bfb8a686db00406d05ce1efe4cb31ce43f5a5d693da0a87a1004b8e8166",
+      "193bcae159a992613bee3c6293dd8a31215efdf3e74853a246a5eb723e87ccb0"
+    ],
+    "iot_hue_lightdim": [
+      "993007496227c00cfabcdc600d031da52c6e1cbc2b5d0ef9c4dcbf6225cc4e9d",
+      "9934dcc3a04d308b62f4cc77bafd7d772578a335d28262b295f6edf20b982a3a",
+      "9de85151cb40e4aa72ae3a965c682d6b4fcc0d70fe9eace608f9f94cc32555b1",
+      "5cbb3584fffaf1292a8e9b83f8cfa018b5ce5024e39bbede485edda3d503d90f",
+      "1665d31e3ed857a8298146f18033e21d75ec18a7cf4717634ef3cdbf4aec72ee"
+    ],
+    "iot_hue_lightoff": [
+      "ef45cf645190cf971e40ce5f91ab75e1bd0bb9cec77ad2985943ee2133844db0",
+      "45e880f6d2be232eb00f79b72d173497ccc366fc133b161771653fd5faa4e874",
+      "1720cd3bdd88c4a1cedac2fa5fe0c7e3407be7ef990f2da0fac2e44e898ad5d0",
+      "0e6831bcc6b55372a0e0f9371488639b0a03c23575b8881a672f62d0d68db71a",
+      "a43d785cd55d85f3d5b67733e0df4ebfe5b9582eadaad6d865c2412e7f3ece6b"
+    ],
+    "iot_hue_lighton": [
+      "e0a6389e2bbb1f30db2a7a52152249f70e704c37123f0b60f31051f2274604de",
+      "84eeaa40efe5f6682d5ceeebd3758f02d1a74707d22e77fc3378f353dc483019",
+      "f16bf36cd0eaebaf3a17a47f5c887b0008fdf11eed5ad87e1a384e065cc4611d",
+      "956486dc0c5aea153f4a88196802ad18e16772d95436e076470549ad05c40cb1",
+      "a9c830525e04ed5ebd6d0815fdebe78bdc9211c29c6c02a1be6fd5a3183ccb84"
+    ],
+    "iot_hue_lightup": [
+      "2592028c90c7a2c902caa11fd76e06cee4c45dee2bafd0a40f32979ee70f8efc",
+      "66c34529103444171eeb8e965980317f1919247faf03f081771c4f84296736db",
+      "e0546495b2790672cbb3dae674493556b988f02da52b5dcc5f5005cb857c7c6a",
+      "d4c0ad0055ae6ca3ba616f6c3b763a2d52c4d175e7ee8a9abb09b5339cb98403",
+      "f5a62576e5a5f7a51abb87460da14aade2ce34b935cd272276b6b3b4cdb83a5a"
+    ],
+    "iot_wemo_off": [
+      "9476e893b47e114664012ae1cb69890b03fe83503e6262c08e12d1604f908ac9",
+      "7b5fb1287a2cdfb4fc4bc528ac4cdee91c11e9d1a0ccc80c6ea96b6318822152",
+      "e3b7693d115e5c309cfba25e99f9527547f37b22ddebd9e8963cbacbf69e3e4b",
+      "3e872567f6446664d36d06582d7dfc09dfb18f228343e46a68113a0d09ea40a9",
+      "f96112a04eae8a830d4b1625d5060e64d7abf217a55b05c195da42ae3aa928ef"
+    ],
+    "iot_wemo_on": [
+      "62313d7c5cb68cfb109aa5ea35754a6a8766d47c32c9dd9b5201bd16bc7da89a",
+      "8f54e666959553d6711ddca39bcfe4b36416df76e7ed3046778422462c68138d",
+      "43d0dc45c71ba35af2570c938e1704fe45cf198e2c3d7654d493c9938d070f4a",
+      "2b1f08f49930e245311a96b37a9a1f00551f00446c9eb85db791f16fda423793",
+      "cf8b9f4bf05a3e808eb59ee87e71b23b425d5d2acd700052d294b21557e029c5"
+    ],
+    "lists_createoradd": [
+      "dab2acbb08a2e636e9b981611747c0162f896e487b62124037ecd0f16adf61ac",
+      "56f862e43dc9ffd0e7e74ffe8fdb9b638535073fccfc38c7176439e07c2d8790",
+      "3205c92017f6bd4a37e467f0e3b9a4466867e19e5047fe180318f4ca2ddce691",
+      "05194ed6a88c5745fde007dd3a5386b61594febcb3ee3ed0cb7e2754fa14318c",
+      "b7cfd267d1d28c5607c0e0251036c7efb8cefcdd70319bb9d9404abf30ce56f2"
+    ],
+    "lists_query": [
+      "6a6441aab7b6261ac821884791d298973440229d9c6ce4792e76dfd29aac0c26",
+      "0c6f0a710385768dc035a2174f7a8472aaae7bfeaf4d6a6b77fa155c819f6ba1",
+      "94580af479d82e1680a4d275dbcb27ca7faf8f2d6d29fbf2241ff481556cc199",
+      "ac8d9945639531a3694898330f64d75d13da66a9fe43189b67163e911a80b865",
+      "c9adc0cd84a7c580d1aa55559fb06f12dcb684b1372463ef41d663ef542df935"
+    ],
+    "lists_remove": [
+      "d18c887392bc9b3dc6fd50a36b3b4b613ce6af5958394af4b9410cdcc106fdab",
+      "b9e4a0084894a474aa043cad23f83074a037fdb0691d3b6e7e6899c8c948cfff",
+      "cd3b537047d9135582f4f8ad8e55f18bfbef6258362b669c2b6f7673d2e3028e",
+      "03dd35c9c9d49f285ce24aca2830137bd4f84169573d0b6c61e74029739a7bf5",
+      "cbbf13abf5dd2910103dc481f32f0b6e73d5caea4c1e7ffc4ba8b549a72f44c7"
+    ],
+    "music_dislikeness": [
+      "403255e2c76d7b5414595164a62bfb8f3f91588e890106122507846a62daa758",
+      "12bd27940f7739686ca5072a6122ad4e5b1eff64f6c26473bf563241571ce762",
+      "635f7bc88ce1d2c7eb84f7316bd216b2505604e4d8d657a70706af98addf4202",
+      "c60aae6773f966a49316e528421a731cc56a4d5edbbf0e72665b5eb2e47103a3",
+      "57acf9705449b4d99c3ed8f86159c274afba73bff79cbd7cf2122be290f10c0e"
+    ],
+    "music_likeness": [
+      "29dbe138c3fc954e1d00fa58a916983f6f0e962c6746be4cf5f8552ab9f9336c",
+      "0d12f4540df0bfd7b18ee883d8c7976780e27449a19eebf8c3bd288d08be47de",
+      "808cb7503624f4d8c542fa504d96cff0170478bfae3622ce9e708ffe2c2119a4",
+      "0ec8c94f5ceb41b171b2ca8b69c9b17e61e65e4b9bb3e9b955dbabecd1384ee2",
+      "78c59bab9b6605acc5ab3f91e30f6351fea0e663ea96c404f8a9acbc295e2dcd"
+    ],
+    "music_query": [
+      "47d5fd1898cce866adbadaafa8060e3b4bb74bac27db9d8e10108d94154a0376",
+      "026ca004c4cef857e97c87098c49d408ba14e95a4571bbb013e4c8c225cc1845",
+      "2fab2fc815a07c9e35edef229e994a77c8222784c3c99976fb1a4ef3c3436f71",
+      "a0fa4af3a553667335c1aa601514e10e04ab23c73c5cef31bba2c4d725250bfc",
+      "72d7b27af002046aec8b6907867dea2d1326eedf2e5b5febe168e5a58a84d1ba"
+    ],
+    "music_settings": [
+      "b63efa8d98b919665e25165ec7525afd61489e609102c050438580a13d54d0b1",
+      "b44d79439f7f4ecabb656ab7e6ff95fd04e746c4540d273fedafc3870507b5b3",
+      "4c1e366ba30b8b03dfd677c5a57ebbddb3503784c3cc2909d2a85c66de8e6fde",
+      "6f42bafaef0bef058e76711a095521410969cb15280baa5ae69d873ebe5896f7",
+      "f1f0f10691374eb0dcf99dcb9d0a3ab3d22ce2df1395699167c486a8e2ac79d9"
+    ],
+    "news_query": [
+      "4df10aa8ab3bc416e28228234cffe3d09b6f409f8e88c6bef492fe94a13a05b0",
+      "f5bbbaff572d14b06bd8dee9b50943f52187f5832aefb2ea236937d017278ecf",
+      "2933cd9573c26260ec396305e216a4b9a47136db36f7851fdbe9c6b223b35888",
+      "0e0f60508d191650ba607ae4aadea99dacfde706f60e079e79d87059124cee6a",
+      "1b4469c23660dde70c9c6950a4677ad0496a097f824cb2a04f37512c70f16273"
+    ],
+    "play_audiobook": [
+      "d3e107c55a5570c406ec5350d02bce649b8814e502fa508e394af373b3922d86",
+      "ac351f47bbf0d4887d6fb0c036f650fb4d5110e5ef2ee9c4f07777d47c6c0871",
+      "e9910ada37332ed7e20f594a95501814067f96713c5e8a5497c7be3688a98046",
+      "4fd94ba95eb7a1b62613003b6925a98373de075ca2b7e905eab5dffa3d401767",
+      "3c57f6ba61342f6b59a095d5bf9af682ef2febd1b5879ffa6397fae47acbc9f3"
+    ],
+    "play_game": [
+      "c63104642bdf4149cd260dd7e24ba91ca2962837a0bd98ff0994a57a679e8306",
+      "e6ac8aad5538fb418696ba23537acc980ea4ee0fa6a80a1cc441b50ec2486a02",
+      "2db41cf2e28082d21493ad4d91083b7f67dad547d09064354e21a7fa45d4c0a3",
+      "bf0369d82837b354e227588b84288d733bc3f3cc4457917f31e7bd4f2dc87e02",
+      "29a7dab2454a57427ef3d320e6542e65c5490ec02deb882714dce0b08e54d60b"
+    ],
+    "play_music": [
+      "0186c5e9e043c8635a8c696edfb9914d888cf9e91dfedb8dbb9735b9e7ac9768",
+      "0a0484b63d3895414dfc44f5531d3a2105a7bb2180fc14ea8b74add1d12e590b",
+      "476bb8ec70326b8c21baa7cd2ff9671e8fbb412eefe4d688c2b15516eade91e5",
+      "d29b59999862abc3998064da4b2a9cbcc984581546e81012dddf7307db4128a1",
+      "3826a15a8aeb09f91c0ce33c8b620274228ff2dceffb15ab1257b2bb89f055df"
+    ],
+    "play_podcasts": [
+      "181158dbec8c0847be02d7932f85cb683ae20d9f21028b692a3e460461896d02",
+      "b97c1af3b14aab759ab39b8edf0f883e6932dd03a28605d1e376a03baf53891e",
+      "ae372383b3a59113e141b8b39ead71552e4659354ccf94cf1bb85366013921fa",
+      "80d659891ae5640fa1fec8585638dcc66f7a9eada4a64bee8403cac87984fb30",
+      "398237350bbd3e1e8cb939e4a8dc0cdbb1e6e57a999eee26332cef032fbdfea0"
+    ],
+    "play_radio": [
+      "c64805687e3e4f509898625e1fca1542382e2aaa497a173c927298c45d9f2ac7",
+      "fe03c2e5577eb571289299dce12f03a876efa9ef629e5530c4acc824fe29c3c2",
+      "3315c20aed2838ab99ba758c9fc111d65c2ab5b199900bebb11e06a8de901632",
+      "519e7ef144abacb8912807ca60b771bc283e25ac39781ea013b1dbcdf0b0fdf4",
+      "2be00c688da06077cfc8ca6a8a559986e417ff2dbef6bad1050a8398ffdddfdb"
+    ],
+    "qa_currency": [
+      "33111865bf735ff7077ccef1db49809e34ad8d3b4516b4c8b5daa630750acb84",
+      "42fb63bbac899b96a851769346417b03b62586d855ae0270ae9938681927746c",
+      "54d3421f632f3c83268ebf96f90e5d6f370096e943c8082cbc68969114127c86",
+      "a3b42f0ec08bb2c0e14fef6d939d1bdd3fd83fa98d5d46e74d6b9bce7b992fcf",
+      "4b24d59211ca97cdaa35dfbd50f13d6c78a5f8aeaabbe8d19843c1c1071a5898"
+    ],
+    "qa_definition": [
+      "fba95abaf99b30773620d562aa67d8178064a1579206adbfdd3cc954a6305613",
+      "7be68a886e6b95c9fc254aafaf3d595c36028630aef140ce18758cff765c176a",
+      "297b82efbcc3377453dd398b58a6dc0ddaa22497abe09ae942989eca66d5f3e2",
+      "db230e695c9d9402da759c33153021a0c85b0320bcba1ca878bfca1e6826fb80",
+      "de7df8b516189726476cac616daebd940649f9906d3cdbbcc45805dfb7266da7"
+    ],
+    "qa_factoid": [
+      "f53f106e2626b2677083d573334ca89c3187520e255d350e4d4b8b857ee06602",
+      "c258837002f6a7a0f86c5c363d53ac456f823f97c0d5554d7dc4a820f3ce1e9d",
+      "dc8ad30568c0882cc339e3335b6c4bf8ab0970a1a1255edf3d70a16d2cda15c6",
+      "d1f9e4b162e5918873a2ac43a16b010c97a7d0c1303f5113c5a17d3032d98e0f",
+      "6212d331e659d653c55dd8c66a4c0cdbd3bbb609686d49ab5e54a21f885b43ea"
+    ],
+    "qa_maths": [
+      "142d382b9f51f243c38551c204389d04f78fe8c0e3469e75dfd014f4d62f6535",
+      "c59aef609a93a3e1c03dc9ff527972e805034462be9472016a5940fadb5f00e8",
+      "365427c0e820db65b80ae7c5abf0893ec06cd8806132fa3a326ba045950be9c9",
+      "796c3e6b19e9f829859b1faec3df9159a963d59f0396fae0855d363068d5db63",
+      "de7bef46d0b57d2a8a27fe31c27926c3b40047ff360503f5cb4c11a5ccda317c"
+    ],
+    "qa_stock": [
+      "e52343a3317d0cd3de4efeb9804e85f0ac4671df8a4f0fed9986e53e0483b1a9",
+      "ff4df52524f5817bf2b144d57ed961080661f454d2f3634dadbff9627ef80a6d",
+      "be0c33cc78ed3381f8c9a176dded93dba6c0ef4f8b12fc31b68fa1a70efbd153",
+      "c1f09a0985262d5002ce0d95a673347949fb88611e5178d85c6fd24a2d90c2f8",
+      "e8fa1144f40509c2fb5de05a24ba03e4a8f649ce4d87a9bfa27cfd121fcbcc57"
+    ],
+    "recommendation_events": [
+      "6cd60bd3cf7cad0ea4348145cff04bc605ef2c4fb715065a340d0c274b54c4fa",
+      "2ce56ed6c23c28221d0c3f39e73705d63c8be8d282b4644ff38de9992aab12c6",
+      "108bebfd3f6e77ab6a9bfce88bbc9a4cd870de50472ba82caf3e2aaf082fc8f0",
+      "71ac0b90799c0d8d703a6283b836fbf19ae37dacad5ac319bd39a0563b221a07",
+      "5f195b807b1fd439e1622531ec516e91f4e501ee4f4c8d14bb590a1ca245f875"
+    ],
+    "recommendation_locations": [
+      "6d9a13e4270b526ab5ad9c710511d1c8892c7dd8971fe3895b41273c6b2e8be5",
+      "bf21bb77c48c894b863ae8bbf6b951cf2344a98de7e85bfd24244544cc08ab0e",
+      "bf2bdc26ed73858060df212fc94db31e12afa95ec17f403877b345ee5c8d173d",
+      "3fc1f71c4571e31d70f7eb8b0f56f9faad192a4883fa9f4d4749455fb0c36779",
+      "8133555948cd58cbe4758aacc21b7895e5e734a17da816e203f552d29275bb1c"
+    ],
+    "recommendation_movies": [
+      "d12242a59b69702602223438a5b66a5e1da4f31c5408df51a58f19eab346e3c2",
+      "9108afefec3cc5e892b56bb55ce697c80a524f75a5dd9898efee768dffd6e8e4",
+      "3c1458b6dba89467822793547c04822cc975fe25af1b6297179530a3ea8c0b24",
+      "511e221426ff8a2ab4ee8cf92149782f016b07aa428c2f3fd4885a968ef96d09",
+      "c1f0ace30c2321cbf200511126cd90450119bd2f570d36d742bb2563e970e9f5"
+    ],
+    "social_post": [
+      "c52d797e3427fd3a4dbc1bed946c23a93984f3d22af3a10e625507d173321f50",
+      "cfcfc3ccc910c555688f4fdb9bf6c0eb495657a67c8a0a0e0d099c2c8e13ba6d",
+      "581c9bc0f5d40c69be0d707feee3637bb7b7a0c2267a15a590bf397f3dfb37ea",
+      "7f5ce0fd90812b14c14227e20e28d3618c0dadd123742465d8461e6041f1b1fd",
+      "24f4d25eef41bc068c11b3694a31c4379f24d2643e9e243c3e004e825f2c815b"
+    ],
+    "social_query": [
+      "aee5d83e870707b4707bfac53fcd643b27ada6f37731b162f5e8b8a688b2349e",
+      "2827d7b34433011028e2b0aa4bd5cf93f41c7797f84b293be9277e3167706acf",
+      "e2e5a7d50bfa5943fc19feb77f6e7608fd9a04ffc97147e5c7d82e62318b7137",
+      "d97865aadaba855c834c240a10f81729505b8472b1a693e35f0b243343abc205",
+      "6558caa0eb466409f03acd8252ea88826a91d757001f6b3d2d985777fd6c351a"
+    ],
+    "takeaway_order": [
+      "6930540c7f8b31303d470d76cc5044624644ce37e7669d1fb4456c83237ec364",
+      "15dd12297d1b2bbaae1284d57b3c7d91833ee03c2b4a5477a0e7bb1379b2c671",
+      "60e986170541563d1572a87c899f9f487d74410e07ed0c3a77c0c1d2a511ad8e",
+      "3952e89773ab93e0a106f519aa018048dc2d9b5298a8f59b6ab1a3e33a16f96f",
+      "dd25ffa01f6892060928ded57b5c87c521bd76aff000ab5ed3bbc83db7f87fb0"
+    ],
+    "takeaway_query": [
+      "c92fd41eab704181e56927ad222c82c006c8261d89e29316e687749a99f2845d",
+      "ade5b46c4db009102c26a97eef49426622f1330d20a9604deea14cd2b2201463",
+      "89ec413b11259f7dbdfd8a8edb4fa74c41951489b8098e5aeb8033a3b80d1c57",
+      "bddb62c4dbd01ca331c171f56e7ea1405c42efce22814419a5cc2534e3e30f83",
+      "f693c1713155807f03e469909725bfff82193625821b87ec94ed08d35f55964c"
+    ],
+    "transport_query": [
+      "ed8000800aa509cd7f17a01bae274070b309b240346a9269dd7f67ca11930ac9",
+      "9758cf9bf39ce17316310537892f6e5df6589e56516a552dfa201ac73ded7b25",
+      "47cabb7d1fca9e9baee1ebda737c9f21891f11acf9342cd59dc5b17bab2e4a65",
+      "ce1d2607055af79354c20008a7319e55caad0386afc8b7e3e78ac067885d03c1",
+      "280cdd143953db4d5552130726aba4f8691a4478851899bf3be396b488a3bfb0"
+    ],
+    "transport_taxi": [
+      "ae9d3b157ea3f154e814f76af3147e30470f3624af78d860a8861d018afa3faa",
+      "aefd6b4e32f0673d3b687922942944921a563583ed1c0665649c36fd45e01f46",
+      "0beea6af66c392390884b530290b8b5d9cfa6bdc4216ebb688cd57483452d655",
+      "0ea6aaaa6c657fdb791d0a637cedd5811cb4464c3539cf8af48c22e9d18d4ee2",
+      "f657d9bafc4bffa5175e68817c2e5f5c526703c79243061edaaea32414a768f3"
+    ],
+    "transport_ticket": [
+      "65f34fbec44cf75ce4bac2376bb6ba48c2ede0cd9d8ab63be87fcc22903fe348",
+      "f00af986933b76547819a0ea35ff0b908182c2359a1d0f5298d6ee04dbbf3b9e",
+      "d5d6ea101579341b9d6f3e21acbe9edd20767babea081c264154589a6a1d6422",
+      "30122e61f653c62c4ef78e47c7e5adc48adcf45cd2f7b10a9b53b5359df135a8",
+      "9d27e25fdc116a0eb308b9226f18ea9117c93a87cc8e4f38a566242b85a97a57"
+    ],
+    "transport_traffic": [
+      "c7ea520aefc0688f7372e6d4cca37135c39e6670d647d18fc0ddd0fd8e64f4db",
+      "29f132f5b1ef18ab237e2ad4d8c384136b7f63c7a1f9251240912a58cee0a417",
+      "84f993f59f6ab069f69f28ea83c694ef676e177dadcbf37843368f838dd02190",
+      "5304aead45164ac5c58ef7cec136d35766da74cdff2d2dab6c9253feaff7344c",
+      "8617a0cf43deb3d9d7200f76949b1ec7743be6771490087dd4dd06ae95a85b4e"
+    ],
+    "weather_query": [
+      "418ee726e4bbcc4a7aaf44f95c9c82253ce0759309a95e1f463d526d5eb2f155",
+      "2a1051488282f464af0955d598a188ce9405d3ecb07d9a7659ae722b173bbb4a",
+      "a5f23dece4a496d22ef8395cb52d82d9614bebc87ba62ab63cf4e2208206a9b1",
+      "d81d9ee65b2f34305796255f4162963522c6903f1fffa603bd904a22e576f047",
+      "358284865ae4ea08856e36b4d8b851d1a5fc0dc81ded2220aaaa3c9a44d25a75"
+    ]
+  }
+}

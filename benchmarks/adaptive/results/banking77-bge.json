@@ -1,0 +1,1475 @@
+{
+  "dataset": "banking77",
+  "model": "bge-small-en-v1.5",
+  "protocol": "embedding",
+  "source_commit": "2f6719d6d6631260129e80248d2683c8612240eb",
+  "evaluator_sha256": "5c787e16b08bb5b94ef28464223e8bbfa4bd58669f63a60850c2be2396033d89",
+  "python": "3.12.13",
+  "seed": 42,
+  "max_examples_per_class": 5,
+  "prototype_counts": {
+    "Refund_not_showing_up": 5,
+    "activate_my_card": 5,
+    "age_limit": 5,
+    "apple_pay_or_google_pay": 5,
+    "atm_support": 5,
+    "automatic_top_up": 5,
+    "balance_not_updated_after_bank_transfer": 5,
+    "balance_not_updated_after_cheque_or_cash_deposit": 5,
+    "beneficiary_not_allowed": 5,
+    "cancel_transfer": 5,
+    "card_about_to_expire": 5,
+    "card_acceptance": 5,
+    "card_arrival": 5,
+    "card_delivery_estimate": 5,
+    "card_linking": 5,
+    "card_not_working": 5,
+    "card_payment_fee_charged": 5,
+    "card_payment_not_recognised": 5,
+    "card_payment_wrong_exchange_rate": 5,
+    "card_swallowed": 5,
+    "cash_withdrawal_charge": 5,
+    "cash_withdrawal_not_recognised": 5,
+    "change_pin": 5,
+    "compromised_card": 5,
+    "contactless_not_working": 5,
+    "country_support": 5,
+    "declined_card_payment": 5,
+    "declined_cash_withdrawal": 5,
+    "declined_transfer": 5,
+    "direct_debit_payment_not_recognised": 5,
+    "disposable_card_limits": 5,
+    "edit_personal_details": 5,
+    "exchange_charge": 5,
+    "exchange_rate": 5,
+    "exchange_via_app": 5,
+    "extra_charge_on_statement": 5,
+    "failed_transfer": 5,
+    "fiat_currency_support": 5,
+    "get_disposable_virtual_card": 5,
+    "get_physical_card": 5,
+    "getting_spare_card": 5,
+    "getting_virtual_card": 5,
+    "lost_or_stolen_card": 5,
+    "lost_or_stolen_phone": 5,
+    "order_physical_card": 5,
+    "passcode_forgotten": 5,
+    "pending_card_payment": 5,
+    "pending_cash_withdrawal": 5,
+    "pending_top_up": 5,
+    "pending_transfer": 5,
+    "pin_blocked": 5,
+    "receiving_money": 5,
+    "request_refund": 5,
+    "reverted_card_payment?": 5,
+    "supported_cards_and_currencies": 5,
+    "terminate_account": 5,
+    "top_up_by_bank_transfer_charge": 5,
+    "top_up_by_card_charge": 5,
+    "top_up_by_cash_or_cheque": 5,
+    "top_up_failed": 5,
+    "top_up_limits": 5,
+    "top_up_reverted": 5,
+    "topping_up_by_card": 5,
+    "transaction_charged_twice": 5,
+    "transfer_fee_charged": 5,
+    "transfer_into_account": 5,
+    "transfer_not_received_by_recipient": 5,
+    "transfer_timing": 5,
+    "unable_to_verify_identity": 5,
+    "verify_my_identity": 5,
+    "verify_source_of_funds": 5,
+    "verify_top_up": 5,
+    "virtual_card_not_working": 5,
+    "visa_or_mastercard": 5,
+    "why_verify_identity": 5,
+    "wrong_amount_of_cash_received": 5,
+    "wrong_exchange_rate_for_cash_withdrawal": 5
+  },
+  "per_class_subset": 0,
+  "classes": 77,
+  "label_aliases": {
+    "reverted_card_payment?": "label_45deabb5ccfda6873c14a7b5"
+  },
+  "concurrency": 1,
+  "method": "max cosine of train examples",
+  "score_is_calibrated_probability": false,
+  "warmup_ms": [
+    503.43402475118637,
+    9.220907464623451,
+    8.287940174341202,
+    7.7721066772937775,
+    7.68706388771534,
+    7.376978173851967,
+    7.2369202971458435,
+    7.517494261264801,
+    7.503319531679153,
+    7.493680343031883
+  ],
+  "audit": {
+    "normalization": "NFKC + casefold + collapse whitespace",
+    "precedence": [
+      "train",
+      "dev",
+      "test"
+    ],
+    "removed": {
+      "train": 0,
+      "dev": 0,
+      "test": 8
+    },
+    "original_counts": {
+      "train": 8030,
+      "dev": 1969,
+      "test": 3080
+    },
+    "clean_counts": {
+      "train": 8030,
+      "dev": 1969,
+      "test": 3072
+    }
+  },
+  "metrics": {
+    "dev": {
+      "n": 1969,
+      "correct": 1582,
+      "accuracy": 0.803453529710513,
+      "macro_f1": 0.80817537111638,
+      "invalid": 0,
+      "per_label": {
+        "Refund_not_showing_up": {
+          "f1": 0.8888888888888888,
+          "support": 32
+        },
+        "activate_my_card": {
+          "f1": 0.9538461538461539,
+          "support": 31
+        },
+        "age_limit": {
+          "f1": 0.926829268292683,
+          "support": 22
+        },
+        "apple_pay_or_google_pay": {
+          "f1": 0.9795918367346939,
+          "support": 25
+        },
+        "atm_support": {
+          "f1": 0.9444444444444444,
+          "support": 17
+        },
+        "automatic_top_up": {
+          "f1": 0.9361702127659575,
+          "support": 25
+        },
+        "balance_not_updated_after_bank_transfer": {
+          "f1": 0.5573770491803278,
+          "support": 34
+        },
+        "balance_not_updated_after_cheque_or_cash_deposit": {
+          "f1": 0.835820895522388,
+          "support": 36
+        },
+        "beneficiary_not_allowed": {
+          "f1": 0.5217391304347826,
+          "support": 31
+        },
+        "cancel_transfer": {
+          "f1": 0.8285714285714286,
+          "support": 31
+        },
+        "card_about_to_expire": {
+          "f1": 0.8571428571428571,
+          "support": 25
+        },
+        "card_acceptance": {
+          "f1": 0.8695652173913043,
+          "support": 11
+        },
+        "card_arrival": {
+          "f1": 0.8461538461538461,
+          "support": 30
+        },
+        "card_delivery_estimate": {
+          "f1": 0.8,
+          "support": 22
+        },
+        "card_linking": {
+          "f1": 0.8363636363636363,
+          "support": 27
+        },
+        "card_not_working": {
+          "f1": 0.8163265306122449,
+          "support": 22
+        },
+        "card_payment_fee_charged": {
+          "f1": 0.8674698795180723,
+          "support": 37
+        },
+        "card_payment_not_recognised": {
+          "f1": 0.75,
+          "support": 33
+        },
+        "card_payment_wrong_exchange_rate": {
+          "f1": 0.8181818181818182,
+          "support": 33
+        },
+        "card_swallowed": {
+          "f1": 0.8695652173913043,
+          "support": 12
+        },
+        "cash_withdrawal_charge": {
+          "f1": 0.9142857142857143,
+          "support": 35
+        },
+        "cash_withdrawal_not_recognised": {
+          "f1": 0.7761194029850746,
+          "support": 32
+        },
+        "change_pin": {
+          "f1": 0.9795918367346939,
+          "support": 24
+        },
+        "compromised_card": {
+          "f1": 0.8823529411764706,
+          "support": 17
+        },
+        "contactless_not_working": {
+          "f1": 0.9230769230769231,
+          "support": 7
+        },
+        "country_support": {
+          "f1": 0.6842105263157895,
+          "support": 25
+        },
+        "declined_card_payment": {
+          "f1": 0.75,
+          "support": 30
+        },
+        "declined_cash_withdrawal": {
+          "f1": 0.6415094339622641,
+          "support": 34
+        },
+        "declined_transfer": {
+          "f1": 0.76,
+          "support": 26
+        },
+        "direct_debit_payment_not_recognised": {
+          "f1": 0.8205128205128205,
+          "support": 36
+        },
+        "disposable_card_limits": {
+          "f1": 0.6486486486486487,
+          "support": 24
+        },
+        "edit_personal_details": {
+          "f1": 0.9787234042553191,
+          "support": 24
+        },
+        "exchange_charge": {
+          "f1": 0.8,
+          "support": 24
+        },
+        "exchange_rate": {
+          "f1": 0.875,
+          "support": 22
+        },
+        "exchange_via_app": {
+          "f1": 0.7083333333333334,
+          "support": 23
+        },
+        "extra_charge_on_statement": {
+          "f1": 0.8852459016393442,
+          "support": 33
+        },
+        "failed_transfer": {
+          "f1": 0.7058823529411765,
+          "support": 27
+        },
+        "fiat_currency_support": {
+          "f1": 0.6229508196721312,
+          "support": 25
+        },
+        "get_disposable_virtual_card": {
+          "f1": 0.7346938775510204,
+          "support": 19
+        },
+        "get_physical_card": {
+          "f1": 0.926829268292683,
+          "support": 21
+        },
+        "getting_spare_card": {
+          "f1": 0.8627450980392157,
+          "support": 25
+        },
+        "getting_virtual_card": {
+          "f1": 0.9473684210526315,
+          "support": 19
+        },
+        "lost_or_stolen_card": {
+          "f1": 0.6666666666666666,
+          "support": 16
+        },
+        "lost_or_stolen_phone": {
+          "f1": 0.8888888888888888,
+          "support": 24
+        },
+        "order_physical_card": {
+          "f1": 0.8,
+          "support": 24
+        },
+        "passcode_forgotten": {
+          "f1": 1.0,
+          "support": 21
+        },
+        "pending_card_payment": {
+          "f1": 0.8363636363636363,
+          "support": 31
+        },
+        "pending_cash_withdrawal": {
+          "f1": 0.7777777777777778,
+          "support": 28
+        },
+        "pending_top_up": {
+          "f1": 0.75,
+          "support": 29
+        },
+        "pending_transfer": {
+          "f1": 0.5818181818181818,
+          "support": 29
+        },
+        "pin_blocked": {
+          "f1": 0.9767441860465116,
+          "support": 22
+        },
+        "receiving_money": {
+          "f1": 0.5116279069767442,
+          "support": 19
+        },
+        "request_refund": {
+          "f1": 0.8135593220338984,
+          "support": 33
+        },
+        "reverted_card_payment?": {
+          "f1": 0.7941176470588235,
+          "support": 32
+        },
+        "supported_cards_and_currencies": {
+          "f1": 0.6153846153846154,
+          "support": 25
+        },
+        "terminate_account": {
+          "f1": 1.0,
+          "support": 21
+        },
+        "top_up_by_bank_transfer_charge": {
+          "f1": 0.6111111111111112,
+          "support": 22
+        },
+        "top_up_by_card_charge": {
+          "f1": 0.8888888888888888,
+          "support": 22
+        },
+        "top_up_by_cash_or_cheque": {
+          "f1": 0.926829268292683,
+          "support": 22
+        },
+        "top_up_failed": {
+          "f1": 0.7619047619047619,
+          "support": 29
+        },
+        "top_up_limits": {
+          "f1": 0.8780487804878049,
+          "support": 19
+        },
+        "top_up_reverted": {
+          "f1": 0.7368421052631579,
+          "support": 29
+        },
+        "topping_up_by_card": {
+          "f1": 0.6486486486486487,
+          "support": 20
+        },
+        "transaction_charged_twice": {
+          "f1": 0.9714285714285714,
+          "support": 35
+        },
+        "transfer_fee_charged": {
+          "f1": 0.7887323943661971,
+          "support": 34
+        },
+        "transfer_into_account": {
+          "f1": 0.65,
+          "support": 22
+        },
+        "transfer_not_received_by_recipient": {
+          "f1": 0.5714285714285714,
+          "support": 34
+        },
+        "transfer_timing": {
+          "f1": 0.6551724137931034,
+          "support": 25
+        },
+        "unable_to_verify_identity": {
+          "f1": 0.8648648648648649,
+          "support": 20
+        },
+        "verify_my_identity": {
+          "f1": 0.75,
+          "support": 20
+        },
+        "verify_source_of_funds": {
+          "f1": 0.9777777777777777,
+          "support": 22
+        },
+        "verify_top_up": {
+          "f1": 0.96,
+          "support": 25
+        },
+        "virtual_card_not_working": {
+          "f1": 0.9333333333333333,
+          "support": 8
+        },
+        "visa_or_mastercard": {
+          "f1": 0.8888888888888888,
+          "support": 27
+        },
+        "why_verify_identity": {
+          "f1": 0.7391304347826086,
+          "support": 24
+        },
+        "wrong_amount_of_cash_received": {
+          "f1": 0.735632183908046,
+          "support": 36
+        },
+        "wrong_exchange_rate_for_cash_withdrawal": {
+          "f1": 0.7457627118644068,
+          "support": 32
+        }
+      },
+      "top_confusions": [
+        {
+          "truth": "beneficiary_not_allowed",
+          "prediction": "failed_transfer",
+          "n": 15
+        },
+        {
+          "truth": "declined_cash_withdrawal",
+          "prediction": "wrong_amount_of_cash_received",
+          "n": 12
+        },
+        {
+          "truth": "disposable_card_limits",
+          "prediction": "get_disposable_virtual_card",
+          "n": 11
+        },
+        {
+          "truth": "card_arrival",
+          "prediction": "card_delivery_estimate",
+          "n": 8
+        },
+        {
+          "truth": "request_refund",
+          "prediction": "cancel_transfer",
+          "n": 8
+        },
+        {
+          "truth": "supported_cards_and_currencies",
+          "prediction": "fiat_currency_support",
+          "n": 8
+        },
+        {
+          "truth": "receiving_money",
+          "prediction": "exchange_via_app",
+          "n": 7
+        },
+        {
+          "truth": "transfer_into_account",
+          "prediction": "receiving_money",
+          "n": 7
+        },
+        {
+          "truth": "balance_not_updated_after_bank_transfer",
+          "prediction": "transfer_not_received_by_recipient",
+          "n": 6
+        },
+        {
+          "truth": "card_payment_not_recognised",
+          "prediction": "direct_debit_payment_not_recognised",
+          "n": 6
+        },
+        {
+          "truth": "pending_transfer",
+          "prediction": "transfer_not_received_by_recipient",
+          "n": 6
+        },
+        {
+          "truth": "top_up_reverted",
+          "prediction": "top_up_failed",
+          "n": 6
+        },
+        {
+          "truth": "why_verify_identity",
+          "prediction": "verify_my_identity",
+          "n": 6
+        },
+        {
+          "truth": "balance_not_updated_after_bank_transfer",
+          "prediction": "transfer_timing",
+          "n": 5
+        },
+        {
+          "truth": "country_support",
+          "prediction": "fiat_currency_support",
+          "n": 5
+        }
+      ],
+      "http_signal_latency": {
+        "n": 1969,
+        "p50_ms": 7.210550829768181,
+        "p95_ms": 8.101378381252289,
+        "p99_ms": 9.699677303433411
+      }
+    },
+    "test": {
+      "n": 3072,
+      "correct": 2416,
+      "accuracy": 0.7864583333333334,
+      "macro_f1": 0.7832775319024883,
+      "invalid": 0,
+      "per_label": {
+        "Refund_not_showing_up": {
+          "f1": 0.875,
+          "support": 40
+        },
+        "activate_my_card": {
+          "f1": 0.9230769230769231,
+          "support": 40
+        },
+        "age_limit": {
+          "f1": 0.9333333333333333,
+          "support": 40
+        },
+        "apple_pay_or_google_pay": {
+          "f1": 0.9873417721518988,
+          "support": 40
+        },
+        "atm_support": {
+          "f1": 0.961038961038961,
+          "support": 38
+        },
+        "automatic_top_up": {
+          "f1": 0.8767123287671232,
+          "support": 40
+        },
+        "balance_not_updated_after_bank_transfer": {
+          "f1": 0.5074626865671642,
+          "support": 40
+        },
+        "balance_not_updated_after_cheque_or_cash_deposit": {
+          "f1": 0.7317073170731707,
+          "support": 40
+        },
+        "beneficiary_not_allowed": {
+          "f1": 0.4444444444444444,
+          "support": 40
+        },
+        "cancel_transfer": {
+          "f1": 0.8705882352941177,
+          "support": 40
+        },
+        "card_about_to_expire": {
+          "f1": 0.891566265060241,
+          "support": 40
+        },
+        "card_acceptance": {
+          "f1": 0.8192771084337349,
+          "support": 38
+        },
+        "card_arrival": {
+          "f1": 0.7222222222222222,
+          "support": 40
+        },
+        "card_delivery_estimate": {
+          "f1": 0.813953488372093,
+          "support": 40
+        },
+        "card_linking": {
+          "f1": 0.8148148148148148,
+          "support": 40
+        },
+        "card_not_working": {
+          "f1": 0.6888888888888889,
+          "support": 40
+        },
+        "card_payment_fee_charged": {
+          "f1": 0.8505747126436781,
+          "support": 40
+        },
+        "card_payment_not_recognised": {
+          "f1": 0.53125,
+          "support": 40
+        },
+        "card_payment_wrong_exchange_rate": {
+          "f1": 0.8607594936708861,
+          "support": 40
+        },
+        "card_swallowed": {
+          "f1": 0.8780487804878049,
+          "support": 40
+        },
+        "cash_withdrawal_charge": {
+          "f1": 0.9156626506024096,
+          "support": 40
+        },
+        "cash_withdrawal_not_recognised": {
+          "f1": 0.7012987012987013,
+          "support": 40
+        },
+        "change_pin": {
+          "f1": 0.9156626506024096,
+          "support": 39
+        },
+        "compromised_card": {
+          "f1": 0.8,
+          "support": 39
+        },
+        "contactless_not_working": {
+          "f1": 0.9487179487179487,
+          "support": 40
+        },
+        "country_support": {
+          "f1": 0.6984126984126984,
+          "support": 39
+        },
+        "declined_card_payment": {
+          "f1": 0.6829268292682927,
+          "support": 40
+        },
+        "declined_cash_withdrawal": {
+          "f1": 0.6578947368421053,
+          "support": 40
+        },
+        "declined_transfer": {
+          "f1": 0.7575757575757576,
+          "support": 40
+        },
+        "direct_debit_payment_not_recognised": {
+          "f1": 0.7191011235955056,
+          "support": 40
+        },
+        "disposable_card_limits": {
+          "f1": 0.6956521739130435,
+          "support": 40
+        },
+        "edit_personal_details": {
+          "f1": 1.0,
+          "support": 40
+        },
+        "exchange_charge": {
+          "f1": 0.7254901960784313,
+          "support": 40
+        },
+        "exchange_rate": {
+          "f1": 0.8666666666666667,
+          "support": 40
+        },
+        "exchange_via_app": {
+          "f1": 0.5714285714285714,
+          "support": 40
+        },
+        "extra_charge_on_statement": {
+          "f1": 0.868421052631579,
+          "support": 40
+        },
+        "failed_transfer": {
+          "f1": 0.6862745098039216,
+          "support": 40
+        },
+        "fiat_currency_support": {
+          "f1": 0.6105263157894737,
+          "support": 40
+        },
+        "get_disposable_virtual_card": {
+          "f1": 0.6538461538461539,
+          "support": 40
+        },
+        "get_physical_card": {
+          "f1": 0.868421052631579,
+          "support": 40
+        },
+        "getting_spare_card": {
+          "f1": 0.8,
+          "support": 40
+        },
+        "getting_virtual_card": {
+          "f1": 0.8780487804878049,
+          "support": 40
+        },
+        "lost_or_stolen_card": {
+          "f1": 0.8172043010752689,
+          "support": 40
+        },
+        "lost_or_stolen_phone": {
+          "f1": 0.9090909090909091,
+          "support": 40
+        },
+        "order_physical_card": {
+          "f1": 0.8192771084337349,
+          "support": 40
+        },
+        "passcode_forgotten": {
+          "f1": 0.9411764705882353,
+          "support": 40
+        },
+        "pending_card_payment": {
+          "f1": 0.7837837837837838,
+          "support": 40
+        },
+        "pending_cash_withdrawal": {
+          "f1": 0.8354430379746836,
+          "support": 40
+        },
+        "pending_top_up": {
+          "f1": 0.6753246753246753,
+          "support": 40
+        },
+        "pending_transfer": {
+          "f1": 0.6301369863013698,
+          "support": 40
+        },
+        "pin_blocked": {
+          "f1": 0.8571428571428571,
+          "support": 39
+        },
+        "receiving_money": {
+          "f1": 0.6534653465346535,
+          "support": 40
+        },
+        "request_refund": {
+          "f1": 0.7733333333333333,
+          "support": 40
+        },
+        "reverted_card_payment?": {
+          "f1": 0.8192771084337349,
+          "support": 40
+        },
+        "supported_cards_and_currencies": {
+          "f1": 0.5862068965517241,
+          "support": 40
+        },
+        "terminate_account": {
+          "f1": 0.963855421686747,
+          "support": 40
+        },
+        "top_up_by_bank_transfer_charge": {
+          "f1": 0.8108108108108109,
+          "support": 40
+        },
+        "top_up_by_card_charge": {
+          "f1": 0.926829268292683,
+          "support": 40
+        },
+        "top_up_by_cash_or_cheque": {
+          "f1": 0.8533333333333334,
+          "support": 40
+        },
+        "top_up_failed": {
+          "f1": 0.6804123711340206,
+          "support": 40
+        },
+        "top_up_limits": {
+          "f1": 0.9156626506024096,
+          "support": 40
+        },
+        "top_up_reverted": {
+          "f1": 0.5526315789473685,
+          "support": 40
+        },
+        "topping_up_by_card": {
+          "f1": 0.49230769230769234,
+          "support": 40
+        },
+        "transaction_charged_twice": {
+          "f1": 0.925,
+          "support": 40
+        },
+        "transfer_fee_charged": {
+          "f1": 0.8292682926829268,
+          "support": 40
+        },
+        "transfer_into_account": {
+          "f1": 0.6666666666666666,
+          "support": 40
+        },
+        "transfer_not_received_by_recipient": {
+          "f1": 0.5609756097560976,
+          "support": 40
+        },
+        "transfer_timing": {
+          "f1": 0.7096774193548387,
+          "support": 40
+        },
+        "unable_to_verify_identity": {
+          "f1": 0.8493150684931506,
+          "support": 40
+        },
+        "verify_my_identity": {
+          "f1": 0.7058823529411765,
+          "support": 40
+        },
+        "verify_source_of_funds": {
+          "f1": 0.975,
+          "support": 40
+        },
+        "verify_top_up": {
+          "f1": 0.9629629629629629,
+          "support": 40
+        },
+        "virtual_card_not_working": {
+          "f1": 0.71875,
+          "support": 40
+        },
+        "visa_or_mastercard": {
+          "f1": 0.8947368421052632,
+          "support": 40
+        },
+        "why_verify_identity": {
+          "f1": 0.6835443037974683,
+          "support": 40
+        },
+        "wrong_amount_of_cash_received": {
+          "f1": 0.7692307692307693,
+          "support": 40
+        },
+        "wrong_exchange_rate_for_cash_withdrawal": {
+          "f1": 0.7605633802816901,
+          "support": 40
+        }
+      },
+      "top_confusions": [
+        {
+          "truth": "beneficiary_not_allowed",
+          "prediction": "failed_transfer",
+          "n": 19
+        },
+        {
+          "truth": "supported_cards_and_currencies",
+          "prediction": "fiat_currency_support",
+          "n": 17
+        },
+        {
+          "truth": "exchange_via_app",
+          "prediction": "exchange_charge",
+          "n": 14
+        },
+        {
+          "truth": "disposable_card_limits",
+          "prediction": "get_disposable_virtual_card",
+          "n": 14
+        },
+        {
+          "truth": "top_up_reverted",
+          "prediction": "top_up_failed",
+          "n": 13
+        },
+        {
+          "truth": "transfer_into_account",
+          "prediction": "receiving_money",
+          "n": 13
+        },
+        {
+          "truth": "virtual_card_not_working",
+          "prediction": "get_disposable_virtual_card",
+          "n": 12
+        },
+        {
+          "truth": "card_arrival",
+          "prediction": "card_delivery_estimate",
+          "n": 11
+        },
+        {
+          "truth": "card_payment_not_recognised",
+          "prediction": "direct_debit_payment_not_recognised",
+          "n": 11
+        },
+        {
+          "truth": "why_verify_identity",
+          "prediction": "verify_my_identity",
+          "n": 11
+        },
+        {
+          "truth": "declined_cash_withdrawal",
+          "prediction": "wrong_amount_of_cash_received",
+          "n": 10
+        },
+        {
+          "truth": "balance_not_updated_after_bank_transfer",
+          "prediction": "transfer_not_received_by_recipient",
+          "n": 10
+        },
+        {
+          "truth": "verify_my_identity",
+          "prediction": "why_verify_identity",
+          "n": 10
+        },
+        {
+          "truth": "pending_top_up",
+          "prediction": "top_up_failed",
+          "n": 9
+        },
+        {
+          "truth": "topping_up_by_card",
+          "prediction": "receiving_money",
+          "n": 8
+        }
+      ],
+      "http_signal_latency": {
+        "n": 3072,
+        "p50_ms": 7.230064831674099,
+        "p95_ms": 8.415298536419865,
+        "p99_ms": 10.178530402481554
+      }
+    }
+  },
+  "prototype_text_hashes": {
+    "Refund_not_showing_up": [
+      "6960d19e711f559773605894b2c19dabd41e739072df0112c4833c805d0f33fd",
+      "79bedf44c2bd034009f08c8afc963cf9fd60844b3d548b02e66c5045f779de57",
+      "3c71b3e8de682b644e396156db315706b487c8635939074b141d6b2ae0d05e17",
+      "04aeddc8899059be77aeb5f8aeef2befd814cb42f2ab0b32f965b646201da69d",
+      "63a368070fe365c54fdbf88a56260d35ea87da76fcf1306e8f3495869ce57c12"
+    ],
+    "activate_my_card": [
+      "9aa2b02d84a1a4806a2d0eb6bd087588ea93920e79d0716ab45b41d2e44c76b5",
+      "18372f8c0755d52158d89f7eadb363f18beb9511f3c4c58e51070bbf3a5c2f33",
+      "04e4ebef12e0451f27dfb91b105c4bcfc2f1aef7dafbad122443a9de937409ea",
+      "6dbfc423fc8f10a6359e7c47da900ef51352d523f2b519a5f2e372af791bdf17",
+      "c6878194eae28edd61c26d98367d6bdadb6152194a85dcc391c0832c9c58f53c"
+    ],
+    "age_limit": [
+      "0c788d046cb875064d9d7a6bc5de373cf4ace8dd3c7b53d09862aced2ac8f780",
+      "bfb7bcbcfe73d5221acdeacbaff11a7b976f5fafb37156a0d759d928593eaf31",
+      "02120197937c7d5e897c860f0cbc6371131c44c5419fd2aaf1646f5addc21dbb",
+      "d0e3dc51551cd74bf1ecdbb9ad1273706dd3c1d90da6cd88beb77f61b042f877",
+      "7c2c2241801a1071f1e5a493e3f6e1778ad0a6c1b8e47573edee6e955b6d1620"
+    ],
+    "apple_pay_or_google_pay": [
+      "404d9f0af13ce85a677c41d5138a93295ceec0345d686eba361940d0e6c40290",
+      "9bcddda0f4c94f756bb1ce698f3f5c5a699a9790b4c44cfa75d62fad102e5ffd",
+      "0e22bf124d2e742770406be35ee7322bcd57cd79eaade047685fc0773980c4d1",
+      "ddac1d3d30949c7d869c758da458587cc374c057fc129ead456208198dd4a87a",
+      "af9bb0f7b93ca3762ea2054e0bef7d06c7d8d3be8fb6cde69a4764011328e910"
+    ],
+    "atm_support": [
+      "b464f8c199b6d30770fe1c230cc35588784ad5859ceae9321acdeb98840f544a",
+      "465603be0905f1ef8928e3848d0e07a34092ed9e53972a8b602e2e567f4686f1",
+      "998abebd84008027bce1c9c8def6af327c65965ebede8259970dcbd61dfe53ec",
+      "f4ac72a4ca88aa83b40dda4ba10f46a772ad95c3ba546e11331ad1b15f03bd58",
+      "b83da3872fce78debf01653efc24e45bedbe1a3df9fccf4b864d21629f75ea4b"
+    ],
+    "automatic_top_up": [
+      "b10e80c3b9e4bbf32fb11b1e05e007cb48448b51648cd17f9a5da599a97d29c4",
+      "4882cafde499673734954126008df60fbdf8beb98d4f4f62612d4645cd313513",
+      "8e52a084b7cdbebe321aa7cbb38c47782ed8508847895a2aa8aa984e7a05f3fd",
+      "2a78bbfa05d4515d87ed95c36d4f9373b393d1bd90076c5481223cf912476a0a",
+      "ac395de5537b65d9e68e16d93369e2d7c71f9c0dfd371ba5b35742c4d68e592c"
+    ],
+    "balance_not_updated_after_bank_transfer": [
+      "13943d15e87aac3e33e9501850cb98677cb3b78547571bcbe4ea24501b7b75af",
+      "9fdcd636a9c5373c66c6ebbd74c22dfa1d6646ab1f3c136da8ef7f694d5165eb",
+      "de618ac582cfe2334027987c2d4c7fc093284263bfd17d1b08ab83deb7873180",
+      "6811d1e981b9ed6a56d855cc785b157445b0f324f986ddef3d14511691da5085",
+      "54b25cc341c961965001feddb8017c5fb5bcfd360f017e1a2005b2c7e77fab8a"
+    ],
+    "balance_not_updated_after_cheque_or_cash_deposit": [
+      "69539343b03b3323980decce0fe93d0600cd091100cf2868ac2d6cc6ec9c06c0",
+      "26c1f908790231f8c56030fc97b88c9e7aab901fa92b4d3df580f2efec4a3cf7",
+      "033c2123426ab5f7e03edeeacebb2154ef455334d60a32b91ef1f7ba818526a7",
+      "0adefe708dc23b2d7a847aa92de9dd339552ce59c94b6ef668368d0cc67ff98b",
+      "2dda2b52f380a0c8907686bc65281d3bcf670ac5f2426a3656245bcc4a5255f1"
+    ],
+    "beneficiary_not_allowed": [
+      "a434b3ab440eb974d0848c86f2eecdec3aa3afca3ffddd23155a93bfab413e8b",
+      "45831c1879658274f0afa3079a071c5d4548c005fb3dd58b0bc9fa5be6ac7b39",
+      "770d04f6d40a9c11e756cb73cc275a120ec068571b16ef993ad24aebe1874d79",
+      "638fd90b34eca92e5081d2bb30da9f011e8cee3289651811a4d2ec2687336bbb",
+      "370a12cfc20703b41557bc899236f781e3e74f69f72e066dffdb8f734a63cddd"
+    ],
+    "cancel_transfer": [
+      "ce62da19e43f2d693a62c5ffefc78bdea17007025d9266bdb6758f68e82779fd",
+      "faa6f7244d793ccdc0500a481b39769207957dc710dc93318e92403cf4961df0",
+      "80a6ef3c8b34bfb1b7fbfbd7a644a18e7d61af7e7ba8da2346e00c5a9e2d7359",
+      "d7673a18e2c8e3770eb432ce7cfa63bdf0358679db3122f987cd8e80f3814192",
+      "01583f1dfffde71215ad54036d39c3383ff9016c16a2988a69dd317ef90d1225"
+    ],
+    "card_about_to_expire": [
+      "74dccc3392fbc27f2f7bf91f337bfa81494564baacd83591be3a7cf6c3182aa4",
+      "f65838d983655e8d4b189cce002fcd5b78bf55c704aa6621aa1134e17905cde8",
+      "d4abe0a18b31879efa7ce5861691b990d03727fb689f3d157945884ecbe5be2f",
+      "03e1086f20136b59240a11c886b571c9d800909c5bef3d9b0b9f1faca48e7625",
+      "9a19128a0e78cf615f518e09fd1026b29b8c9ab91b5ec40fba0cc2960c3f0752"
+    ],
+    "card_acceptance": [
+      "fa252ca014b646f2f139d5db9a85df808a77cd966d7d004c8722672968a34997",
+      "6515336c8af43f4c9ea962627aa5c8528818068097b39e1bc37d2fce255c6872",
+      "d50ffa04106349837f3f18dc88f73e30c4615c03eb2e271d93587dd0b7f584b0",
+      "9c3fdd95235ebf17f0041c3783b0c0ffd1c0ea62413d5dc7a89a0ce6e528d3e1",
+      "9893fad14e0a101fc80067ed34339f98881f53139454d63a0e1ae8bb77e34d88"
+    ],
+    "card_arrival": [
+      "64b842116d7edc7d8a657a407d167e19877162bc16e4663ae0ae8eee68477f60",
+      "b2e6a87c10b06d0cb29f88062df7aa50917f6346257b5af8075dd557cdfa8298",
+      "55fa2bd8d6d5bc6dbb978418866633d9cd211c4914567f828c2839d89f10c1f7",
+      "be1eeb2ff8e008888fe06727c86199a2ad9f55d3a0805295626a19ac1fd66773",
+      "491db8913df376e0ca9b96f2a6122285680bfd2877d51896211528e5a3c8eb20"
+    ],
+    "card_delivery_estimate": [
+      "295f305063c4b9cb73bcd949b54cbae831b57d5cdbe539ebce4ce25d36b28872",
+      "82432e1c59992d0c7a9393dcf412d5e0d788228f104553c5aa4d3388fdf43fab",
+      "45366ebf4dd5c27aa1c82b79bd522bb5622167bcc05742c67e2f65548c48e931",
+      "5b7faa1dcefa23a0eea75e438c7c61c97eb535ef08acc9318aaaabbe7d719207",
+      "82e3eb359abbc187b3346a4351988410d6eea3dfe6ffae7029f334678800d000"
+    ],
+    "card_linking": [
+      "75f12e296691b55f25fffa16d5b219d434f69f300781eed7c2c0a32d44985742",
+      "4a641994ad5e7a07f6a1c8c5a7e15ae8485e01ee8cf6859213609f65d8127656",
+      "35c016ae8c5de063335f118b8c79e0db2c75d198cbdddbeb51ca96ad3a835988",
+      "3196bd157ef75aafb420a03832637e0141be66688ce9cfdd64d4ba0892cb81ed",
+      "3a3e0217f210f5f8f54d144215f595de207c66efd41f708dc017894e7fc71ecb"
+    ],
+    "card_not_working": [
+      "591a5f5b49c642366f70244b246afd84b3f0a69b8b4a489bb0017638b6255c5a",
+      "4ba039e6eec817c3b31c31e40b9e50b6ee5056c4385f88bf3e447348774b133c",
+      "2d4be02de0447553029425e757cd3d671236af623daaa7d0fb04922e97fd465b",
+      "213fffd70e85a4fdc5416facedf7f57bd820cf7bb8b1cf7eca14930162ceb6ca",
+      "0fad17eab875c17335bfc149470907d076ddecbb6abe331915526367eee799ba"
+    ],
+    "card_payment_fee_charged": [
+      "17fd9a044062b02b93edc61154d8959daf2e296752b1aa2f91c95af56c0935e0",
+      "fc09df4c85878caece6dd4106bc9da91a204bb5d5ce72ee446a74112aa6620b6",
+      "0ea00a45b27f91516602e844e110d9f33bd7bbc086d6874132cd37a2b00d1a39",
+      "6c6ccf52779dc6a9ad8629648d619997f2254072860380186475a52f3004945e",
+      "86cb5d1449748a737b5f21a9ddd6c056c26f84458b7a082f6984ada8ff8f098e"
+    ],
+    "card_payment_not_recognised": [
+      "9846b41f2472fead5e4699523301a2349f50e5dd6be74d99c8dbe2d23cb8dc86",
+      "fd7db018df810cceded7eae28ff65980b5717145eed196b47210e4db1cdbe657",
+      "7008988945233eb86cd94a5e169874c317d0cc3f9d6ede5c85d9bdfb5f1a8abd",
+      "c4c385824f0b8ef4ee5ff4491ebf8bb8c2344d9d7ff288101c3a87b1898bf787",
+      "68b78e95e446a9a4eb72bd847695a4fa781cb4accaf304baa3eb7863688cd575"
+    ],
+    "card_payment_wrong_exchange_rate": [
+      "875d64dee47fbcd169fa0365918897624da1d04780a5942291802545448d5935",
+      "2693a132571bb56891cc8e153f63947988d640464af36b397a3c2ca0f9e18b73",
+      "0ec7c7828077318533e7bd70f8abbf0e90b59f5807fd664ed28360038fc9ec1d",
+      "928c729f83e283095c7ddc088f59ccceaa034e33047a8b2a854cd8e81b60dd13",
+      "6906ba9ac64c8383b0f727e8c70b08cd628c8e41ca1af3b96848e252927d1237"
+    ],
+    "card_swallowed": [
+      "d4fa643eb8900b53e6ed150e41e596862eaadd1c4a421ca399f67b150c30b0ec",
+      "1f27d1dd72f8ae219626a7eb306064c99846f00eed008df8f2ff1263230124d5",
+      "9c0cafda85a529360a45f7e25d2053a2587851f7e060765b9fe47cbf12c6c24f",
+      "1a3456cb9dca8f498025b7ab0754095002a6a34ffcc3a07cb63d63fdfed1f001",
+      "d70bed645c39440995377454a45c06a406917c958155fd2381a2876cbe70ace6"
+    ],
+    "cash_withdrawal_charge": [
+      "223b642c0bd4592833b64d2d897767c739037a77cb3fce881e01a28be1e276de",
+      "106994a5a38f92ad0688a4947de227cfb14420fc26ed43d70dafb1ae1d923d9a",
+      "ce18e31ef5d44a69e599fea36bfede9db1b206287e3d6e33e1b094a39d3d7c8d",
+      "709977a8a1603eb2174fd83c7e68e29d5d71e9cabcb01f423322c33e86fe68b9",
+      "87089fc66e9599e2c67a42accd6c6a532de96db292ae45834332d1b187b057d0"
+    ],
+    "cash_withdrawal_not_recognised": [
+      "fcf1246491ecf3c7b99a9a5e20603cb754f5dd7c2bdb5ad80e4bb03082690a36",
+      "1e888d2e00fc54195078fabe1efd0984f05427501618004a4a7e1aa76562ff1b",
+      "a776b6036c67bbb282df2969580d17b1ad01dc5024cb2bd2ea606540da1f00ee",
+      "c995d6ecc400cb23ec6d5e4d23c3dcd4a07eb6343e2de98c3693838200c96558",
+      "92e51789a8e93fe27a0ffef1dcc45fa9980ebd46ba882c1032fac1864817a507"
+    ],
+    "change_pin": [
+      "5252542ebae9802107038fc3ee8192eabb4a86c6638ea0e3eaa09adcc33b4397",
+      "8c0d31bdc9680e248527460ea9dbdf081753660b3f9223f5672f2fc3940e9cd8",
+      "03ef6488800c2608d81dee72c92631a3854b196d3842531f4d9b7ae512aa7ea6",
+      "732a083fa7d7484a537bfcd55b0181943de8412803eaa9f119d77c73242c6288",
+      "6c9384a6ff03c26892ad05cdcdc52b7b4d12ace21d187a6e36925467ee12f09d"
+    ],
+    "compromised_card": [
+      "2e7eccea62e9dce6e5330a2673a31b5e1025b9e34c7cd1b781619ee1b7f54f8f",
+      "d8f23f394a3b2d7921216a28c01fee70f850b5122d6fa23a6e71979f0f1dee0d",
+      "dbccc1fad6897a7fb63f24d11bf60e25a17adad442b16d120a714a1e5fbfe6c6",
+      "8faef59efd12a3c153ee95737b65771e8918e03d2ae3455a5c64b059faf74deb",
+      "3f8243a52fcf9a8ed00d3a58e15ce8825276182cbd37c7bd29e1fd713695ca85"
+    ],
+    "contactless_not_working": [
+      "af97ba9682889baa7323626965398c2665fc2170439c0eef5a3c0c3685118f74",
+      "76139d8af8bccf5e15a1e5c0a3a0aaf1b4fe0fb53a4325b72bb99639a97a9d96",
+      "4f8e6ed300e476c94dedde34c25c657a890596e5b2606ab83e67dd0153890668",
+      "fe0ba7124be77777d8ee7a26f19cea862b305d7c2bb37d100df7a7deb5d667c6",
+      "4c9953b9053007434a512ad7db0ab083ed7743e3eef35d6635cba50f0ac582b0"
+    ],
+    "country_support": [
+      "1ad654a2f659af6dfb212f989e531ba2c3fdda9045c8e2a2554556f9d32ea463",
+      "74f526e9c58793bb2b0afa52de2f49052fa892d0dc43eff0140c2773e882344d",
+      "251a84aaed0223ab27c4b571c82d169d57babcea7ec359ef320d09ef643b7525",
+      "008444f3c1ebe473d31ed7e983cdfb19ddee73dcb9437747b13788e80b4c427a",
+      "ac8d4bd631fbfd5c09ab8281f47f5d4bc2c419ad53fc83dc8d97d5e1f5c2cd03"
+    ],
+    "declined_card_payment": [
+      "4000f535f14a0a859c7e8dddf56c421b01008cc77ad1217c36fbf1ea04a490d5",
+      "f6384f2f312960fbf4da4f89bb0261fbe30555741761de4cd5efc5ca565fc3fb",
+      "3ccdb794931ab3e2ab4dc9f0cb09c59d1a63133359565e028582e199403446ef",
+      "eb0a8e9d437eb11441f184df373f8512b60040fe8f3c23c8076d3f8f908e8009",
+      "d73c4ab39fe9f5667057d4ec9c8552636e7cd66ae8da0eed41b6c970d12d5131"
+    ],
+    "declined_cash_withdrawal": [
+      "184c0a4076260029769b126472e1c57f494101dbb6cd20ac22f2bc888534f07b",
+      "34469f7269c5ad89caa7ac83a64373f2f833d1c98f22d211bff475f8af4d7623",
+      "6b3349aa6ffa00b98ed3df167d4a25f0e4b683f9c16518b3ae0a442a26ceb1cb",
+      "50ea9f6d26ff5e77ddb692ac32ee9377192aa76df7392e4aeac080512d132cf6",
+      "304e11224674b85811a5ae9aa28481cbab445d3408f43be82aad0af61e70bd65"
+    ],
+    "declined_transfer": [
+      "664ae0e6d17f582cf5c9226b309db054d908f5ebefc476dca107b99f6b6b82e8",
+      "24638cb004be3ab5ab5d5a02ef41954552ab59c41aa20e0f1476e34d5698e5ae",
+      "e579cc406faf786005d318c0c47fd9b4c61b16f186ba824aa459181876446995",
+      "55341d9e8547939e1ddc0dee6d550ed4b355697e02262b6d61ec23af2e3d3ada",
+      "02b914f8542583b8f409fc56380819c5d6baa42a71e4ecba74a1bd52162fa614"
+    ],
+    "direct_debit_payment_not_recognised": [
+      "efc155af297f35b4f8f5adda1b0f6b3b9dea985db624b3d7d73d8400c841041e",
+      "8bebdec389ef8e10bbbcef1cdd074232b42c3734908b289c26409577d1eef91c",
+      "71b56c7d6d69788ba37b860455cf48d354fcea3d1881c4cf5d991e4107be09d7",
+      "745eec4c663d0895ecaef1c36f3b6f50a82c9b11d7cfb5bac97e2d8b990133e7",
+      "57d4240ae6fe93cb5eeb894ca939e9425b570e4f1277121d4c4ce55605053bcb"
+    ],
+    "disposable_card_limits": [
+      "bc3cbd6a44e9eb51019a1bb6d2d7a977ff5d490017e4e8942014a0b6993e5fb2",
+      "446a7a3e85a5414fa1ac2d1a39ecd9c4438c2581d5eb0ffe6754718dfd2c2d28",
+      "637c73355dea2266fcabed919abaf368a09c740133379f730c317147d2d6443f",
+      "ffdbb50bf35bf39c5cb97fd2fa095760a86297b14350d7f7b2a60ae57a79e46b",
+      "287ffe11de307de12e33f8bf75967103c3e7c88866c48a7c54e04576f45385ff"
+    ],
+    "edit_personal_details": [
+      "9162badedc2876a0616dc141a6b42d324f3426231a2e2a3fb4b62338527214a9",
+      "2f9b08a01f97e1ae7f4481042d8d2961443a364072a3d6b2020a5dc5a1622ef9",
+      "af55a4c7d6eeab872cb847dc865443e74e962d48fac3f90de638ca0501510d6d",
+      "f0cc185ffdb85a5245c0b80ef820d5000a3cfae4dfb7760e858c2f2d8d2c054b",
+      "5c6327624c9785edaeb68c067193deb5b5d9b36a5066d11198ca94f14294df96"
+    ],
+    "exchange_charge": [
+      "83f9697c6e578314419224ad5de0172802bd100b1eda07dbe7ce12619bfae89f",
+      "dbd02255c4b1c1f61d215bbd64eee24a9d0654cd8453656bca23c09076f1e302",
+      "6751e9b88fe3632652b5d5aaaa6b137035171f61c778cd066601a1ec34e2fd71",
+      "e8a9ff0bbb707246131d9f0dfa1dfad6115408891ae5cf9a3e2d4629a49d11d5",
+      "3e4102506a572093a6700bf9db9662fefd8cf635acbc2b842feabed2668f4a66"
+    ],
+    "exchange_rate": [
+      "fee4630861b5727c0cf03de3bdc9b5db3d91e3d0f1a944dec2e4a6885efef6e0",
+      "1346c9e4fe8c3af57acdd9f6bcea0d9b1b98b2ef1d23a323d36e3a9d3286137c",
+      "2342e8c6e16be79b63bf1e8aa57898b643a51af8ec065b4cd0f604939c615182",
+      "ee11c7089331820dc0650e9dfb20c4b4c1dc84f5fbbf9b0a22d3a5ecd2f95c9d",
+      "1a5810b3c00d23bd68d4089d1397cd2452fddd8dc4885fc994e7dcdbdbe20a3a"
+    ],
+    "exchange_via_app": [
+      "0bd766c2c5e2d84e2e028fe7175cb2c2f2b6d2b7441b5e7d66ef63743c04dfec",
+      "cc4b76b4bc7939e6d661b770aef6870bcbd61a5f733bda2256b13106a62a20bf",
+      "5c657eaa712ec8e85bb53c738f5be0db76d0f98adfc5a2f8f7753299349328d0",
+      "10cc0e1eb9cc62090c19dd40c3da2ae8d27f6ca7911c3c233c5bb53068f83938",
+      "5a7c0eba8380c65ea1bdd4f0dd9c745dc61200288050f41a2880a737cfd14957"
+    ],
+    "extra_charge_on_statement": [
+      "2d3886d492d6e86573c2db0c370f6d84d65da188536467de3735ec67ecb3203d",
+      "5c2001ecfed26c22818ffcad1d44bcfe282e0414d28857b0d352a251ccc3a77f",
+      "6f93444adb6499f481f5a8a43c915b0a57014328d29acb586b6c99f1ab1a679e",
+      "019f0f76287fb3e35e7f4a5735c87ae0e4c2d38a40a9ed9e65919a2f5565349a",
+      "118ed7b55f54ce51b5f7dee4255e59a978d4b9ed8494a7a225e096f803e43d0c"
+    ],
+    "failed_transfer": [
+      "6f785f879e0480c396c649ee2356c56a06ed3ada15774dd70ce1d873ef460772",
+      "c5d4e157be09e9142a5d27c1e917ab4c97991daf1da0d5c3dc8c4db5c039bae4",
+      "13baaf295754a9963f0117c9cadbf68419750a16baf1efb3792f4f0162fdf956",
+      "099a3092af8a0e115f370b65e30044654ea6574058c9c4a28b3c7858a7ecbf20",
+      "479dbc7200ffb308366b92695f147ceb9c938598391673e74ab2c40fef2f3fa6"
+    ],
+    "fiat_currency_support": [
+      "f52242659350e396e0339326ddef18be755df607250c42cbbdf7b2c1e8d62b32",
+      "ad5f4617983d22bc0d7e68df25aa2f97b1b7c7addf67a62878596556507905d1",
+      "9803b6d7cdb2240613ab6fc493e371ce1c84020fd82a35ba0654cd79821ffa27",
+      "5537051f191e4889fec1a66e237c77494181070db82bcf569a30eb8752a9a116",
+      "64ca5efb5f4846bc99de620675abaaa3ba1ae10c0e8b407867a228a06b28cdf4"
+    ],
+    "get_disposable_virtual_card": [
+      "9011340240f972da6969288b62ebe836ae9b61fc7a934b8cd096fc1cce257a74",
+      "bb66b53e9eaf9eb0bef15ea611467770c107b4ee9962017d837401b127b54496",
+      "1fe2c15677b7507bdbdb31d32c27d6ae93055de1b29569ceccff432e8313aa31",
+      "487b52487ce9ec053d9c7204acd23c958682446f88d5a0342232a7c9b2a2bc16",
+      "16f8f8ec5e466649920c91e0483c8e7014ffe86d754773f9d40742f2deeb931b"
+    ],
+    "get_physical_card": [
+      "0e03148b1a4ac486e28fddadda8f4e335d88c179561ea3fce90659cf07967f7e",
+      "3e3d5fc1775a3c19dfcc2da8fe12f1f4118ce0ab6f61975c7a631bc6795d3e27",
+      "203c7aa989cdcd97387d706f8cf08276f8aeadee540866b0f36698292a3db75a",
+      "111c7307e3de9d47c5e4f51e056f21add7bc18af9303590a84ee310ea47bc0c4",
+      "30eef94ae6a0195195cdf9afe6073194cfcc3ed36666bc56f58bce23562242f6"
+    ],
+    "getting_spare_card": [
+      "a5fc5205b8abc9bb2302807c7ed7d32d3b0e3df19c614e1801cd9b535eb52aec",
+      "20e30f91a048d868c3c1b033b0d33e9441d3b5e05e49d1ca6fefb62278acfa95",
+      "f989e9be31713d7c3c3f3fa5ac9cd5f9f05b4345b0c41cbdae7b1569c7af92e9",
+      "ac42ab6e9af54a6ff9aa1a701b026048577783b02d0d11e48d3a96cc334195aa",
+      "70cf92e7ed2eb33d91cc823982e5eda18e65745a973ba59c6c7b572b7654e342"
+    ],
+    "getting_virtual_card": [
+      "dd6acdb28936676f3ca7564269fced32a4b88923f25ae9c6da9a2f27fa8a2f0a",
+      "6efc60b1d8c25d15a43330a769504f28253e1539c8c3c488beea957e2ac31879",
+      "2eda9310e13a0524378a225aa764835e3e98a582673e10bcc9ca5fc67f75f44f",
+      "c55fa11fd08b923ba83c0097972abca0cdc7a247b42dcd318319a7b4951cc442",
+      "eec463a6d727f5c6de446a08b7205986782c7724b808b1507a499ac68f85831c"
+    ],
+    "lost_or_stolen_card": [
+      "b17b038b81403b03ad97dbea7ab2d9a3f8dc163d4f9bea39d7ccbd4a89875bf4",
+      "85a08cea73173bf33b8b9762c902fc86172b8d7220831a317dabf2f9b615cd23",
+      "4e55efed935176ed497e5302104650409c6776459dcecf40b8253dbe8ac66435",
+      "a765785f45807a5b025ed70cd53397238b07454b0b6b1769d4f72026c054cf32",
+      "770ad392c064970ba9c1e847a247a3caabed60a7a737a8d8fa74cfc53481e5a6"
+    ],
+    "lost_or_stolen_phone": [
+      "79f3d41a70fc6e19af01c93f6a79f261704f26ed1a4ec33c1bc160afd7859708",
+      "3e67b7adeea8db1fd4179b3fbd091011d7bb47f105a2de88ac19233e45d3e994",
+      "63444b757d86ddbba45a66294eaa19efe05cde3cd9707a9a45bdfdd699d089e7",
+      "b8cfeab15b6269d8c1299fb0f2a96fe865b640728d553ab4681c27c1a63e6445",
+      "3527a4b073284e14bf921a91c2d3438785ee9a830fd117b833bd6de6509c113a"
+    ],
+    "order_physical_card": [
+      "d16862c7b22bc36d3789cc6fc53f0c9b2b17e3009e92eea30081c17ea0581f1e",
+      "0ca566011f9f8d265030514a4cc26b1199da5fe15d34923130447e5843b1b91d",
+      "3a4abd2ed89381bcb31740d0d791fbd9d63d45ad90ebab5fcf8247e1e9d31b90",
+      "0ac1583068164a652806a442f43aa36591aa42e116797b987ffdad623043b96e",
+      "ba3b74397e7d60ab2d7cb80b4f1cdd8488bc07809b25b45cefdadde1958b59c7"
+    ],
+    "passcode_forgotten": [
+      "99c6fee907860e426469733dfe5b7d2043b46705aab836ac690c99acde937cc5",
+      "915dcd636f1a828dd0d5b187df6ae10b5dfb3be16617d5c0d809aaf47756ac7d",
+      "fbd8017f5c60fc0187f84dd91c18252e4bf621a4fe4165ef73f22a1a8e790f0d",
+      "a407985288353da31d0787fe59bc0d61d9cc5060c35fcb92cbd56dc014f333f1",
+      "a4857e1ae7ae6d92ec6b0ec9e18a7f9c02a6ccbe4029f89ab99398a80405ea6e"
+    ],
+    "pending_card_payment": [
+      "d61eab9d7016760cbe3c30d0fd201ac2b8f3aed3cd8c2f7845705460eb1ae441",
+      "7bff91943fc6eccb576406b55586601c1362584c913ae69c4607085d501e0212",
+      "219536e93fe87d73c4837f7aa237f1b7f3eaaac8d7252cf2a5efd58bdb24c25d",
+      "07e5fca2da7a7a15fcaad3348233f4ca847e9887cabb047abc05a07b37943fd0",
+      "5f65a739d0e7eb1a24db5eb418ae3168834cd1dd4620923c589349772567a2e1"
+    ],
+    "pending_cash_withdrawal": [
+      "477895df7eaec8cf1bb21ad87b2138259e99f4b4a74aca0c7c0b9ab4a0ff38d9",
+      "0645e9909146cf87464c1078d51ec9f6c194ba9e1c26dcb056aebb3f715e88dd",
+      "bf9cf8f495910f514f938d00fa9a2d35753b742d561c4381c44c361164d93a58",
+      "efa6780f07417acf95f69a6608be7350294207b98497284051ffbe848c4064f7",
+      "c916f926fd35a2cb0e6f159b3c3420c361208195721fceb7e312a4de0ef054f1"
+    ],
+    "pending_top_up": [
+      "e3b888e9f2e016a27dfcab1265bf9ccf85bb1265b955244978db5944b8a5f149",
+      "0672d290b23ad273e464d781f1f837069504356edf8481e3f0c4464b6287f543",
+      "a43c120562f09b06e1a0fcce00d31603220526116f48411ee6e6b821ac4db690",
+      "47dee84bff62e5e7335203d70caedb254bd0f2a577ab2ae2004bf472b68784f8",
+      "3626df58d33d909710d801de55a5b8d6591af9b08439bcee49e29d7498cfe05f"
+    ],
+    "pending_transfer": [
+      "4d3e6fbb80fb36473dc921de808f371c66d11bb8890d4e0ec74f305ad277f57f",
+      "74df0b762eecc8a544375d40c16a742d2c697fb62a1b647b569dcb0a4f7254a6",
+      "32c610b3cbca349c7a76f355ff3b9bba0dd821e8d5b0eb7ec049f44ce040f658",
+      "a904468f2239ca16e9d403ca038ade4960b0a77ba438cab5ad3f1f9cd1a6918f",
+      "6a0d44cfafc3c23c0c26a9397929173ef579d7e71e2009986ebeeae334ccfb22"
+    ],
+    "pin_blocked": [
+      "f1f3c81a7e02469909a8b578b2eda0b99f340d3c79068cb8c6e2939ed5255a97",
+      "877a96fffc2948ef765201e6f01ceb60e0902233deaccb000dbfe5d5307615c2",
+      "7b17446f9fb60a6531c6b79a96ec2b010c64bcbf782a58139e10d167b96f474b",
+      "6d6f224cae528a399142903f1dc14ca9755a72908e38fe21e6b507501ee27d5a",
+      "baac3a5041347fc0fdd0047f079332ad4c2171adbbfbe079b16534534d5cf5e3"
+    ],
+    "receiving_money": [
+      "47524c7d202491368909b200b3899c2db9853905896eebfb55f75e8828e8b97f",
+      "2df4539658ad4c431851d94d8473c88a21c792590836ddaa531e8cf3a07f6fd0",
+      "aa2b672eb1aec0221a8cfff5dad629ffc51e4009a1259705280364acb573cdb2",
+      "c70e5681529a8902af80e1685f27a4181f2ec795a7285e9901ef86ef52995d39",
+      "3336cf06978dc54c9a0063586d9e9fa777cdeced5f97cba3c133f3464304237a"
+    ],
+    "request_refund": [
+      "d59687b528dda990b86cb0952c653e9a96f38c1a976251e52346534b692d4d80",
+      "68de5e903d87f81af3b498d0db351e264b43cfcf60410dd55b48866510d10f33",
+      "0803cbe88aff80495cf790ee535d067006c58f4dc04f2b7633c03ff694cd9cb2",
+      "c3b4f85c08f98ca446fd88e75cbe1fb71f275eac7d1c890e4fc0c0a3c7e70587",
+      "becc50e040ebdf2b19d72d0e604a7f80f0bedcff08dcb19d50173e85a559a49f"
+    ],
+    "reverted_card_payment?": [
+      "3cd640c8cf2b6b988c1fbbfa5285b858ccc0916791aea91db3a28506c8ef634e",
+      "270a201c09663479ede1c08d7b55607962692ed1a00a479879525d7067205c9d",
+      "e845d5a2e937f4946bac0ff2e3b450d3a752b327906d67847d72c82c96140fb1",
+      "17c33ef505803749c12b6bd09ec122415a8bf287940389b02a11893f0e5da016",
+      "e4ae69a6397eece30419cbf88fafc5d2519c2164c72b28ade7da05d2994e7f3d"
+    ],
+    "supported_cards_and_currencies": [
+      "5504557c31e663cbdeebc8390a753ebcee3987870edc730a5b70ff9a32ccae53",
+      "601c7d3311a6223c5dd648a012bf989722774cb9f15f2ce2f944968a157cb32f",
+      "47d7bf7eb63f74e0b5d171f6f8b627e51b8246815ffb67eace89d0233ca8ae89",
+      "38bdaf069d334b5d691a5630ba5e8e16ddbeee4afab4cdfe5cae699ab85b9e9e",
+      "e531fc8b5469f4d8ac9d6852d71b4852a3cc1709f0c5ac50671563b7b45bddf4"
+    ],
+    "terminate_account": [
+      "73e8dbeeda553a9f2be6c6e352efecc03a3042257997d9ab06e365b6e0fe64e1",
+      "1dd38e9de933e02409538e07025d4b966a6752a2ae3cbf57c522d34d06febba0",
+      "a6c87e5d70524dcb1f6bab16d1b3d836de8729768e9a38fc6cfcb17bb76187e9",
+      "07f91cbc11f07d89ef961a5b9861dd0f2a03227fdef654606e94ada5125ed63d",
+      "35b952924d5768731d229699f48d2870c9fcdd4fc407111103f12ee71cdd9327"
+    ],
+    "top_up_by_bank_transfer_charge": [
+      "704176d6f3d5513a38688367b27c3dc3df1b4b301e05a8a8f587dcbdb9b76e99",
+      "46c33c89389d48ff086c4f112b9d89791b0e57c0a30e81735435010cd0a1aae8",
+      "d35b32c221f444025ab1dfc010553df2d9e9c2ffca24620d0286bb4a9b51790c",
+      "2987b5773eb207d8a18bcdb2f046f027b5a10b4a9be0fe41ed53eba3a6c775b6",
+      "4aaf1d438d2f6670fe3d54ca5e0427b7b545bc7d19c088fde5f742c5fcbdfc4b"
+    ],
+    "top_up_by_card_charge": [
+      "9c29c07a91a64b9df6ca149a3c4ece6648bc9520d745b8fe3ca30ed6bfaf36fe",
+      "72503a7d5e2cdcc9270543900761ee7e5d65d7ffc166b2a702cbd042eed47877",
+      "a39da7baa916b8554dbadc09f0b3656edf2612623b6f5b314614bd1981f15905",
+      "b50cbb0ce6f57aa0b514066cd88df5ae0122ae2b16800ef410f0c70ebe363aa8",
+      "b991e1f31cf132fcf99bcd2f0604d79e15b71712b7c4fb7d43e257b5c5caf0ee"
+    ],
+    "top_up_by_cash_or_cheque": [
+      "5e6f207127f0abdd9591d4bb1447f8ca312076a76d7eb8ee0d17ad258596b58d",
+      "e17cdee50c0c9a498d1b31d2517b8d26ca1ae71e011aefeb9f340ad934f2b0d5",
+      "ed899882cf2017a6039d15a70e80e2ae77b021297412946baec837ff1cf63627",
+      "aa4cb882f65989869329e20f93710a60d2409fa6c956a44a9b7d120457777882",
+      "65b367cc7fa13929367cfb5ca3be0c198ccbdde682e32d1a20220e673df5b733"
+    ],
+    "top_up_failed": [
+      "6977e8fa41df0632fe5c337533fc341e322379eb8aff0df1a0c1bb8e4acdddef",
+      "f8421cc2006bda89665d83e68d85c853864c7d5cb81464ae1d578a3b15546395",
+      "5d3c0c30e1c9cb77601e469b8416c7d6a1f160b44be59c8cace85715580188fc",
+      "a5df58bfce1e81dc09fae0ee5bf43a555532268b1537eec8842dae4bcd03f9e6",
+      "0c1fbb1afd51526484ce2b1b71b5505b999ff2ac90dcbd591ef8d3ddfec91188"
+    ],
+    "top_up_limits": [
+      "a9428cd9379afda123680a2deeea186460cce32a2f2dbbcd38f456c97f25dd01",
+      "3ae4870a1f713e5870de8a50906be56b2d63a72a34ecf35988e45a2cc5feb6f3",
+      "1b2221d97f91f9344114ac396909403f3e16231618a2fd9c4e1237f8f45fae2e",
+      "0984ce23ecca3febd67de3ebc29eed49532ea4250be8a432847c93096171e859",
+      "dbdda137aef67754131dde0c3f8cc31459c12142f79ed34268d0656d7c0d7090"
+    ],
+    "top_up_reverted": [
+      "148e55a4463f3634994bed0a8e022e867d2005378abb9d36de69cf7744c95278",
+      "8f18fa5f82167c24f423d5476ea13d98dfa8b0bdf280712560dbeeb20a6b0a6a",
+      "22737b7d7b572fb1e5a75741ac29570f9b8a8c683261b8f98b035b81c1a04f3f",
+      "4949d7b0abcb2872ad11efbbca60b0cc3ad7be5a79791d7031990c0b39902432",
+      "bbd6f881050ae22942af59b20791426d7eef53c29de125373b3581fc6e567c44"
+    ],
+    "topping_up_by_card": [
+      "29d4ef009d23641fa38a57c0427a6a6bb89abe784f971af8a2671d35179a4264",
+      "fd639fb9812d50daa566e22c6d45ed7cd06b66ba9c11f24017d102a8a11b74a3",
+      "bad50887850b31efa143e52b256d5d18847bd19cb3541698af0dc7af9fe21211",
+      "57bd75a9beaad098c07e2316bd3f376958bf0a811529608df1887fc3d30751e7",
+      "5cdee655f28dcafec0568be539eb9e6f585e49aa7449c203045e0f8eb0752757"
+    ],
+    "transaction_charged_twice": [
+      "95dbd6413dc8ce2708dbffea3f4694c84b677421f659a5d75331bac2fbaf182f",
+      "05b30f1007b5d636811599a582622a2847c5658353628480d047accc7d7b07a7",
+      "0e0f1aab7214264e7f9851ebb925e417148340337f76f84f9679b34fc3d705a9",
+      "3f87c3185639a55760c00db77019d2da06fe5a363f51e0f0b562477e4149746b",
+      "d308660acefcf17917aa378110d53d022f19755ea2b17f40988129fc5a79f775"
+    ],
+    "transfer_fee_charged": [
+      "742215554865326cd0eebb79a5483a143022828d2885641036971732018badbd",
+      "f2f9924cedfbff7bb25c2aae4e4983082ec85fc99bd33f6b9b33a049721505ae",
+      "34dd95fc8966c85a1fd6ae903af78bcbdc66581da4c8fdc735ce819670510f03",
+      "a6c314728e6962469e2e7d7aaca0a0362d2c5d2bc084033ce58e4defc694bcae",
+      "5629d1ee692bf95329dd0c97ff4d1e6b94629edb56589738b84df11ccb67c548"
+    ],
+    "transfer_into_account": [
+      "05bc66c3ba16e6fd3b6a2760fc2b6a1ee37cd9c1753f8d63a3d86ff029a5763c",
+      "a9a52b655f7a103163d45988757f9c20c615c1cbfd8acaff23e66d882ff0194d",
+      "29f8fdd4d689e39737a2ba326e3c26689e4c40cbe07d3f6ae835ca4f87e89f70",
+      "af01ac980ae61752abced29475199f0e1fbb8ff45b18b22f0472b74d451fe139",
+      "b9b0cb4c64c3dd62f5604afd1a6248afd55f8743836a931731b06234b795e88c"
+    ],
+    "transfer_not_received_by_recipient": [
+      "95bc2d0e7759628167f69c0dff7c9e93f846aeb41849952ef5e0c6288771ae37",
+      "e617401cb3631c64267f5c94e397361e5f122b0769d4bfe32303f37896ba353a",
+      "834c881485b8f136ff0983c326044db4885c0e2e30cfceafb251d90b7054b3dd",
+      "c6a08cd222f7c183f3c0a7b410145988ed189edddd00787fa7216035e17727b2",
+      "94dc193f7beaa1b4fd2c215211698c105214dc6d3ee854be2b58b887a2a01006"
+    ],
+    "transfer_timing": [
+      "7a75f3763b81828fc63a9f68b3124cf0e11b7253a32d94b0c942ad5d1841471d",
+      "98ad106857320ad03475b203859bf3b0ef9aa6eec837ab404a83c7cea040ff7d",
+      "02e4098f1f04617a244566b764438160e8c867f8816012d9ed30788dde902259",
+      "65a1fb39d07f78f76487ce09b1fda9d7770d6dda79b9348efc993bec3b26778d",
+      "d5b64ad57a89247e411225897f5cac37748865f548965629478d8bc557a846d4"
+    ],
+    "unable_to_verify_identity": [
+      "7ab54a465f03175eb92e793afa7181fcc8310bd4635184a61ffd200456a3846d",
+      "9f98277bc6dfe331958e1b8a990453779739099ce95f2b329566d02e0d16297d",
+      "6e6c2c4bb8adac0bba18aa8f348b65c81398c2a88e566851474a1a688a99f144",
+      "0a35b102f553cc51eee05ed53a25e47028ac9490388bb55394de11dbd30eaabd",
+      "eb600debef5e1991b6bf44c1a23199aa92bda10a8b4caa407407d318a581eda3"
+    ],
+    "verify_my_identity": [
+      "fac17ac520c3a498c4963cfec3b6db11fabd87ad1a0819d7b532f197eb136135",
+      "970fe9b6e0a9bc2661c142cd3bf637dbdd3fb5f7b8f463fedb15d91b816f99d8",
+      "4b9e19d42c5d3ab7cbf1f80cf7aa3912e1447404e204604e6e623537f93fe370",
+      "4dbe18a658ff8d9cd6c143dcad1b91a90394d5e985c9f29574d53fc1b7c264f3",
+      "75ae11d1d5d03c94e789aa2cde671f1a6e7107bf6a746a253c2bad3fb998a745"
+    ],
+    "verify_source_of_funds": [
+      "c49f407861b1a188a0c3fe2498f79a83032dea1ff23342bb107a6ddd1a6d6b7d",
+      "fd88e8b402e677c839a4ded520b21ed67a08f6d00508cbb1f1809adda65581ad",
+      "9bb6bc78ca1ff26b646d83a4cbbafdc6359c4c59a744a3ea535ca4c107dda8fd",
+      "b3868892334073b83f04a405f1a32d4abad2bcb2bb6b649254c2be864005129b",
+      "b68aacbff03e6668746f0a4ce1fb742fcaf69b5f97624db2e27f4e26f457ca80"
+    ],
+    "verify_top_up": [
+      "3275a8a34fa09e34db717c50021a342bff90c79d7617d4b28b6e97846c9a3929",
+      "d768d7c3c0316cd317422086e3644ae0abdc725ef28c9f496ebf3b18fbd11fc4",
+      "485d39fe02b93ef0e531a26cf898e679f9d1017dabdc9fdb8080f04f950f813c",
+      "6b656f957ef52edb818e385bd413150e4efe66976193d6fa64e3208661a5f0ac",
+      "00a340076a50f75fb41b5092631f5398c6ad998acbafbdf04b0b1b0e0e948424"
+    ],
+    "virtual_card_not_working": [
+      "d5689f1de6671cf23dddc9252b80d7d5115ae5c8db443e9e9f4552fb6b7a7bcd",
+      "f7299f0b890f6362c3845b2862e341dfc3f67d77985bc71f8fdb71a158569de0",
+      "e133bd9ac233c211687eca18c22e4e55666a03630fef6b6bbbf33f57e1d2f3de",
+      "50c93aee2b7b9c06ed199a0dccd4c98423d2c913eede9f4c7b5b1143accd8c65",
+      "19970c91c9cc443b66a9a27c7d810cf01f6874d9815760eac33121e123cad2f4"
+    ],
+    "visa_or_mastercard": [
+      "9e2353ac5e9388a60b72067a8ecc33396734c739f799b486bd711b2b3df2aaec",
+      "be6508b6377c56b4fbd2564435514e3ab53b93fc60802085aab38318c705801e",
+      "7642c173874da60111bebe949206654c03ce6bda92778218e017b3f5fefaf97b",
+      "ed81aaa52ca18c673f68d00d32c7deb3bd931bcd97861c2f172f80917c746803",
+      "160704a0b974d309a3fd3c6dcfdb9e99e0043f5513ab6cf1b9ed2eda1e142b3a"
+    ],
+    "why_verify_identity": [
+      "6aa3a823bfc3426ee85849a04fcba846bd1e8c77f195449d3d518248465b1bee",
+      "340332b8fcd8d6ae81507e5db458a90e80a9f1cf555c730a8899b029cff6bd28",
+      "df223cc08565a4f45030c84c235d53e68a33500235501217a80dde223d167410",
+      "52061239e22ac17a49eb2d8e99ff96c61472d4114115dfb95bc2bf4e101881d1",
+      "5f7f1f13a59d797411b5d53c942e00f1a24548d362f0e174e9ca2ee81ab28673"
+    ],
+    "wrong_amount_of_cash_received": [
+      "47743ab74a06bf99d6d94cc556046d8714ec5985fb18ed268da1bb33ed7fb088",
+      "d01f73bf01ab5d394faa04ea9d445b6db460ac5c2d8b2307e1e255d720e9cb08",
+      "af34b07e91c473bf4a5150bfee96dc22fd9c3236fc1c55f806919736b808c9e8",
+      "60dc8bd0af441a2ae6377837196b59fb5841120d35bb2db5bd1a8cc458605c59",
+      "4ff7440f975e5ace60190ac14819693ff2df44c978679354583dc8b019412e93"
+    ],
+    "wrong_exchange_rate_for_cash_withdrawal": [
+      "e328ee6a06566a3ac13f6a606a259c045994429d264a1f1b9326ca188edad8fa",
+      "929bab35888456e61e0de6f8763658457279cd736ded065d7e2fc5301382ec64",
+      "e05a03da91972944b1b9fd8ae41944e8fc21a41c0755e2ea77b0938a15e48c61",
+      "e8ccbda781bc379ab994ef40165e7c61265adeab91e385bcf82d73aa0a62c53c",
+      "460a3091bab4e8fe2c3a1efc5142aca83f5fe2080a7c1e2432e403fb064f4831"
+    ]
+  }
+}

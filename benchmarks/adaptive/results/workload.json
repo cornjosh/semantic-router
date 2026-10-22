@@ -1,0 +1,649 @@
+{
+  "source_commit": "2f6719d6d6631260129e80248d2683c8612240eb",
+  "script_sha256": "2a02e361859350126fd24c6c7502a597951629f7b0a6d085b752d26ca4a69bcd",
+  "store": "SQLite on local /tmp, default durable transactions",
+  "fixture_delay_ms": 20,
+  "quality": "scripted only, no real answer-quality claims",
+  "scenarios": {
+    "static": {
+      "samples": 200,
+      "warmup": 20,
+      "concurrency": 1,
+      "http_route_latency": {
+        "p50_ms": 3.4101875498890877,
+        "p95_ms": 4.301432054489851,
+        "p99_ms": 4.566693007946013
+      },
+      "errors": [],
+      "provider_calls_measured": 0,
+      "models": {
+        "basic": 200
+      },
+      "clusters": {
+        "basic-east": 200
+      },
+      "mean_synthetic_selected_ttft_ms": 2000.0,
+      "first_decisions": [
+        {
+          "model": "basic",
+          "cluster": "basic-east",
+          "synthetic_ttft_ms": 2000.0
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east",
+          "synthetic_ttft_ms": 2000.0
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east",
+          "synthetic_ttft_ms": 2000.0
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east",
+          "synthetic_ttft_ms": 2000.0
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east",
+          "synthetic_ttft_ms": 2000.0
+        }
+      ],
+      "warmup_decisions": [
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        }
+      ]
+    },
+    "load": {
+      "samples": 200,
+      "warmup": 20,
+      "concurrency": 1,
+      "http_route_latency": {
+        "p50_ms": 3.1376248225569725,
+        "p95_ms": 3.8545017130672927,
+        "p99_ms": 5.23151058703661
+      },
+      "errors": [],
+      "provider_calls_measured": 0,
+      "models": {
+        "basic": 200
+      },
+      "clusters": {
+        "basic-west": 200
+      },
+      "mean_synthetic_selected_ttft_ms": 100.0,
+      "first_decisions": [
+        {
+          "model": "basic",
+          "cluster": "basic-west",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west",
+          "synthetic_ttft_ms": 100.0
+        }
+      ],
+      "warmup_decisions": [
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        }
+      ]
+    },
+    "learning": {
+      "samples": 200,
+      "warmup": 20,
+      "concurrency": 1,
+      "http_route_latency": {
+        "p50_ms": 3.509528934955597,
+        "p95_ms": 4.314437042921779,
+        "p99_ms": 4.843237455934285
+      },
+      "errors": [],
+      "provider_calls_measured": 0,
+      "models": {
+        "reasoning": 200
+      },
+      "clusters": {
+        "reasoning-east": 200
+      },
+      "mean_synthetic_selected_ttft_ms": 100.0,
+      "first_decisions": [
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east",
+          "synthetic_ttft_ms": 100.0
+        }
+      ],
+      "warmup_decisions": [
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        }
+      ]
+    },
+    "signals": {
+      "samples": 200,
+      "warmup": 20,
+      "concurrency": 1,
+      "http_route_latency": {
+        "p50_ms": 24.201984517276287,
+        "p95_ms": 24.620514828711748,
+        "p99_ms": 24.902799651026726
+      },
+      "errors": [],
+      "provider_calls_measured": 200,
+      "models": {
+        "basic": 200
+      },
+      "clusters": {
+        "basic-west": 200
+      },
+      "mean_synthetic_selected_ttft_ms": 100.0,
+      "first_decisions": [
+        {
+          "model": "basic",
+          "cluster": "basic-west",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west",
+          "synthetic_ttft_ms": 100.0
+        }
+      ],
+      "warmup_decisions": [
+        {
+          "model": "basic",
+          "cluster": "basic-east"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        },
+        {
+          "model": "basic",
+          "cluster": "basic-west"
+        }
+      ]
+    },
+    "shortcut": {
+      "samples": 200,
+      "warmup": 20,
+      "concurrency": 1,
+      "http_route_latency": {
+        "p50_ms": 3.3859368413686752,
+        "p95_ms": 3.9172463119029994,
+        "p99_ms": 6.080844048410648
+      },
+      "errors": [],
+      "provider_calls_measured": 0,
+      "models": {
+        "reasoning": 200
+      },
+      "clusters": {
+        "reasoning-east": 200
+      },
+      "mean_synthetic_selected_ttft_ms": 100.0,
+      "first_decisions": [
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east",
+          "synthetic_ttft_ms": 100.0
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east",
+          "synthetic_ttft_ms": 100.0
+        }
+      ],
+      "warmup_decisions": [
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        },
+        {
+          "model": "reasoning",
+          "cluster": "reasoning-east"
+        }
+      ]
+    }
+  }
+}

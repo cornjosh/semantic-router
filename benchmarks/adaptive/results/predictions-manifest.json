@@ -1,0 +1,26 @@
+[
+  {
+    "file": "banking77-bge.predictions.json.gz",
+    "compressed_sha256": "927959c15289af7ec5ae22503d02f643f0011178d77d2cfe17a84e8002821bd9",
+    "uncompressed_bytes": 1253149,
+    "uncompressed_sha256": "715e7ca19d2c7114c37a2b263945ff62375df220fb26c1b83092b18f2420357f"
+  },
+  {
+    "file": "clinc150-bge.predictions.json.gz",
+    "compressed_sha256": "b97af7f432d27206be154308d176de5cd3c609b4257a38b38af5a5dcfafbf32a",
+    "uncompressed_bytes": 1977341,
+    "uncompressed_sha256": "aa1af73398d6cc2bcb48660029c625b461a9d9076a2c3ee0cffdb95277121d42"
+  },
+  {
+    "file": "massive-zh-bge.predictions.json.gz",
+    "compressed_sha256": "eddcff542f9b0c2e03f2a62f9126a9634b4afa6266978cbf9271b62122549c96",
+    "uncompressed_bytes": 1074619,
+    "uncompressed_sha256": "a4713b3020eae2fe1a6878b6d2767de10fd4deec445daa3c8fcec68e1ada8cda"
+  },
+  {
+    "file": "massive-zh-qwen-probe.predictions.json.gz",
+    "compressed_sha256": "2689a9ecb164c8923f82fde3a30f51c02fdf9ecbee9105025b5315e9d829e441",
+    "uncompressed_bytes": 25765,
+    "uncompressed_sha256": "86096ca629e94cae4e539583ef34975f02fc9b510ece9071a9a6091e3833d6e9"
+  }
+]
