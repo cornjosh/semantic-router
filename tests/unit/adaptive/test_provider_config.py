@@ -60,6 +60,19 @@ def test_question_and_example_configuration_is_bounded():
         EmbeddingOptions.model_validate({"provider": "p", "examples": {"empty": []}})
 
 
+def test_full_clinc150_taxonomy_and_bounded_example_budget():
+    examples = {
+        f"intent_{i}": ("one", "two", "three", "four", "five") for i in range(150)
+    }
+    assert len(EmbeddingOptions(provider="p", examples=examples).examples) == 150
+    with pytest.raises(ValidationError):
+        EmbeddingOptions(
+            provider="p", examples={f"intent_{i}": ("one",) for i in range(256)}
+        )
+    with pytest.raises(ValidationError):
+        EmbeddingOptions(provider="p", examples={"large": ("text",) * 1025})
+
+
 @pytest.mark.parametrize("kind,provider", [("systemone", "test"), ("llm", "absent")])
 def test_enabled_signals_validate_protocol_and_provider_at_startup(kind, provider):
     registry = ProviderRegistry(

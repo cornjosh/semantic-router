@@ -53,7 +53,7 @@ class QuestionOptions(SignalOptions):
 
 
 class EmbeddingOptions(SignalOptions):
-    examples: dict[Name, tuple[str, ...]] = Field(default_factory=dict, max_length=128)
+    examples: dict[Name, tuple[str, ...]] = Field(default_factory=dict, max_length=255)
     dimensions: int | None = Field(default=None, gt=0, le=65536, strict=True)
 
     @model_validator(mode="after")
