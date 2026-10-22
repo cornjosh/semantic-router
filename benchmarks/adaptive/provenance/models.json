@@ -1,0 +1,193 @@
+[
+  {
+    "source": "modelscope",
+    "model": "AI-ModelScope/bge-small-zh-v1.5",
+    "revision": "29ee8f619cff1eb2efae93ff802e01a877212d16",
+    "files": [
+      {
+        "path": "1_Pooling/config.json",
+        "bytes": 190,
+        "sha256": "aaa8861589f80c961a03cc86c7eeaef7605c1676b9ab55329d33a304738769c6"
+      },
+      {
+        "path": "README.md",
+        "bytes": 28112,
+        "sha256": "f271bdf5e1acc00295c8806b2c9369168282f5a2a582e32e8e1f186dc92f7b55"
+      },
+      {
+        "path": "config.json",
+        "bytes": 776,
+        "sha256": "3853a7979202c348751b753e36f579c41d8da7d36af617d3d907e1fc9b441f2a"
+      },
+      {
+        "path": "config_sentence_transformers.json",
+        "bytes": 124,
+        "sha256": "940d5f50db195fa6e5e6a4f122c095f77880de259d74b14a65779ed48bdd7c56"
+      },
+      {
+        "path": "configuration.json",
+        "bytes": 47,
+        "sha256": "da6024cdfaee6dd3c4bf75dac3bac16fdb1b900021f0df757d8ca0ef577efe34"
+      },
+      {
+        "path": "model.safetensors",
+        "bytes": 95827648,
+        "sha256": "354763b9b1357bc9c44f62c6be2276321081ed2567773608c0d0785b61d5a026"
+      },
+      {
+        "path": "modules.json",
+        "bytes": 349,
+        "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+      },
+      {
+        "path": "sentence_bert_config.json",
+        "bytes": 52,
+        "sha256": "84e39fda68ccbff05bfa723ae9c0e70e23e2ec373b76e0f8c6e71af72a693cbf"
+      },
+      {
+        "path": "special_tokens_map.json",
+        "bytes": 125,
+        "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3"
+      },
+      {
+        "path": "tokenizer.json",
+        "bytes": 439125,
+        "sha256": "48cea5d44424912a6fd1ea647bf4fe50b55ab8b1e5879c3275f80e339e8fae26"
+      },
+      {
+        "path": "tokenizer_config.json",
+        "bytes": 367,
+        "sha256": "e6f3b96db926a37d4039995fbf5ad17de158dfb8f6343d607e4dbaad18d75f5a"
+      },
+      {
+        "path": "vocab.txt",
+        "bytes": 109540,
+        "sha256": "45bbac6b341c319adc98a532532882e91a9cefc0329aa57bac9ae761c27b291c"
+      }
+    ]
+  },
+  {
+    "source": "modelscope",
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "09b42cad3d112e832108974449ccb5e8e0f5b5d1",
+    "files": [
+      {
+        "path": "LICENSE",
+        "bytes": 11343,
+        "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+      },
+      {
+        "path": "README.md",
+        "bytes": 13965,
+        "sha256": "1ab64a26fcb3b461423b89a433a8c858f1bf8d4086f979cbb3ff878d47cf20e9"
+      },
+      {
+        "path": "config.json",
+        "bytes": 726,
+        "sha256": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd"
+      },
+      {
+        "path": "configuration.json",
+        "bytes": 73,
+        "sha256": "f888421726665e8a84b738eed42a64875aed79de8be7daade851ac8bf4c0cef9"
+      },
+      {
+        "path": "generation_config.json",
+        "bytes": 239,
+        "sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2"
+      },
+      {
+        "path": "merges.txt",
+        "bytes": 1671853,
+        "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+      },
+      {
+        "path": "model.safetensors",
+        "bytes": 1503300328,
+        "sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b"
+      },
+      {
+        "path": "tokenizer.json",
+        "bytes": 11422654,
+        "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+      },
+      {
+        "path": "tokenizer_config.json",
+        "bytes": 9732,
+        "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+      },
+      {
+        "path": "vocab.json",
+        "bytes": 2776833,
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    ]
+  },
+  {
+    "source": "modelscope",
+    "model": "AI-ModelScope/bge-small-en-v1.5",
+    "revision": "1895cc28693ec6e3d51debcda993ead43042f3fa",
+    "files": [
+      {
+        "path": "1_Pooling/config.json",
+        "bytes": 190,
+        "sha256": "d1caf60c96f5fba2157c0c26b76d80818fad6cf0b8eb5e73ec372ff9818eba5c"
+      },
+      {
+        "path": "README.md",
+        "bytes": 90774,
+        "sha256": "0e50b669b0ed3e0b0026aba68eb3dbbacecb5829c70d064658d864f013bae58f"
+      },
+      {
+        "path": "config.json",
+        "bytes": 743,
+        "sha256": "094f8e891b932f2000c92cfc663bac4c62069f5d8af5b5278c4306aef3084750"
+      },
+      {
+        "path": "config_sentence_transformers.json",
+        "bytes": 124,
+        "sha256": "940d5f50db195fa6e5e6a4f122c095f77880de259d74b14a65779ed48bdd7c56"
+      },
+      {
+        "path": "configuration.json",
+        "bytes": 47,
+        "sha256": "da6024cdfaee6dd3c4bf75dac3bac16fdb1b900021f0df757d8ca0ef577efe34"
+      },
+      {
+        "path": "model.safetensors",
+        "bytes": 133466304,
+        "sha256": "3c9f31665447c8911517620762200d2245a2518d6e7208acc78cd9db317e21ad"
+      },
+      {
+        "path": "modules.json",
+        "bytes": 349,
+        "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+      },
+      {
+        "path": "sentence_bert_config.json",
+        "bytes": 52,
+        "sha256": "84e39fda68ccbff05bfa723ae9c0e70e23e2ec373b76e0f8c6e71af72a693cbf"
+      },
+      {
+        "path": "special_tokens_map.json",
+        "bytes": 125,
+        "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3"
+      },
+      {
+        "path": "tokenizer.json",
+        "bytes": 711396,
+        "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66"
+      },
+      {
+        "path": "tokenizer_config.json",
+        "bytes": 366,
+        "sha256": "9261e7d79b44c8195c1cada2b453e55b00aeb81e907a6664974b4d7776172ab3"
+      },
+      {
+        "path": "vocab.txt",
+        "bytes": 231508,
+        "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+      }
+    ]
+  }
+]

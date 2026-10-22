@@ -123,6 +123,6 @@ KUBE_APISERVER=/tmp/adaptive-kubernetes/kube-apiserver \
 | Helm 3.19.0 + Kubernetes 1.34.1 API + 固定 Higress CRD | 两种 profile 的严格服务端 dry-run 通过 |
 | OCI layout + skopeo 检查/拷贝 | 本地插件镜像格式可被独立 OCI 工具读取 |
 
-当前开发机器无 Docker daemon、无 Kubernetes 工作节点，因此没有声称在本机运行过完整 Pod 部署或服务容器。CI 已加入两个 Dockerfile 的构建及 SQLite 容器启动检查；其是否运行成功以远程 workflow 结果为准。没有部署到生产集群，也没有发布镜像。
+当前开发机器无 Docker daemon、无 Kubernetes 工作节点，因此没有声称在本机运行过完整 Pod 部署或服务容器。远程 [CI 39822517062](https://github.com/cornjosh/semantic-router/actions/runs/39822517062) 已成功构建两个 Dockerfile，并完成 SQLite 容器启动检查（提交 `a4496c0`）。本机真实 Kubernetes API 的严格 dry-run 与 CI 容器检查仍不等价于生产集群 Pod 调度、存储和网络验证。没有部署到生产集群，也没有发布镜像。
 
 参考：[Higress 自定义插件](https://higress.io/docs/latest/plugins/custom/)、[固定版本网关环境变量模板](https://github.com/higress-group/higress/blob/4deae1dd3b4cb2707273748985e55bef28e747d1/helm/core/templates/_pod.tpl)、[固定版本集群过滤配置](https://github.com/higress-group/higress/blob/4deae1dd3b4cb2707273748985e55bef28e747d1/helm/core/templates/controller-deployment.yaml)。

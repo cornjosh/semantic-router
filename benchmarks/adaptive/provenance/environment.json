@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-23",
+  "os": "Linux-5.10.134-17.3.al8.x86_64-x86_64-with-glibc2.35",
+  "python": "3.12.13",
+  "cpu_count": 8,
+  "project_packages": {
+    "numpy": "2.5.3",
+    "aiohttp": "3.14.5",
+    "pydantic": "2.13.5"
+  },
+  "gpu": "NVIDIA A10, 550.54.15, 23028 MiB",
+  "notes": [
+    "CPU HTTP evaluation and GPU inference are separate processes on the same host.",
+    "Dataset model requests concurrency=1; 10 warmup requests excluded.",
+    "No paid API; Jev protocol tested with fixtures only."
+  ],
+  "model_packages": {
+    "torch": "2.13.0",
+    "transformers": "5.16.1",
+    "modelscope": "1.40.1",
+    "safetensors": "0.8.0",
+    "aiohttp": "3.14.3"
+  }
+}

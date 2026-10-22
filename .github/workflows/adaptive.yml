@@ -1,10 +1,10 @@
 name: Adaptive routing
 on:
   pull_request:
-    paths: ["semantic_router/adaptive/**", "plugins/higress-adaptive/**", "deploy/adaptive/**", "scripts/adaptive/**", "tests/**/adaptive/**", ".github/workflows/adaptive.yml", "pyproject.toml", "uv.lock"]
+    paths: ["semantic_router/adaptive/**", "plugins/higress-adaptive/**", "deploy/adaptive/**", "scripts/adaptive/**", "benchmarks/adaptive/**", "tests/**/adaptive/**", ".github/workflows/adaptive.yml", "pyproject.toml", "uv.lock"]
   push:
     branches: [main, feat/higress-adaptive-routing]
-    paths: ["semantic_router/adaptive/**", "plugins/higress-adaptive/**", "deploy/adaptive/**", "scripts/adaptive/**", "tests/**/adaptive/**", ".github/workflows/adaptive.yml", "pyproject.toml", "uv.lock"]
+    paths: ["semantic_router/adaptive/**", "plugins/higress-adaptive/**", "deploy/adaptive/**", "scripts/adaptive/**", "benchmarks/adaptive/**", "tests/**/adaptive/**", ".github/workflows/adaptive.yml", "pyproject.toml", "uv.lock"]
   workflow_dispatch:
 permissions:
   contents: read
@@ -42,7 +42,7 @@ jobs:
         run: uv run make -C plugins/higress-adaptive test build OUT=/tmp/adaptive-routing.wasm
       - name: Python contracts, real stores, complete proxy chain and Kubernetes API
         run: |
-          uv run ruff check semantic_router/adaptive tests/unit/adaptive tests/integration/adaptive scripts/adaptive
+          uv run ruff check semantic_router/adaptive tests/unit/adaptive tests/integration/adaptive scripts/adaptive benchmarks/adaptive
           uv run pytest tests/unit/adaptive tests/integration/adaptive -q
       - name: OCI packaging
         run: |

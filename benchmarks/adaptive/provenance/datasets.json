@@ -1,0 +1,58 @@
+[
+  {
+    "repository": "clinc/oos-eval",
+    "revision": "828f8093932c8fe6ca7936c3d2e52903b1c523de",
+    "file": "LICENSE",
+    "url": "https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/LICENSE",
+    "bytes": 19467,
+    "sha256": "e6bc9e9c474700b708f568bac9e5a8a9bcb2b1dad53442f5ba449fcb848b8e76"
+  },
+  {
+    "repository": "clinc/oos-eval",
+    "revision": "828f8093932c8fe6ca7936c3d2e52903b1c523de",
+    "file": "README.md",
+    "url": "https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/README.md",
+    "bytes": 2668,
+    "sha256": "8a8df26c4de3d25b6c4cff385ca23602c30e4e56828b015206cbc202f6db363a"
+  },
+  {
+    "repository": "clinc/oos-eval",
+    "revision": "828f8093932c8fe6ca7936c3d2e52903b1c523de",
+    "file": "data/data_full.json",
+    "url": "https://raw.githubusercontent.com/clinc/oos-eval/828f8093932c8fe6ca7936c3d2e52903b1c523de/data/data_full.json",
+    "bytes": 2495390,
+    "sha256": "36923c3705a59e08fe9c3883d8bc2dd966ef93e22cb78ac41171782a698d56e0"
+  },
+  {
+    "repository": "PolyAI-LDN/task-specific-datasets",
+    "revision": "57ec275d8078af65b7731c2a98be812d844a6d6b",
+    "file": "LICENSE",
+    "url": "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/57ec275d8078af65b7731c2a98be812d844a6d6b/LICENSE",
+    "bytes": 18650,
+    "sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661"
+  },
+  {
+    "repository": "PolyAI-LDN/task-specific-datasets",
+    "revision": "57ec275d8078af65b7731c2a98be812d844a6d6b",
+    "file": "banking_data/categories.json",
+    "url": "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data/categories.json",
+    "bytes": 2036,
+    "sha256": "53261da888122daf2d120d925458631d9619e15d82e56052e7a42e535ce32b63"
+  },
+  {
+    "repository": "PolyAI-LDN/task-specific-datasets",
+    "revision": "57ec275d8078af65b7731c2a98be812d844a6d6b",
+    "file": "banking_data/test.csv",
+    "url": "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data/test.csv",
+    "bytes": 239961,
+    "sha256": "d12d6e3bc4c3103966ae786dc435913c0c563dfa328f5a3646d0e62cfeeb474d"
+  },
+  {
+    "repository": "PolyAI-LDN/task-specific-datasets",
+    "revision": "57ec275d8078af65b7731c2a98be812d844a6d6b",
+    "file": "banking_data/train.csv",
+    "url": "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data/train.csv",
+    "bytes": 839073,
+    "sha256": "b06e26ac675513959a63135f11b94ea7786ed02da65db93a5650d8838cbc664b"
+  }
+]

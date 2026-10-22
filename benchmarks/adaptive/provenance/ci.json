@@ -1,0 +1,69 @@
+{
+  "run_url": "https://github.com/cornjosh/semantic-router/actions/runs/39822517062",
+  "commit": "a4496c02b3bb0be8278bc4fb2a760653a0326d2c",
+  "jobs": [
+    {
+      "id": 119977497808,
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run uv sync --locked",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run sudo apt-get update && sudo apt-get install -y skopeo openssl",
+          "conclusion": "success"
+        },
+        {
+          "name": "Acquire pinned runtimes",
+          "conclusion": "success"
+        },
+        {
+          "name": "Go host tests and real Wasm build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Python contracts, real stores, complete proxy chain and Kubernetes API",
+          "conclusion": "success"
+        },
+        {
+          "name": "OCI packaging",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build Docker images and smoke standalone SQLite",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}
