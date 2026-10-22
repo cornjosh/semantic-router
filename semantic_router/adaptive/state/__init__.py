@@ -1,1 +1,1 @@
-"""Shared durable state; PostgreSQL is loaded only by the server/state consumer."""
+"""Embedded SQLite persistence and optional etcd for cross-node high availability."""

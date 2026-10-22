@@ -4,9 +4,9 @@
 
 **Goal:** Deliver a Higress plugin and highly available external decision service with configurable isolated signals, shortcut policies, passive multi-cluster load routing and online learning.
 
-**Architecture:** Higress retains all generation traffic. A staged signal pipeline supplies facts to declarative policy; constrained model and cluster selection use durable shared PostgreSQL state. Gateway timing observations and authenticated quality feedback update distinct operational and learning models.
+**Architecture:** Higress retains all generation traffic. A staged signal pipeline supplies facts to declarative policy; constrained model and cluster selection use embedded SQLite or optional shared etcd state. Gateway timing observations and authenticated quality feedback update distinct operational and learning models.
 
-**Tech Stack:** Python 3.10–3.13, Pydantic, aiohttp, FastAPI/uvicorn, psycopg/PostgreSQL; Go Wasm SDK; Higress v2.2.5; Kubernetes.
+**Tech Stack:** Python 3.10–3.13, Pydantic, aiohttp, FastAPI/uvicorn, stdlib SQLite / optional etcd v3 JSON API; Go Wasm SDK; Higress v2.2.5; Kubernetes.
 
 **Spec:** `docs/superpowers/specs/2026-10-22-adaptive-higress-routing.md`
 
@@ -16,7 +16,7 @@
 - Target Higress v2.2.5, checked latest release 2026-10-22.
 - No PD, inference engine, or generation proxy in the Python service.
 - Signal providers never choose a target; policy alone decides shortcuts and candidate models.
-- PostgreSQL is authoritative across replicas; no local state fallback on database errors.
+- SQLite is the default standalone store; etcd is authoritative across HA replicas. No local fallback on etcd errors and no cross-host shared SQLite files.
 - Paid provider calls disabled; synthetic fixtures are not real quality measurements.
 - Feature branch `feat/higress-adaptive-routing`; commit and push each verified feature to origin.
 - Use `uv run` for project development commands. External tool bootstrap is isolated in `/mnt/workspace/.tools/semantic-router`.
@@ -74,13 +74,23 @@
 
 **Completion contract:** Actual concurrent processes share durable updates; no simulated database-only proof; production requirements for HA PostgreSQL documented.
 
+### Task 3 revision: SQLite default and optional etcd HA (user steering)
+
+The earlier PostgreSQL feature was tested and pushed, but is superseded by the user's request to avoid PG and deployment complexity. Keep its history; replace it in a forward commit before Task 4.
+
+- [x] Port the existing behavioral contract suite to real SQLite files and actual etcd; keep concurrent and separate-process tests.
+- [x] Share domain update logic behind atomic key/value transactions; implement SQLite durable journaling/FULL and etcd linearizable reads/CAS with bounded contention/network deadlines.
+- [x] Remove the new PostgreSQL implementation/setup/SQL and server dependency; preserve the library's existing Postgres index and extra.
+- [x] Test restart, duplicate events, leases, bounded pending state, lock contention, three-member etcd leader loss/quorum loss/recovery. Document the single-node versus HA boundary.
+- [x] Run regression/lint/types; commit and push the completed replacement feature.
+
 ### Task 4: Decision HTTP service with hard constraints and HA behavior
 
 **Files:** `adaptive/{service,app,__main__}.py`, server extra, API schemas/config, integration HTTP tests and service image.
 
 **Interfaces:** `POST /v1/route`, `/v1/observations`, `/v1/feedback`, health/readiness/metrics. Route decision supplies a logical target from trusted configuration, never an arbitrary URL. Strict auth roles and tenant binding.
 
-- [ ] Write RED end-to-end HTTP tests using two server processes plus PostgreSQL: identical concurrent requests return the same persisted decision, kill/restart a worker, learning visible from the survivor.
+- [ ] Write RED end-to-end HTTP tests using two server processes plus etcd (and SQLite standalone coverage): identical concurrent requests return the same persisted decision, kill/restart a worker, learning visible from the survivor.
 - [ ] Implement composition, capability/model/context filters, request fingerprint/idempotency, authentication, bounded concurrency and deadlines, graceful shutdown.
 - [ ] Test fixed models, tool shortcuts, unsupported modality/schema/context, missing exact count policy, invalid auth/tenant, DB outage, overload, input bounds and secret redaction.
 - [ ] Add usable YAML examples, including one model in two clusters. Verify commands and API docs against running service.
@@ -106,9 +116,9 @@
 
 **Files:** `deploy/adaptive/`, local/e2e scripts, pinned runtime manifest, deployment docs, CI workflow.
 
-- [ ] Add Python image, plugin OCI packaging, v2.2.5 WasmPlugin and ingress/service mappings, replicas/PDB/spread/probes/secrets/config and HA PostgreSQL option.
+- [ ] Add Python image, plugin OCI packaging, v2.2.5 WasmPlugin and ingress/service mappings, replicas/PDB/spread/probes/secrets/config and standalone SQLite and optional three-member etcd profiles.
 - [ ] Render/validate manifests against exact CRDs; exercise local Kubernetes API or disposable cluster if feasible. Document deployment evidence and platform limits exactly.
-- [ ] Run proxy→two service replicas→PostgreSQL→HTTP providers/upstreams with failures, SSE and feedback; verify counts/choices after one replica exits.
+- [ ] Run proxy→two service replicas→etcd→HTTP providers/upstreams with failures, SSE and feedback; verify counts/choices after one replica exits.
 - [ ] Add CI jobs for changed Python/Go/integration artifacts with paid APIs excluded.
 - [ ] Commit `feat(deploy): package adaptive routing for Higress on Kubernetes`; push and verify.
 
@@ -118,6 +128,8 @@
 
 **Files:** benchmark scripts/results, Chinese usage/troubleshooting docs, final evidence matrix.
 
+- [ ] Evaluate real scenario classification on public human-labelled datasets (Chinese first), with pinned data/license, independent train/dev/test splits, accuracy/macro-F1, OOS rejection, confusion/error analysis, and latency. Do not equate intent labels with best-model/difficulty ground truth.
+- [ ] Download pinned lightweight models preferentially from ModelScope; run real local classification/embedding adapter validation, recording provenance and measured results without claiming general accuracy.
 - [ ] Run deterministic synthetic workloads comparing static routing, load-aware routing, learning updates and shortcut signal avoidance. Report errors and p50/p95/p99 with sample counts, warmup, concurrency, code/config versions.
 - [ ] Run full applicable regression/lint/type/Go/build/integration suites; list failures and genuine environmental gaps instead of silently skipping.
 - [ ] Use a fresh reviewer per executing-plans final-review instructions; address important findings with regression tests and one coherent fix pass, then rerun affected suites.

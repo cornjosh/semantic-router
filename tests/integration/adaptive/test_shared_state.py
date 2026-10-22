@@ -1,15 +1,14 @@
-"""Real PostgreSQL, unique schema per test, including separate Python processes."""
+"""Real SQLite and optional etcd, including separate Python processes."""
 
 import asyncio
+import json
 import os
 import sys
 from datetime import datetime, timedelta, timezone
 from uuid import uuid4
 
-import psycopg
 import pytest
 import pytest_asyncio
-from psycopg import sql
 
 from semantic_router.adaptive.selection import (
     ClusterOption,
@@ -27,7 +26,7 @@ from semantic_router.adaptive.state.base import (
     StateConflict,
     StateNotFound,
 )
-from semantic_router.adaptive.state.postgres import PostgresState
+from semantic_router.adaptive.state.factory import open_state
 
 ARMS = (ModelArm(model_id="a", version="1"), ModelArm(model_id="b", version="1"))
 
@@ -82,28 +81,27 @@ def feedback(d, **updates):
     ).model_copy(update=updates)
 
 
-@pytest_asyncio.fixture
-async def stores():
-    dsn = os.environ.get(
-        "ADAPTIVE_TEST_DSN", "postgresql://postgres:postgres@127.0.0.1:5432/postgres"
-    )
-    schema = "adaptive_test_" + uuid4().hex
-    first = PostgresState(
-        dsn=dsn, schema=schema, load=LoadConfig(failure_threshold=2, cooldown_s=1)
-    )
-    second = PostgresState(
-        dsn=dsn, schema=schema, load=LoadConfig(failure_threshold=2, cooldown_s=1)
-    )
+@pytest_asyncio.fixture(params=["sqlite", "etcd"])
+async def stores(request, tmp_path):
+    if request.param == "sqlite":
+        config = {"backend": "sqlite", "path": str(tmp_path / "state.db")}
+    else:
+        endpoints = os.environ.get("ADAPTIVE_TEST_ETCD")
+        if not endpoints:
+            endpoints = ",".join(request.getfixturevalue("etcd_cluster").endpoints)
+        config = {
+            "backend": "etcd",
+            "endpoints": endpoints.split(","),
+            "prefix": "/adaptive-test/" + uuid4().hex + "/",
+        }
+    first = open_state(**config, load=LoadConfig(failure_threshold=2, cooldown_s=1))
+    second = open_state(**config, load=LoadConfig(failure_threshold=2, cooldown_s=1))
     await asyncio.gather(first.initialize(), second.initialize())
     try:
-        yield first, second, dsn, schema
+        yield first, second, config, None
     finally:
         await first.aclose()
         await second.aclose()
-        async with await psycopg.AsyncConnection.connect(dsn) as conn:
-            await conn.execute(
-                sql.SQL("DROP SCHEMA {} CASCADE").format(sql.Identifier(schema))
-            )
 
 
 @pytest.mark.asyncio
@@ -141,7 +139,7 @@ async def test_atomic_decision_replay_and_conflicting_request_id(stores):
 
 @pytest.mark.asyncio
 async def test_feedback_once_changes_other_replica_and_survives_restart(stores):
-    first, second, dsn, schema = stores
+    first, second, config, _ = stores
     d = await first.record_decision(proposal=decision())
     event = feedback(d)
     applied = await asyncio.gather(
@@ -152,7 +150,7 @@ async def test_feedback_once_changes_other_replica_and_survives_restart(stores):
     )
     assert sum(applied) == 1
     await first.aclose()
-    restarted = PostgresState(dsn=dsn, schema=schema)
+    restarted = open_state(**config)
     try:
         snap = await restarted.snapshot(
             context=context(), models=ARMS, cluster_ids=("east",)
@@ -301,15 +299,15 @@ async def test_failure_cooldown_and_missing_outcomes_expire_without_quality_upda
 
 @pytest.mark.asyncio
 async def test_two_real_processes_deduplicate_feedback_in_shared_database(stores):
-    first, _, dsn, schema = stores
+    first, _, config, _ = stores
     d = await first.record_decision(proposal=decision())
     event = feedback(d)
     program = """
-import asyncio, os, sys
-from semantic_router.adaptive.state.postgres import PostgresState
+import asyncio, json, os, sys
+from semantic_router.adaptive.state.factory import open_state
 from semantic_router.adaptive.state.base import Feedback
 async def main():
-    store = PostgresState(dsn=os.environ["WORKER_DSN"], schema=os.environ["WORKER_SCHEMA"])
+    store = open_state(**json.loads(os.environ["WORKER_CONFIG"]))
     try:
         applied = await store.feedback(tenant_id="tenant-a", event=Feedback.model_validate_json(os.environ["WORKER_EVENT"]))
         sys.stdout.write("applied" if applied else "duplicate")
@@ -319,8 +317,7 @@ asyncio.run(main())
 """
     env = {
         **os.environ,
-        "WORKER_DSN": dsn,
-        "WORKER_SCHEMA": schema,
+        "WORKER_CONFIG": json.dumps(config),
         "WORKER_EVENT": event.model_dump_json(),
     }
     children = [
@@ -352,8 +349,8 @@ asyncio.run(main())
 
 @pytest.mark.asyncio
 async def test_new_samples_reset_expired_ewma_instead_of_reviving_old_values(stores):
-    _, _, dsn, schema = stores
-    store = PostgresState(dsn=dsn, schema=schema, load=LoadConfig(stale_after_s=0.2))
+    _, _, config, _ = stores
+    store = open_state(**config, load=LoadConfig(stale_after_s=0.2))
     try:
         first = await store.record_decision(proposal=decision())
         await store.observe(
@@ -525,7 +522,7 @@ async def test_failed_active_poll_does_not_fabricate_zero_load(stores, reply):
 async def test_disabled_active_polling_needs_neither_endpoint_key_nor_database():
     from semantic_router.adaptive.telemetry import TelemetryPoller, TelemetryTarget
 
-    store = PostgresState(dsn="postgresql://invalid:secret@127.0.0.1:1/missing")
+    store = open_state(backend="etcd", endpoints=["http://127.0.0.1:1"])
     poller = TelemetryPoller(
         store=store,
         targets=(
@@ -579,12 +576,10 @@ async def test_actual_passive_cluster_metrics_change_the_next_choice(stores):
 
 
 @pytest.mark.asyncio
-async def test_database_failure_is_explicit_and_contains_no_dsn_secret():
+async def test_database_failure_is_explicit_and_contains_no_endpoint_secret():
     from semantic_router.adaptive.state.base import StateUnavailable
 
-    store = PostgresState(
-        dsn="postgresql://missing:private-password@127.0.0.1:1/postgres", timeout_ms=100
-    )
+    store = open_state(backend="etcd", endpoints=["http://127.0.0.1:1"], timeout_ms=100)
     try:
         with pytest.raises(StateUnavailable) as exc:
             await store.snapshot(context=context(), models=ARMS, cluster_ids=("east",))
@@ -592,3 +587,20 @@ async def test_database_failure_is_explicit_and_contains_no_dsn_secret():
         assert "private-password" not in str(exc.value)
     finally:
         await store.aclose()
+
+
+@pytest.mark.asyncio
+async def test_atomic_backend_compare_failure_cannot_partially_write(stores):
+    first, second, _, _ = stores
+    before = await first.backend.read(["transaction-a", "transaction-b"])
+    assert await first.backend.commit(
+        before, {"transaction-a": {"n": 1}, "transaction-b": {"n": 1}}
+    )
+    stale = await second.backend.read(["transaction-a", "transaction-b"])
+    assert await first.backend.commit(stale, {"transaction-a": {"n": 2}})
+    assert not await second.backend.commit(
+        stale, {"transaction-a": {"n": 3}, "transaction-b": {"n": 3}}
+    )
+    after = await first.backend.read(["transaction-a", "transaction-b"])
+    assert after["transaction-a"].value == {"n": 2}
+    assert after["transaction-b"].value == {"n": 1}

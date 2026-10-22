@@ -15,7 +15,7 @@ from semantic_router.adaptive.providers import ProviderConfig, ProviderFailure
 from semantic_router.adaptive.signals.base import InvalidSignalResult
 from semantic_router.adaptive.signals.validation import number, strict_json
 from semantic_router.adaptive.state.base import StateUnavailable
-from semantic_router.adaptive.state.postgres import PostgresState
+from semantic_router.adaptive.state.store import DurableState
 
 
 class TelemetryTarget(Contract):
@@ -51,7 +51,7 @@ class TelemetryPoller:
     def __init__(
         self,
         *,
-        store: PostgresState,
+        store: DurableState,
         targets: tuple[TelemetryTarget, ...],
         interval_s: float = 5,
         concurrency: int = 4,
