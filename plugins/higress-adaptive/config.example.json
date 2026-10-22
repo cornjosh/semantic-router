@@ -1,0 +1,15 @@
+{
+  "tenant_id": "demo",
+  "classifier_cluster": "outbound|8080||adaptive-router.default.svc.cluster.local",
+  "classifier_authority": "adaptive-router.default.svc.cluster.local",
+  "route_token": "REPLACE_WITH_ROUTE_SERVICE_TOKEN",
+  "observe_token": "REPLACE_WITH_OBSERVER_SERVICE_TOKEN",
+  "path": "/v1/chat/completions",
+  "timeout_ms": 5000,
+  "max_body_bytes": 262144,
+  "targets": {
+    "basic-east": {"model_id": "basic", "cluster_id": "basic-east", "upstream_model": "example-basic"},
+    "basic-west": {"model_id": "basic", "cluster_id": "basic-west", "upstream_model": "example-basic"},
+    "reasoning-east": {"model_id": "reasoning", "cluster_id": "reasoning-east", "upstream_model": "example-reasoning"}
+  }
+}

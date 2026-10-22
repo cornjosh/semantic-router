@@ -104,11 +104,11 @@ The earlier PostgreSQL feature was tested and pushed, but is superseded by the u
 
 **Interfaces:** Consumes Task 4 versioned schema. Uses a configurable classifier cluster and allowlisted logical target map. Emits observations with deterministic event/attempt IDs.
 
-- [ ] Inspect v2.2.5 SDK and runtime APIs; write RED host tests for request envelope, route/model rewrite, asynchronous resume exactly once, unknown targets and deadlines.
-- [ ] Implement plugin stages and bounded body handling. Test trusted header reset, fixed-model fallback constraints and interaction with model-router/ai-proxy.
-- [ ] Add bounded incremental SSE observation parser; test split JSON/events, keepalives, content/tool deltas, nonstream responses, reset/end de-duplication and exact response byte preservation.
-- [ ] Build actual Wasm, run with a real compatible proxy binary and loopback backends; verify distinct upstreams receive rewritten model requests and stream bytes unchanged.
-- [ ] Run Go/race/host tests and build; commit `feat(higress): route through external adaptive decisions`; push and verify.
+- [x] Inspect v2.2.5 SDK and runtime APIs; write RED host tests for request envelope, route/model rewrite, asynchronous resume exactly once, unknown targets and deadlines.
+- [x] Implement plugin stages and bounded body handling. Test trusted header reset, fixed-model fallback constraints and interaction with model-router/ai-proxy.
+- [x] Add bounded incremental SSE observation parser; test split JSON/events, keepalives, content/tool deltas, nonstream responses, reset/end de-duplication and exact response byte preservation.
+- [x] Build actual Wasm, run with a real compatible proxy binary and loopback backends; verify distinct upstreams receive rewritten model requests and stream bytes unchanged.
+- [x] Run Go/race/host tests and build; commit `feat(higress): route through external adaptive decisions`; push and verify.
 
 **Completion contract:** Real Wasm loads and forwards to selected upstream; a Go-only emulator run is not sufficient for final gateway evidence.
 
