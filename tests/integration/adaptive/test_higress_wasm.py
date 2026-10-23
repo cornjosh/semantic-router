@@ -429,6 +429,47 @@ async def test_real_wasm_failures_never_reach_generation(tmp_path):
 
 
 @pytest.mark.asyncio
+async def test_real_wasm_rejects_unmodelled_requirements_before_callouts(tmp_path):
+    called = []
+
+    async def unexpected(request):
+        called.append(request.path)
+        return web.json_response({})
+
+    service = web.Application()
+    service.router.add_post("/{tail:.*}", unexpected)
+    async with serve(service) as port:
+        async with gateway(tmp_path, port, {"a": port}) as (url, _):
+            async with aiohttp.ClientSession() as client:
+                for fields in (
+                    {
+                        "functions": [
+                            {"name": "weather", "parameters": {"type": "object"}}
+                        ]
+                    },
+                    {"function_call": {"name": "weather"}},
+                    {
+                        "modalities": ["text", "audio"],
+                        "audio": {"voice": "alloy", "format": "wav"},
+                    },
+                    {"audio": {"voice": "alloy", "format": "wav"}},
+                    {"prediction": {"type": "content", "content": "unaccounted input"}},
+                    {"vendor_capability": True},
+                    {"functions": None},
+                ):
+                    async with client.post(
+                        url + "/v1/chat/completions",
+                        json={
+                            "model": "auto",
+                            "messages": [{"role": "user", "content": "hello"}],
+                            **fields,
+                        },
+                    ) as response:
+                        assert response.status == 400, await response.text()
+            assert called == []
+
+
+@pytest.mark.asyncio
 async def test_real_wasm_upstream_reset_is_not_success(tmp_path):
     observations = []
 

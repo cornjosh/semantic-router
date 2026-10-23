@@ -21,6 +21,19 @@ func parseRequest(body []byte, tenant, requestID string) (*request, error) {
 	if err := json.Unmarshal(body, &r.fields); err != nil || r.fields == nil {
 		return nil, errors.New("expected object")
 	}
+	// Only pass fields whose routing/capacity semantics are understood. Otherwise
+	// a new or legacy capability requirement could bypass classifier constraints.
+	// In particular, functions, output audio and prediction inputs are not yet
+	// represented by the routing contract. Reject even null rather than silently
+	// changing protocol semantics between providers.
+	for key := range r.fields {
+		switch key {
+		case "model", "messages", "tools", "tool_choice", "response_format", "max_tokens", "max_completion_tokens", "stream":
+		case "temperature", "top_p", "frequency_penalty", "presence_penalty", "stop", "seed", "logit_bias", "logprobs", "top_logprobs", "n", "stream_options", "user", "metadata", "store", "service_tier", "reasoning_effort", "parallel_tool_calls", "safety_identifier", "prompt_cache_key", "prompt_cache_retention":
+		default:
+			return nil, errors.New("unsupported generation field")
+		}
+	}
 	if v, ok := r.fields["model"]; ok {
 		if string(v) == "null" || json.Unmarshal(v, &r.model) != nil || r.model == "" {
 			return nil, errors.New("invalid model")

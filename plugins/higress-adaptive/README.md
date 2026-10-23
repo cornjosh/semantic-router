@@ -57,7 +57,11 @@ Higress 路由按 `x-semantic-route` 匹配到预先配置的 Service/集群。�
 
 插件拥有 `auto` 模型选择和最终别名改写。相同路径不再启用另一个 `model-router`，避免二次选择。默认直接转发 OpenAI 兼容上游；若另加 `ai-proxy` 做厂商协议转换，需在部署中单独验证其插件顺序、别名映射和流格式。当前运行证据是直接转发链路，不宣称验证了所有厂商转换插件。
 
-分类请求仅包含 `messages`、`tools`、`tool_choice`、`response_format`、生成长度限制、`stream`、逻辑模型与身份字段。其他生成参数保留在转发请求中。JSON 重复键、过深嵌套、压缩请求、请求 trailers 和无效协议会被拒绝。分类失败返回 5xx；不绕过硬约束选择备用大模型。
+分类请求仅包含 `messages`、`tools`、`tool_choice`、`response_format`、生成长度限制、`stream`、逻辑模型与身份字段。允许透传的其他顶层生成参数为：`temperature`、`top_p`、`frequency_penalty`、`presence_penalty`、`stop`、`seed`、`logit_bias`、`logprobs`、`top_logprobs`、`n`、`stream_options`、`user`、`metadata`、`store`、`service_tier`、`reasoning_effort`、`parallel_tool_calls`、`safety_identifier`、`prompt_cache_key`、`prompt_cache_retention`。其具体值和供应商兼容性仍由上游校验。
+
+其余顶层字段返回 HTTP 400，且不调用分类器或上游，包括旧版 `functions/function_call`、输出 `modalities/audio`、额外预测内容 `prediction` 及未知厂商扩展，即使值为 null 也拒绝。旧版函数调用应迁移为 `tools/tool_choice`；输出音频和 prediction 暂不在首版能力/容量合同中，不能在遗漏这些需求后仍按文本模型路由。新增协议字段需要同时审查分类与容量语义。
+
+JSON 重复键、过深嵌套、压缩请求、请求 trailers 和无效协议会被拒绝。分类失败返回 5xx；不绕过硬约束选择备用大模型。
 
 ## 计时与可靠性边界
 

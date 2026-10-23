@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-23",
+  "tested_source_commit": "b5c1689c6d7f0dce84296eba7184bdf2f176f6ba",
+  "test_scope": "non-live tests/unit + tests/functional + tests/integration/adaptive",
+  "passed": 595,
+  "skipped": 29,
+  "warnings": 3,
+  "seconds": 78.67,
+  "fresh_wasm_runtime": {
+    "passed": 5,
+    "seconds": 16.39,
+    "wasm_sha256": "88740aafd4361b95d76ac831c3f63d447ba42a221bb46f04b60c95750ebf7002"
+  },
+  "local_logs": [
+    {
+      "name": "adaptive-final-regression.log",
+      "sha256": "06334b767b64e1c42753d81fc8c3ed1c437fc6a2161aaa1c70a2160d90f2431e"
+    },
+    {
+      "name": "adaptive-final-lint.log",
+      "sha256": "3f5f11faec438e479dc45f21ce71433f787c33a4ac93456d662d48eca47ea0bd"
+    },
+    {
+      "name": "adaptive-final-mypy.log",
+      "sha256": "a6e92d42ff9a825357da795fed271b605f9b6f577e1b84dfa39eb333f9ffe2ef"
+    },
+    {
+      "name": "adaptive-final-go.log",
+      "sha256": "13a9735e9fa8c02931023263854f6cbdf97acf2714d8cdb98e7c3b683ae692c3"
+    },
+    {
+      "name": "adaptive-final-rebuilt-wasm.log",
+      "sha256": "7e8e57425644c28fdf7c0bdf205a841529baeffbdbc7425596033edfa43ac181"
+    }
+  ],
+  "scope_gaps": [
+    "Existing library index container integration suites require unavailable local Docker daemon",
+    "No paid live API tests",
+    "No production Kubernetes worker-node deployment"
+  ],
+  "ruff": "157 files check/format passed",
+  "mypy": "79 source files passed",
+  "go": "race/vet/build passed",
+  "review_fix": {
+    "finding": "unmodelled generation requirements bypassed capability checks",
+    "native_red": "18 unsupported field/value cases accepted before fix",
+    "real_wasm_red": "request reached classifier and returned502 instead of early400",
+    "real_wasm_green": {
+      "passed": 5,
+      "seconds": 12.59
+    },
+    "full_suite_green": {
+      "passed": 596,
+      "skipped": 29,
+      "warnings": 3,
+      "seconds": 80.63
+    },
+    "go": "race/vet/build passed",
+    "lint": "157files passed",
+    "reviewed_commit": "84beccf986ca2dbf792b873705dca0ad4ac09410",
+    "note": "Recorded output was inspected in session; ephemeral /tmp logs and runtimes were lost when the execution container was replaced. Persistent source/results are retained, and final CI verifies the final committed revision."
+  }
+}

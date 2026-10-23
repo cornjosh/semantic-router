@@ -46,6 +46,17 @@ func TestRequestRejectsAmbiguousJSON(t *testing.T) {
 	}
 }
 
+func TestRequestRejectsUnmodelledRequirements(t *testing.T) {
+	for _, field := range []string{"functions", "function_call", "modalities", "audio", "prediction", "vendor_capability"} {
+		for _, value := range []string{`null`, `{}`, `["audio"]`} {
+			body := []byte(`{"messages":[{"role":"user","content":"hello"}],"` + field + `":` + value + `}`)
+			if _, err := parseRequest(body, "tenant", "req"); err == nil {
+				t.Errorf("accepted unmodelled requirement %s=%s", field, value)
+			}
+		}
+	}
+}
+
 func TestDecisionRequiresCompleteAllowlistedTarget(t *testing.T) {
 	cfg := testConfig()
 	body := []byte(validDecision)

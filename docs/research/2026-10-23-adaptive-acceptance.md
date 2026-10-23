@@ -31,9 +31,11 @@ SQLite 单实例不提供节点故障容错；跨节点 HA 使用 etcd。异步�
 
 ## 验证记录
 
-本机非付费 unit、functional 与全部 adaptive integration 回归：**595 passed、29 skipped**，78.67 秒；3 条警告来自既有 Qdrant 客户端测试。全库 ruff check/format 通过（157 个文件），mypy 79 个源文件通过，Go race/vet 与 Wasm 构建通过。原库需要 pinecone-local/pgvector/qdrant 容器的集成套件因本机无 Docker daemon 未运行，付费 live 测试未运行。新服务的 SQLite/etcd、HTTP、真实 Higress 和 Kubernetes API 测试实际运行，不归入该环境缺口。
+本机非付费 unit、functional 与全部 adaptive integration 回归：审查修复前 **595 passed、29 skipped**，78.67 秒；修复后 **596 passed、29 skipped**，80.63 秒；3 条警告来自既有 Qdrant 客户端测试。全库 ruff check/format 通过（157 个文件），mypy 79 个源文件通过，Go race/vet 与 Wasm 构建通过。原库需要 pinecone-local/pgvector/qdrant 容器的集成套件因本机无 Docker daemon 未运行，付费 live 测试未运行。新服务的 SQLite/etcd、HTTP、真实 Higress 和 Kubernetes API 测试实际运行，不归入该环境缺口。
 
-测试日志留在本机 `/tmp/adaptive-*`；版本化评测结果、运行环境及输入摘要随分支保存。独立审查与最终远程 SHA 在结束前补充。
+测试日志留在本机 `/tmp/adaptive-*`；版本化评测结果、运行环境及输入摘要随分支保存。独立审查使用全新上下文，覆盖 `1fa1937..84beccf`：没有 Critical/Minor，发现 1 项 Important——能力相关参数未进入分类合同却被透传。已先用 Go 和真实 Wasm 复现，再改为明确字段白名单；旧式 functions、输出 audio/modalities、prediction 和未知顶层扩展在调用分类器前返回 400。修复后 5 项真实 Wasm 测试、Go race/vet/build 及上述 596 项回归通过；按执行流程未再委托第二次审查。审查者还独立核算了四份分类预测的指标，并运行 103 项 adaptive unit 测试。
+
+分支最终状态以远程 `feat/higress-adaptive-routing` 为准。报告提交 `84beccf` 因普通 Git HTTP 上传超时，使用 GitHub Git 对象 API 上传并逐项核对 blob、tree 和完整 commit SHA，再按预期旧 SHA 快进引用；未改写提交或强推历史。
 
 ## 实施取舍记录
 
@@ -55,3 +57,11 @@ SQLite 单实例不提供节点故障容错；跨节点 HA 使用 etcd。异步�
 14. 通过网关 Deployment Secret env patch 与 VM HOST 环境传密钥。代价是 GitOps 需要保留补丁，轮换后重启网关。
 15. 数据集标准化去重，train/dev/test 依次优先。代价是数量与官方未过滤榜单不同，不能直接排名比较。
 16. BANKING77 带问号的类名只在传输层转换成稳定别名，统计时还原。代价是复现必须保存别名映射；没有删掉该类或放松生产标识符校验。
+
+17. 独立审查未扩展厂商 ai-proxy 转换范围；当前 direct OpenAI-compatible 合同已验证，代价是新增转换需验证插件顺序和别名。
+18. 独立审查未代替生产 K8s 运维验收；缺少 worker/生产凭证且证据范围已明确，代价是部署方仍需验证调度、PVC、CNI 与证书。
+19. 独立审查未推测 Jev 或最终回答质量；没有实际凭证或答案质量真值，代价是业务精度还需真实标注。
+20. 独立审查接受已说明的保留窗口与逻辑尝试边界；代价是运营方负责容量管理、归档和物理重试记账。
+21. 拒绝尚未建模的顶层生成字段，避免能力和容量过滤被绕过；代价是旧 functions 客户端需迁移 tools，音频输出和未知扩展暂不支持。
+
+未延期 Minor 项。
