@@ -33,9 +33,13 @@ SQLite 单实例不提供节点故障容错；跨节点 HA 使用 etcd。异步�
 
 本机非付费 unit、functional 与全部 adaptive integration 回归：审查修复前 **595 passed、29 skipped**，78.67 秒；修复后 **596 passed、29 skipped**，80.63 秒；3 条警告来自既有 Qdrant 客户端测试。全库 ruff check/format 通过（157 个文件），mypy 79 个源文件通过，Go race/vet 与 Wasm 构建通过。原库需要 pinecone-local/pgvector/qdrant 容器的集成套件因本机无 Docker daemon 未运行，付费 live 测试未运行。新服务的 SQLite/etcd、HTTP、真实 Higress 和 Kubernetes API 测试实际运行，不归入该环境缺口。
 
-测试日志留在本机 `/tmp/adaptive-*`；版本化评测结果、运行环境及输入摘要随分支保存。独立审查使用全新上下文，覆盖 `1fa1937..84beccf`：没有 Critical/Minor，发现 1 项 Important——能力相关参数未进入分类合同却被透传。已先用 Go 和真实 Wasm 复现，再改为明确字段白名单；旧式 functions、输出 audio/modalities、prediction 和未知顶层扩展在调用分类器前返回 400。修复后 5 项真实 Wasm 测试、Go race/vet/build 及上述 596 项回归通过；按执行流程未再委托第二次审查。审查者还独立核算了四份分类预测的指标，并运行 103 项 adaptive unit 测试。
+上述运行输出已在执行时核对；随后执行容器重建，旧 `/tmp` 日志和运行时不再保留，已记录的摘要见 `benchmarks/adaptive/provenance/verification.json`。版本化评测结果、运行环境及输入摘要随分支保存。重建后使用锁定依赖重新通过 103 项 adaptive unit 测试、全库 ruff 和 Go race/vet/Wasm 构建，当前环境为 Python 3.11.11；历史评测仍对应环境清单中的 Python 3.12.13，不混用两次环境信息。
+
+独立审查使用全新上下文，覆盖 `1fa1937..84beccf`：没有 Critical/Minor，发现 1 项 Important——能力相关参数未进入分类合同却被透传。已先用 Go 和真实 Wasm 复现，再改为明确字段白名单；旧式 functions、输出 audio/modalities、prediction 和未知顶层扩展在调用分类器前返回 400。修复提交为 `8ab2f0833aaed0f6c20df108656145eadff7d1d1`。修复后 5 项真实 Wasm 测试、Go race/vet/build 及上述 596 项回归通过；按执行流程未再委托第二次审查。审查者还独立核算了四份分类预测的指标，并运行 103 项 adaptive unit 测试。
 
 分支最终状态以远程 `feat/higress-adaptive-routing` 为准。报告提交 `84beccf` 因普通 Git HTTP 上传超时，使用 GitHub Git 对象 API 上传并逐项核对 blob、tree 和完整 commit SHA，再按预期旧 SHA 快进引用；未改写提交或强推历史。
+
+最终代码提交 `8ab2f0833aaed0f6c20df108656145eadff7d1d1` 的 [CI 39881266695](https://github.com/cornjosh/semantic-router/actions/runs/39881266695) 已成功完成全部步骤：Go race/vet/Wasm、Python adaptive 单元与实际集成测试、OCI 检查、两个 Docker 镜像构建、SQLite 容器 readiness，以及 Wasm 产物上传。其后收尾提交只更新本验收文档和计划完成状态，不改变经过验证的代码、配置或测试。所有 7 项任务完成，独立审查的 Important 项已修复；没有延期 Minor。保留功能分支和工作树供部署方审查。
 
 ## 实施取舍记录
 

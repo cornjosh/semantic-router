@@ -133,6 +133,6 @@ The earlier PostgreSQL feature was tested and pushed, but is superseded by the u
 - [x] Run deterministic synthetic workloads comparing static routing, load-aware routing, learning updates and shortcut signal avoidance. Report errors and p50/p95/p99 with sample counts, warmup, concurrency, code/config versions.
 - [x] Run full applicable regression/lint/type/Go/build/integration suites; list failures and genuine environmental gaps instead of silently skipping.
 - [x] Use a fresh reviewer per executing-plans final-review instructions; address important findings with regression tests and one coherent fix pass, then rerun affected suites.
-- [ ] Audit every numbered user requirement against authoritative code/runtime/remote state. Commit and push documentation/results and each necessary fix.
+- [x] Audit every numbered user requirement against authoritative code/runtime/remote state. Commit and push documentation/results and each necessary fix.
 
 **Completion contract:** Remote branch matches verified local state; every user requirement has scoped evidence; unresolved required runtime evidence leaves the goal active.
